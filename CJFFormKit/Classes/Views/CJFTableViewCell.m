@@ -6,6 +6,7 @@
 //
 
 #import "CJFTableViewCell.h"
+#import <CJFFormKit/CJFTableViewCellStyle.h>
 
 @implementation CJFTableViewCell
 
@@ -31,13 +32,13 @@
 
 #pragma mark - Getters
 
-- (CJFTableViewCellStyle *)style
-{
-    if (!_style) {
-        _style = [[CJFTableViewCellStyle alloc] init];
-        _style.contentInset = UIEdgeInsetsMake(5, 10, 5, 10);
-    }
-    return _style;
-}
+//- (CJFTableViewCellStyle *)style
+//{
+//    if (!_style) {
+//        _style = [[CJFTableViewCellStyle alloc] init];
+//        _style.contentInset = UIEdgeInsetsMake(5, 10, 5, 10);
+//    }
+//    return _style;
+//}
 
 @end

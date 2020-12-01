@@ -8,6 +8,8 @@
 
 #import "CJFTestViewController.h"
 //#import "CJFFormReadLR001TableViewCell.h"
+#import <CJFTableViewCell.h>
+#import <CJFTableViewCellStyle.h>
 //#import <CJFView.h>
 
 //#if __has_include(<CJFFormKit/CJFFormReadLR001TableViewCell.h>)
