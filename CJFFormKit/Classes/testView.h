@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CJFFormKit/CJFView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface testView : UIView
+
+@property (strong, nonatomic) CJFView *view; /**< <#property#> */
 
 @end
 
