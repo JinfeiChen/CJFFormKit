@@ -6,14 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CJFFormKit/CJFTableViewCellStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CJFTableViewCellStyle;
-
 @interface CJFTableViewCell : UITableViewCell
 
-//@property (strong, nonatomic) CJFTableViewCellStyle *style; /**< <#property#> */
+@property (strong, nonatomic) CJFTableViewCellStyle *style; /**< <#property#> */
 
 - (void)setModelWithDict:(NSDictionary * _Nullable)dict format:(NSDictionary * _Nullable)format;
 

@@ -21,6 +21,7 @@
 #import <CJFFormKit/testView.h>
 #import <CJFFormKit/subTestView.h>
 #import <CJFFormKit/CJFSubTableViewCell.h>
+#import <CJFFormKit/CJFFormLR002TableViewCell.h>
 
 @interface CJFTestViewController ()
 
