@@ -17,6 +17,7 @@
 //#endif
 
 #import <CJFFormKit/testView.h>
+#import <CJFFormKit/subTestView.h>
 
 @interface CJFTestViewController ()
 
