@@ -8,6 +8,9 @@
 
 #import "CJFViewController.h"
 
+#import <CJFFormKit/CJFView.h>
+#import <CJFFormKit/CJFTableViewCell.h>
+
 @interface CJFViewController ()
 
 @end

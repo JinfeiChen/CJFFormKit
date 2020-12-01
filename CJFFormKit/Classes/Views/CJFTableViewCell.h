@@ -7,15 +7,15 @@
 
 #import <UIKit/UIKit.h>
 #import <Masonry/Masonry.h>
-#import <CJFFormKit/CJFFormModel.h>
+#import <CJFFormKit/CJFTableViewCellStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CJFTableViewCellStyle : NSObject
-
-@property (assign, nonatomic) UIEdgeInsets contentInset ; /**< <#property#> */
-
-@end
+//@interface CJFTableViewCellStyle : NSObject
+//
+//@property (assign, nonatomic) UIEdgeInsets contentInset ; /**< <#property#> */
+//
+//@end
 
 @interface CJFTableViewCell : UITableViewCell
 

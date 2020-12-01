@@ -7,9 +7,9 @@
 
 #import "CJFTableViewCell.h"
 
-@implementation CJFTableViewCellStyle
-
-@end
+//@implementation CJFTableViewCellStyle
+//
+//@end
 
 @implementation CJFTableViewCell
 
