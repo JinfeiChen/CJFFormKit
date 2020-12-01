@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 常用的各种Form表单控件.包括编辑状态、查看状态。
                        DESC
 
-  s.homepage         = 'https://github.com/jinfei_chen@icloud.com/CJFFormKit'
+  s.homepage         = 'https://github.com/JinfeiChen/CJFFormKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'jinfei_chen@icloud.com' => 'jinfei_chen@icloud.com' }
