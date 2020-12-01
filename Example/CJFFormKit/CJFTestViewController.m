@@ -10,11 +10,11 @@
 //#import "CJFFormReadLR001TableViewCell.h"
 //#import <CJFView.h>
 
-#if __has_include(<CJFFormKit/CJFFormReadLR001TableViewCell.h>)
-#import <CJFFormKit/CJFFormReadLR001TableViewCell.h>
-#elif __has_include("CJFFormReadLR001TableViewCell.h")
-#import "CJFFormReadLR001TableViewCell.h"
-#endif
+//#if __has_include(<CJFFormKit/CJFFormReadLR001TableViewCell.h>)
+//#import <CJFFormKit/CJFFormReadLR001TableViewCell.h>
+//#elif __has_include("CJFFormReadLR001TableViewCell.h")
+//#import "CJFFormReadLR001TableViewCell.h"
+//#endif
 
 #import <CJFFormKit/testView.h>
 
@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    CJFFormReadLR001TableViewCell *cell = nil;
+//    CJFFormReadLR001TableViewCell *cell = nil;
 }
 
 /*
