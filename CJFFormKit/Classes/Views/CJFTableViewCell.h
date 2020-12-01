@@ -10,6 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface CJFTableViewCellStyle : NSObject
+
+@end
+
 @interface CJFTableViewCell : UITableViewCell
 
 //@property (strong, nonatomic) CJFTableViewCellStyle *style; /**< <#property#> */

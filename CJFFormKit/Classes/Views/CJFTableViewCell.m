@@ -7,6 +7,10 @@
 
 #import "CJFTableViewCell.h"
 
+@implementation CJFTableViewCellStyle
+
+@end
+
 @implementation CJFTableViewCell
 
 - (void)awakeFromNib {
