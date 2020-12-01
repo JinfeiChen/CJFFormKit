@@ -5,7 +5,7 @@
 //  Created by cjf on 1/12/2020.
 //
 
-#import <CJFTableViewCell.h>
+#import <CJFFormKit/CJFTableViewCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

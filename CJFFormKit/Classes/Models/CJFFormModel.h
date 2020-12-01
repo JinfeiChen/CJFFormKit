@@ -5,7 +5,7 @@
 //  Created by cjf on 1/12/2020.
 //
 
-#import <CJFObject.h>
+#import <CJFFormKit/CJFObject.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

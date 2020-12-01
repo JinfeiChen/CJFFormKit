@@ -7,8 +7,6 @@
 //
 
 #import "CJFViewController.h"
-#import <testView.h>
-#import <CJFObject.h>
 
 @interface CJFViewController ()
 

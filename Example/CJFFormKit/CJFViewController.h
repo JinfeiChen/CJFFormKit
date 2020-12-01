@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface CJFViewController : UIViewController
+@interface CJFViewController : UITableViewController
 
 @end
