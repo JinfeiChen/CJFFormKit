@@ -7,7 +7,8 @@
 //
 
 #import "CJFTestViewController.h"
-#import "CJFFormReadLR001TableViewCell.h"
+//#import "CJFFormReadLR001TableViewCell.h"
+//#import <CJFView.h>
 
 @interface CJFTestViewController ()
 
@@ -19,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    CJFFormReadLR001TableViewCell *cell = nil;
+//    CJFFormReadLR001TableViewCell *cell = nil;
 }
 
 /*

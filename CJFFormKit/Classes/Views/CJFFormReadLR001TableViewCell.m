@@ -6,6 +6,7 @@
 //
 
 #import "CJFFormReadLR001TableViewCell.h"
+#import <Masonry/Masonry.h>
 
 @implementation CJFFormReadLR001TableViewCell
 

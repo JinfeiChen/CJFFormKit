@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Masonry/Masonry.h>
 #import <CJFFormKit/CJFTableViewCellStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
