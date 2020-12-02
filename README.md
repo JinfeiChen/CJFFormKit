@@ -38,4 +38,4 @@ e.g. CJFFormLR001TableViewCell
 
 e.g. CJFFormLR001EditTableViewCell
 
-大驼峰：前缀+功能+特征+编号+类别
+大驼峰：前缀+功能+特征1(+特征2)+编号+类别
