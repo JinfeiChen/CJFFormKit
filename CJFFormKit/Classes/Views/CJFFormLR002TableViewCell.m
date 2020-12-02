@@ -26,13 +26,14 @@
 - (void)buildView
 {
     [self.contentView addSubview:self.LTitleLabel];
+    [self.contentView addSubview:self.RValueLabel];
+    
     [self.LTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
         make.left.mas_equalTo(self.contentView).offset(self.style.contentInset.left);
         make.height.mas_equalTo(18);
     }];
 
-    [self.contentView addSubview:self.RValueLabel];
     [self.RValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
         make.right.mas_equalTo(self.contentView).offset(-self.style.contentInset.right);

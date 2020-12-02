@@ -7,6 +7,8 @@
 
 #import <CJFFormKit/CJFTableViewCell.h>
 #import <CJFFormKit/CJFObject.h>
+#import <YYText/YYLabel.h>
+#import <YYText/NSAttributedString+YYText.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,54 +19,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-typedef NS_ENUM (NSUInteger, CJFFormLRTagAlignment) {
-    CJFFormLRTagAlignmentLeft,
-    CJFFormLRTagAlignmentRight,
-    CJFFormLRTagAlignmentCenter,
-};
-@interface CJFFormLRTag001TagStyle : CJFObject
+@interface WYTagsModel : NSObject
 
-//标签边框
-@property (nonatomic) CGFloat strokeWidth;
+@property (nonatomic,strong)NSString *title;
 
-//标签边框颜色
-@property (nullable, nonatomic, strong) UIColor *strokeColor;
+@property (nonatomic,strong)NSString *color;
 
-//路径的连接点形状,] kCGLineJoinMiter(默认全部连接),kCGLineJoinRound(圆形连接),kCGLineJoinBevel(斜角连接)
-@property (nonatomic) CGLineJoin lineJoin;
-
-//标签内容内边距
-@property (nonatomic) UIEdgeInsets insets;
-
-//标签圆角
-@property (nonatomic) CGFloat cornerRadius;
-
-//标签填充颜色
-@property (nullable, nonatomic, strong) UIColor *fillColor;
-
-//字体大小
-@property (nonatomic, strong) UIFont *_Nullable font;
-
-//字体颜色
-@property (nonatomic, strong) UIColor *_Nonnull textColor;
-
-//标签上下间距
-@property (nonatomic, assign) CGFloat lineSpace;
-
-//标签左右间距
-@property (nonatomic, assign) CGFloat space;
-
-//标签的最大宽度-》以便计算高度
-@property (nonatomic, assign) CGFloat maxWidth;
-
-//对齐方式
-@property (nonatomic, assign) CJFFormLRTagAlignment tagAlignment;
+- (instancetype)initWithTagsDict:(NSDictionary *)dict;
 
 @end
 
-//@interface CJFFormLRTag001View : YYLabel
-//
-//@end
+@interface CJFFormLRTag001TagCollectionViewCell : UICollectionViewCell
+
+@property (strong, nonatomic) UILabel *titleLabel; /**< <#property#> */
+
+@end
 
 @interface CJFFormLRTag001TableViewCell : CJFTableViewCell
 
