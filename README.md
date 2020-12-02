@@ -27,3 +27,10 @@ jinfei_chen@icloud.com, jinfei_chen@icloud.com
 ## License
 
 CJFFormKit is available under the MIT license. See the LICENSE file for more info.
+
+## 命名规则
+
+前缀：CJF
+
+1.类命名
+大驼峰：前缀+功能+特征+编号+类别

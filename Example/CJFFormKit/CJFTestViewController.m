@@ -7,23 +7,9 @@
 //
 
 #import "CJFTestViewController.h"
-//#import "CJFFormReadLR001TableViewCell.h"
-#import <CJFTableViewCell.h>
-//#import <CJFTableViewCellStyle.h>
-//#import <CJFView.h>
-
-//#if __has_include(<CJFFormKit/CJFFormReadLR001TableViewCell.h>)
-//#import <CJFFormKit/CJFFormReadLR001TableViewCell.h>
-//#elif __has_include("CJFFormReadLR001TableViewCell.h")
-//#import "CJFFormReadLR001TableViewCell.h"
-//#endif
-
-#import <CJFFormKit/testView.h>
-#import <CJFFormKit/subTestView.h>
-//#import <CJFFormKit/CJFSubTableViewCell.h>
 #import <CJFFormKit/CJFFormLR002TableViewCell.h>
 
-@interface CJFTestViewController ()
+@interface CJFTestViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -36,14 +22,19 @@
 //    CJFFormReadLR001TableViewCell *cell = nil;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CJFFormLR002TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseCell"];
+    [cell setModelWithDict:@{
+        @"title": @"my title",
+        @"value": @"my valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy value"
+    } format:nil];
+    return cell;
+}
 
 @end

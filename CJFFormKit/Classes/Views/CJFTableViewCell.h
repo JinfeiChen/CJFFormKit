@@ -6,13 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <CJFFormKit/CJFTableViewCellStyle.h>
+#import <Masonry/Masonry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFTableViewCellStyle : NSObject
 
 @property (assign, nonatomic) UIEdgeInsets contentInset; /**< <#property#> */
+
 
 @end
 

@@ -28,7 +28,6 @@
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
 {
-    if (!dict) { return; }
 }
 
 #pragma mark - Setters
