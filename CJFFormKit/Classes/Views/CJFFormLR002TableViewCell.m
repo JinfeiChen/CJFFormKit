@@ -53,20 +53,19 @@
         return;
     }
     
-    self.model = [CJFFormLR002Model yy_modelWithJSON:dict];
-    if (!format) {
-        self.LTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
-        self.RValueLabel.text = [NSString stringWithFormat:@"%@", self.model.value];
-    } else {
-        if ([format objectForKey:@"title"]) {
-            NSString *key = [format objectForKey:@"title"];
-            self.LTitleLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:key] ? : self.model.title];
-        }
-        if ([format objectForKey:@"value"]) {
-            NSString *key = [format objectForKey:@"value"];
-            self.RValueLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:key] ? : self.model.value];
-        }
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    if (format) {
+        [format.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *key = [format objectForKey:obj];
+            id value = [dict objectForKey:key];
+            if (value) {
+                [mDict setObject:value forKey:obj];
+            }
+        }];
     }
+    self.model = [CJFFormLR002Model yy_modelWithJSON:mDict];
+    self.LTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    self.RValueLabel.text = [NSString stringWithFormat:@"%@", self.model.value];
 }
 
 #pragma mark - Setters

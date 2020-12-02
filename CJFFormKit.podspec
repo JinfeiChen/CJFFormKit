@@ -41,4 +41,5 @@ Pod::Spec.new do |s|
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'Masonry' # 如果需要多个依赖库依次往下写即可
   s.dependency 'YYModel'
+  s.dependency 'YYText'
 end
