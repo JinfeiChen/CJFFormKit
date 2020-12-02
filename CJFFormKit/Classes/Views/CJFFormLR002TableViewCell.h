@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *LTitleLabel; /**< <#property#> */
 @property (strong, nonatomic) UILabel *RValueLabel; /**< <#property#> */
 
+@property (strong, nonatomic) CJFFormLR002Model *model; /**< <#property#> */
+
 @end
 
 NS_ASSUME_NONNULL_END

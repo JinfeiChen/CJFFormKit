@@ -32,5 +32,10 @@ CJFFormKit is available under the MIT license. See the LICENSE file for more inf
 
 前缀：CJF
 
-1.类命名
+1.类命名 
+
+e.g. CJFFormLR001TableViewCell
+
+e.g. CJFFormLR001EditTableViewCell
+
 大驼峰：前缀+功能+特征+编号+类别

@@ -31,7 +31,7 @@
 {
     CJFFormLR002TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseCell"];
     [cell setModelWithDict:@{
-        @"title": @"my title",
+        @"title": @"my value",
         @"value": @"my valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy value"
     } format:nil];
     return cell;

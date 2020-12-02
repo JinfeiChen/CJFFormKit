@@ -25,13 +25,11 @@
 
 - (void)buildView
 {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     [self.contentView addSubview:self.LTitleLabel];
     [self.LTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
         make.left.mas_equalTo(self.contentView).offset(self.style.contentInset.left);
-        make.height.mas_equalTo(16);
+        make.height.mas_equalTo(18);
     }];
 
     [self.contentView addSubview:self.RValueLabel];
@@ -40,6 +38,7 @@
         make.right.mas_equalTo(self.contentView).offset(-self.style.contentInset.right);
         make.bottom.mas_equalTo(self.contentView).offset(-self.style.contentInset.bottom);
         make.left.mas_equalTo(self.LTitleLabel.mas_right).offset(10);
+        make.height.greaterThanOrEqualTo(@16);
     }];
     [self.RValueLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
@@ -53,12 +52,20 @@
     if (!dict) {
         return;
     }
-
-    if ([dict objectForKey:@"title"]) {
-        self.LTitleLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]];
-    }
-    if ([dict objectForKey:@"value"]) {
-        self.RValueLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:@"value"]];
+    
+    self.model = [CJFFormLR002Model yy_modelWithJSON:dict];
+    if (!format) {
+        self.LTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+        self.RValueLabel.text = [NSString stringWithFormat:@"%@", self.model.value];
+    } else {
+        if ([format objectForKey:@"title"]) {
+            NSString *key = [format objectForKey:@"title"];
+            self.LTitleLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:key] ? : self.model.title];
+        }
+        if ([format objectForKey:@"value"]) {
+            NSString *key = [format objectForKey:@"value"];
+            self.RValueLabel.text = [NSString stringWithFormat:@"%@", [dict objectForKey:key] ? : self.model.value];
+        }
     }
 }
 

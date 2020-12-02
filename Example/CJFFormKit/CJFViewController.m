@@ -44,9 +44,12 @@
 //    cell.textLabel.text = @"asdf";
     CJFFormLR002TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
     [cell setModelWithDict:@{
-        @"title": @"my title",
-        @"value": @"my valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy valuemy value"
-    } format:nil];
+        @"myTitle": @"my title",
+        @"myValue": @"my value"
+    } format:@{
+        @"title": @"myTitle",
+        @"value": @"myValue"
+    }];
     return cell;
 }
 

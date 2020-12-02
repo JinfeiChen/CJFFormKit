@@ -38,7 +38,7 @@
 {
     if (!_style) {
         _style = [[CJFTableViewCellStyle alloc] init];
-        _style.contentInset = UIEdgeInsetsMake(5, 10, 5, 10);
+        _style.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
     }
     return _style;
 }
