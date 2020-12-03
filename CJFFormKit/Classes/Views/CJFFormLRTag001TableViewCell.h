@@ -1,6 +1,7 @@
 //
 //  CJFFormLRTag001TableViewCell.h
 //  Pods
+//  布局：左标题，右标签列表（标签为左对齐）
 //
 //  Created by cjf on 2/12/2020.
 //
