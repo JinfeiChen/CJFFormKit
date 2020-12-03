@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *title; /**< <#property#> */
 @property (copy, nonatomic) NSArray <NSString *> *tags; /**< <#property#> */
 
+@property (assign, nonatomic) CGFloat autoCacheHeight; /**< 自动缓存高度 */
+
 @end
 
 @interface WYTagsModel : NSObject
@@ -35,6 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+// 创建UICollectionViewFlowLayout子类，实现当每一行的item宽度加起来小于collectionView的contentSize.width时，所有item左对齐布局（默认是自动拉伸item间距）
+@interface CJFFormLRTag001TagCollectionViewFlowLayout : UICollectionViewFlowLayout
+
+@property (assign, nonatomic) CGFloat maximumInteritemSpacing; /**< <#property#> */
+
+@end
+
+// 建议缓存tableViewCell的高度，减少不必要的高度计算
 @interface CJFFormLRTag001TableViewCell : CJFTableViewCell
 
 @property (strong, nonatomic) CJFFormLRTag001Model *model; /**< <#property#> */

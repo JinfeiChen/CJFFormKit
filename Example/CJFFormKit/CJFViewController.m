@@ -13,7 +13,7 @@
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度所用字典
 @end
 
 @implementation CJFViewController
@@ -46,7 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -58,7 +58,7 @@
         [cell setModelWithDict:@{
             @"title": @"my tags:",
             @"tags": @[
-                    @"标签tag1",@"表面",@"哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
+                    @"标签tag1",@"表面",@"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
                     @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦",
                     @"标签tag1",@"表面",@"哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
                     @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦",
@@ -70,7 +70,7 @@
     } else {
         CJFFormLR002TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
         [cell setModelWithDict:@{
-            @"myTitle": @"my title",
+            @"myTitle": @"my title:",
             @"myValue": @"my value"
         } format:@{
             @"title": @"myTitle",
@@ -80,5 +80,35 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"click at : %ld,%ld", indexPath.section, indexPath.row);
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *height = [self.heightAtIndexPath objectForKey:indexPath];
+    if(height)
+    {
+        return height.floatValue;
+    }
+    else
+    {
+        return 100;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *height = @(cell.frame.size.height);
+    [self.heightAtIndexPath setObject:height forKey:indexPath];
+}
+
+- (NSMutableDictionary *)heightAtIndexPath {
+    if (!_heightAtIndexPath) {
+        _heightAtIndexPath = [NSMutableDictionary dictionary];
+    }
+    return _heightAtIndexPath;
+}
 
 @end

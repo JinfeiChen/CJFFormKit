@@ -7,8 +7,7 @@
 
 #import "CJFFormLRTag001TableViewCell.h"
 
-#define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
-#define KScreenHeight [[UIScreen mainScreen] bounds].size.height
+static CGFloat kFontSize = 14.0;
 
 @implementation CJFFormLRTag001Model
 
@@ -39,7 +38,7 @@
         label.backgroundColor = [UIColor colorWithRed:244/255.0 green:244/255.0 blue:245/255.0 alpha:1.0];
         label.text = @"N/A";
         label.frame = self.contentView.bounds;
-        label.font = [UIFont systemFontOfSize:14];
+        label.font = [UIFont systemFontOfSize:kFontSize];
         label.layer.cornerRadius = 2.0;
         label.layer.masksToBounds = YES;
         label.layer.borderWidth = 1.0;
@@ -63,11 +62,61 @@
 
 @end
 
+@implementation CJFFormLRTag001TagCollectionViewFlowLayout
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _maximumInteritemSpacing = 10.0;
+    }
+    return self;
+}
+
+- (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    NSArray *attributes = [super layoutAttributesForElementsInRect:rect];
+    [attributes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx > 0) {
+            UICollectionViewLayoutAttributes *currentAttributes = obj;
+            UICollectionViewLayoutAttributes *prevAttributes = attributes[idx - 1];
+            CGFloat maximumSpacing = self.maximumInteritemSpacing;// 最大间距
+            CGFloat originX = CGRectGetMaxX(prevAttributes.frame);
+            if (originX + maximumSpacing + currentAttributes.frame.size.width < self.collectionViewContentSize.width) {
+                CGRect frame = currentAttributes.frame;
+                frame.origin.x = originX + maximumSpacing;
+                currentAttributes.frame = frame;
+            }
+        }
+    }];
+    return attributes;
+}
+
+@end
+
+@interface CJFFormLRTag001TagCollectionView : UICollectionView
+
+@end
+
+@implementation CJFFormLRTag001TagCollectionView
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *hitView = [super hitTest:point withEvent:event];
+    if ([hitView isKindOfClass:[self class]]) {
+        return nil;
+    } else {
+        return hitView;
+    }
+}
+
+@end
+
 @interface CJFFormLRTag001TableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSMutableArray *tagsArr;
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) CJFFormLRTag001TagCollectionView *collectionView;
+@property (assign, nonatomic) BOOL hasTitleText; /**< <#property#> */
 
 @end
 
@@ -96,6 +145,7 @@
 
 - (void)buildView
 {
+    _hasTitleText = YES;
     [self.contentView addSubview:self.LTitleLabel];
     [self.contentView addSubview:self.collectionView];
 }
@@ -127,7 +177,7 @@
         make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
         make.right.mas_equalTo(self.contentView).offset(-self.style.contentInset.right);
         make.bottom.mas_equalTo(self.contentView).offset(-self.style.contentInset.bottom);
-        make.left.mas_equalTo(self.LTitleLabel.mas_right).offset(10);
+        make.left.mas_equalTo(self.LTitleLabel.mas_right).offset(self.hasTitleText?10:0);
     }];
     [self.collectionView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
@@ -152,7 +202,6 @@
     }
     self.model = [CJFFormLRTag001Model yy_modelWithJSON:mDict];
     self.LTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
-    [self layoutIfNeeded]; // MARK: 必须手动调用一次，否则会导致后面collectionview的x位置获取不准确
 
     NSMutableArray *mArr = [NSMutableArray array];
     for (NSString *text in self.model.tags) {
@@ -167,6 +216,8 @@
     [self.collectionView layoutIfNeeded];
 }
 
+#pragma mark - UICollectionViewDelegate/UICollectionViewDataSource
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.tagsArr.count;
@@ -175,8 +226,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WYTagsModel *model = self.tagsArr[indexPath.row];
-    CGFloat width = [self widthForLabel:[NSString stringWithFormat:@"%@", model.title] fontSize:16];
-    return CGSizeMake(width + 10, 22);
+    CGFloat width = [self widthForLabel:[NSString stringWithFormat:@"%@", model.title] fontSize:kFontSize];
+    return CGSizeMake(MIN(CGRectGetWidth(collectionView.frame), width + 10), 22);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -187,6 +238,8 @@
     return cell;
 }
 
+#pragma mark - UIView (UIConstraintBasedLayoutFittingSize)
+
 - (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize withHorizontalFittingPriority:(UILayoutPriority)horizontalFittingPriority verticalFittingPriority:(UILayoutPriority)verticalFittingPriority
 {
     // 先对bgview进行布局,这里需对bgView布局后collectionView宽度才会准确
@@ -194,15 +247,17 @@
 //    [self.bgView layoutIfNeeded];
     
     // 在对collectionView进行布局
-    CGFloat titleWidth = [self widthForLabel:self.model.title fontSize:14];
-    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - titleWidth - self.style.contentInset.left - self.style.contentInset.right - 10, 44);
+    CGFloat titleWidth = [self widthForLabel:self.model.title fontSize:kFontSize];
+    self.hasTitleText = titleWidth > 0;
+    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - titleWidth - self.style.contentInset.left - self.style.contentInset.right - (self.hasTitleText?10:0), 44);
     [self.collectionView layoutIfNeeded];
     
     // 由于这里collection的高度是动态的，这里cell的高度我们根据collection来计算
     CGSize collectionSize = self.collectionView.collectionViewLayout.collectionViewContentSize;
-    CGFloat cotentViewH = collectionSize.height + 22;
+    CGFloat contentViewHeight = collectionSize.height + self.style.contentInset.top + self.style.contentInset.bottom;
+    self.model.autoCacheHeight = contentViewHeight;
     
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width, cotentViewH);
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
 }
 
 #pragma mark - Private Methods
@@ -222,19 +277,20 @@
 {
     if (!_LTitleLabel) {
         _LTitleLabel = [[UILabel alloc] init];
-        _LTitleLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
+        _LTitleLabel.font = [UIFont systemFontOfSize:kFontSize weight:UIFontWeightRegular];
         _LTitleLabel.textColor = [UIColor colorWithRed:159 / 255.0 green:162 / 255.0 blue:168 / 255.0 alpha:1.0];
     }
     return _LTitleLabel;
 }
 
-- (UICollectionView *)collectionView
+- (CJFFormLRTag001TagCollectionView *)collectionView
 {
     if (!_collectionView) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        CJFFormLRTag001TagCollectionViewFlowLayout *layout = [[CJFFormLRTag001TagCollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 8;
         layout.minimumInteritemSpacing = 8;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        layout.maximumInteritemSpacing = 8;
+        _collectionView = [[CJFFormLRTag001TagCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor clearColor];
