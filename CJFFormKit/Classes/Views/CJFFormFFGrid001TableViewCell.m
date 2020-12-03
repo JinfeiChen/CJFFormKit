@@ -52,6 +52,8 @@ static CGFloat kItemHeight = 30.0;
     [self.contentView addSubview:_iconImageView];
     
     _textLabel = [[UILabel alloc] init];
+    _textLabel.textColor = [UIColor colorWithRed:86/255.0 green:84/255.0 blue:101/255.0 alpha:1.0];
+    _textLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
     [self.contentView addSubview:_textLabel];
     
     [self setupLayoutRule];
