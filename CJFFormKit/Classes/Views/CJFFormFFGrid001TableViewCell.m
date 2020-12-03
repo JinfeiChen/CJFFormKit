@@ -15,14 +15,19 @@
 
 @implementation CJFFormFFGrid001Model
 
-
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{
+        @"dataSource" : [CJFFormFFGrid001ItemModel class]
+    };
+}
 
 @end
 
 static CGFloat kItemPadding = 5.0;
 static CGFloat kItemHeight = 30.0;
 
-@interface CJFFormFFGrid001SubCollectionViewCell : UICollectionViewCell
+@interface CJFFormFFGrid001SubCollectionViewCell : UICollectionViewCell 
 
 @property (strong, nonatomic) UIImageView *iconImageView; /**< <#property#> */
 @property (strong, nonatomic) UILabel *textLabel; /**< <#property#> */
@@ -44,7 +49,6 @@ static CGFloat kItemHeight = 30.0;
 - (void)buildView
 {
     _iconImageView = [[UIImageView alloc] init];
-    _iconImageView.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:_iconImageView];
     
     _textLabel = [[UILabel alloc] init];
@@ -59,7 +63,8 @@ static CGFloat kItemHeight = 30.0;
     CGFloat iconHeight = kItemHeight - kItemPadding * 2;
     [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(iconHeight, iconHeight));
-        make.top.left.mas_equalTo(self.contentView).offset(kItemPadding);
+        make.left.mas_equalTo(self.contentView).offset(kItemPadding);
+        make.centerY.mas_equalTo(self.contentView).offset(0);
     }];
     
     [self.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -76,7 +81,7 @@ static CGFloat kItemHeight = 30.0;
     _model = model;
     
     if ([model.imageUrl containsString:@"http://"] || [model.imageUrl containsString:@"https://"]) {
-        
+        [self.iconImageView yy_setImageWithURL:[NSURL URLWithString:model.imageUrl] options:YYWebImageOptionProgressive];
     } else {
         self.iconImageView.image = [UIImage imageNamed:model.imageUrl];
     }
@@ -92,9 +97,27 @@ static CGFloat kItemHeight = 30.0;
 
 @end
 
-@interface CJFFormFFGrid001TableViewCell ()
+@interface CJFFormFFGrid001SubCollectionView : UICollectionView
 
-@property (strong, nonatomic) UICollectionView *collectionView; /**< <#property#> */
+@end
+
+@implementation CJFFormFFGrid001SubCollectionView
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *hitView = [super hitTest:point withEvent:event];
+    if ([hitView isKindOfClass:[self class]]) {
+        return nil;
+    } else {
+        return hitView;
+    }
+}
+
+@end
+
+@interface CJFFormFFGrid001TableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (strong, nonatomic) CJFFormFFGrid001SubCollectionView *collectionView; /**< <#property#> */
 @property (strong, nonatomic) CJFFormFFGrid001SubCollectionViewFlowLayout *flowLayout; /**< <#property#> */
 
 @end
@@ -184,7 +207,7 @@ static CGFloat kItemHeight = 30.0;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) / self.flowLayout.columns, self.flowLayout.estimatedItemSize.height);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame) / self.flowLayout.columns, self.flowLayout.fixedItemHeight);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -194,12 +217,31 @@ static CGFloat kItemHeight = 30.0;
     return cell;
 }
 
+#pragma mark - UIView (UIConstraintBasedLayoutFittingSize)
+
+- (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize withHorizontalFittingPriority:(UILayoutPriority)horizontalFittingPriority verticalFittingPriority:(UILayoutPriority)verticalFittingPriority
+{
+    // 先对bgview进行布局,这里需对bgView布局后collectionView宽度才会准确
+//    self.bgView.frame = CGRectMake(0, 0, targetSize.width, 44);
+//    [self.bgView layoutIfNeeded];
+    
+    // 在对collectionView进行布局
+    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - self.style.contentInset.left - self.style.contentInset.right, 44);
+    [self.collectionView layoutIfNeeded];
+    
+    // 由于这里collection的高度是动态的，这里cell的高度我们根据collection来计算
+    CGSize collectionSize = self.collectionView.collectionViewLayout.collectionViewContentSize;
+    CGFloat contentViewHeight = collectionSize.height + self.style.contentInset.top + self.style.contentInset.bottom;
+    
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
+}
+
 #pragma mark - Getters
 
-- (UICollectionView *)collectionView
+- (CJFFormFFGrid001SubCollectionView *)collectionView
 {
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
+        _collectionView = [[CJFFormFFGrid001SubCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor clearColor];
@@ -216,7 +258,7 @@ static CGFloat kItemHeight = 30.0;
         _flowLayout.minimumLineSpacing = 0;
         _flowLayout.minimumInteritemSpacing = 0;
         _flowLayout.columns = 3;
-        _flowLayout.estimatedItemSize = CGSizeMake(100, 40);
+        _flowLayout.fixedItemHeight = 40.0;
     }
     return _flowLayout;
 }

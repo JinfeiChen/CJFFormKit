@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CJFFormFFGrid001SubCollectionViewFlowLayout : UICollectionViewFlowLayout
 
 @property (assign, nonatomic) NSInteger columns; /**< <#property#> */
+@property (assign, nonatomic) CGFloat fixedItemHeight; /**< <#property#> */
 
 @end
 

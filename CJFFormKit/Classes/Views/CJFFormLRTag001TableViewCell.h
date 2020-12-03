@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *title; /**< <#property#> */
 @property (copy, nonatomic) NSArray <NSString *> *tags; /**< <#property#> */
 
-@property (assign, nonatomic) CGFloat autoCacheHeight; /**< 自动缓存高度 */
-
 @end
 
 @interface WYTagsModel : NSObject

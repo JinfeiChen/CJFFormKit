@@ -255,7 +255,6 @@ static CGFloat kFontSize = 14.0;
     // 由于这里collection的高度是动态的，这里cell的高度我们根据collection来计算
     CGSize collectionSize = self.collectionView.collectionViewLayout.collectionViewContentSize;
     CGFloat contentViewHeight = collectionSize.height + self.style.contentInset.top + self.style.contentInset.bottom;
-    self.model.autoCacheHeight = contentViewHeight;
     
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
 }

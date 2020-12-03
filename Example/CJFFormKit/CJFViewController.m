@@ -10,6 +10,7 @@
 
 #import <CJFFormKit/CJFFormLR002TableViewCell.h>
 #import <CJFFormKit/CJFFormLRTag001TableViewCell.h>
+#import <CJFFormKit/CJFFormFFGrid001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -25,6 +26,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView registerClass:[CJFFormLR002TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
     [self.tableView registerClass:[CJFFormLRTag001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
+    [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
     
 //    int64_t delayInSeconds = 2.0; /**< 延迟的时间 */
 //    /*
@@ -53,6 +55,36 @@
 {
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
 //    cell.textLabel.text = @"asdf";
+    
+    if (indexPath.row == 0) {
+        CJFFormFFGrid001TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
+        [cell setModelWithDict:@{
+            @"dataSource" : @[
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf11"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf22"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf33"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf44"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf55"
+                    }
+            ]
+        } format:nil];
+        return cell;
+    }
+    
     if (indexPath.row%2 == 0) {
         CJFFormLRTag001TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
         [cell setModelWithDict:@{
