@@ -53,7 +53,7 @@ static CGFloat kItemHeight = 30.0;
     
     _textLabel = [[UILabel alloc] init];
     _textLabel.textColor = [UIColor colorWithRed:86/255.0 green:84/255.0 blue:101/255.0 alpha:1.0];
-    _textLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
+    _textLabel.font = [UIFont systemFontOfSize:12.0 weight:UIFontWeightRegular];
     [self.contentView addSubview:_textLabel];
     
     [self setupLayoutRule];
@@ -170,10 +170,10 @@ static CGFloat kItemHeight = 30.0;
 - (void)setLayoutRule
 {
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
-        make.right.mas_equalTo(self.contentView).offset(-self.style.contentInset.right);
-        make.bottom.mas_equalTo(self.contentView).offset(-self.style.contentInset.bottom);
-        make.left.mas_equalTo(self.contentView).offset(self.style.contentInset.left);
+        make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
+        make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
+        make.bottom.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
+        make.left.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
     }];
 }
 
@@ -228,14 +228,24 @@ static CGFloat kItemHeight = 30.0;
 //    [self.bgView layoutIfNeeded];
     
     // 在对collectionView进行布局
-    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - self.style.contentInset.left - self.style.contentInset.right, 44);
+    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - self.cellStyle.contentInset.left - self.cellStyle.contentInset.right, 44);
     [self.collectionView layoutIfNeeded];
     
     // 由于这里collection的高度是动态的，这里cell的高度我们根据collection来计算
     CGSize collectionSize = self.collectionView.collectionViewLayout.collectionViewContentSize;
-    CGFloat contentViewHeight = collectionSize.height + self.style.contentInset.top + self.style.contentInset.bottom;
+    CGFloat contentViewHeight = collectionSize.height + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom;
     
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
+}
+
+#pragma mark - Setters
+
+- (void)setCellStyle:(CJFTableViewCellStyle *)cellStyle
+{
+    [super setCellStyle:cellStyle];
+    
+    // tell constraints they need updating
+    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - Getters

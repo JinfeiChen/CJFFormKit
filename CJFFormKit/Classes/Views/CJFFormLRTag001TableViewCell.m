@@ -168,15 +168,15 @@ static CGFloat kFontSize = 14.0;
 - (void)setLayoutRule
 {
     [self.LTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
-        make.left.mas_equalTo(self.contentView).offset(self.style.contentInset.left);
+        make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
+        make.left.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
         make.height.mas_equalTo(18);
     }];
     
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView).offset(self.style.contentInset.top);
-        make.right.mas_equalTo(self.contentView).offset(-self.style.contentInset.right);
-        make.bottom.mas_equalTo(self.contentView).offset(-self.style.contentInset.bottom);
+        make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
+        make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
+        make.bottom.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
         make.left.mas_equalTo(self.LTitleLabel.mas_right).offset(self.hasTitleText?10:0);
     }];
     [self.collectionView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
@@ -249,12 +249,12 @@ static CGFloat kFontSize = 14.0;
     // 在对collectionView进行布局
     CGFloat titleWidth = [self widthForLabel:self.model.title fontSize:kFontSize];
     self.hasTitleText = titleWidth > 0;
-    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - titleWidth - self.style.contentInset.left - self.style.contentInset.right - (self.hasTitleText?10:0), 44);
+    self.collectionView.frame = CGRectMake(0, 0, targetSize.width - titleWidth - self.cellStyle.contentInset.left - self.cellStyle.contentInset.right - (self.hasTitleText?10:0), 44);
     [self.collectionView layoutIfNeeded];
     
     // 由于这里collection的高度是动态的，这里cell的高度我们根据collection来计算
     CGSize collectionSize = self.collectionView.collectionViewLayout.collectionViewContentSize;
-    CGFloat contentViewHeight = collectionSize.height + self.style.contentInset.top + self.style.contentInset.bottom;
+    CGFloat contentViewHeight = collectionSize.height + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom;
     
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
 }

@@ -12,6 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, CJFTableViewCellType) {
+    CJFTableViewCellType_LR001,
+    CJFTableViewCellType_LR002,
+    CJFTableViewCellType_LRTag001,
+    CJFTableViewCellType_FFGrid001,
+};
+
 @interface CJFTableViewCellStyle : NSObject
 
 @property (assign, nonatomic) UIEdgeInsets contentInset; /**< <#property#> */
@@ -21,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) CJFTableViewCellStyle *style; /**< <#property#> */
+@property (strong, nonatomic) CJFTableViewCellStyle *cellStyle; /**< <#property#> */
 
 - (void)setModelWithDict:(NSDictionary * _Nullable)dict format:(NSDictionary * _Nullable)format;
 

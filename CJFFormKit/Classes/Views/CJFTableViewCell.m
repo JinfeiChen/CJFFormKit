@@ -34,13 +34,13 @@
 
 #pragma mark - Getters
 
-- (CJFTableViewCellStyle *)style
+- (CJFTableViewCellStyle *)cellStyle
 {
-    if (!_style) {
-        _style = [[CJFTableViewCellStyle alloc] init];
-        _style.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    if (!_cellStyle) {
+        _cellStyle = [[CJFTableViewCellStyle alloc] init];
+        _cellStyle.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
     }
-    return _style;
+    return _cellStyle;
 }
 
 @end

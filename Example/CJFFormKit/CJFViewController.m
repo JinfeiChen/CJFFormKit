@@ -82,6 +82,7 @@
                     }
             ]
         } format:nil];
+        cell.cellStyle.contentInset = UIEdgeInsetsMake(8, 20, 8, 20);
         return cell;
     }
     

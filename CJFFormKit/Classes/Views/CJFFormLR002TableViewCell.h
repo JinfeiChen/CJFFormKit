@@ -1,7 +1,7 @@
 //
 //  CJFFormLR002TableViewCell.h
 //  Pods
-//  布局：左标题，右内容
+//  布局：左右，左标题，右内容
 //
 //  Created by cjf on 1/12/2020.
 //
