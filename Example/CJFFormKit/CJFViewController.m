@@ -8,7 +8,7 @@
 
 #import "CJFViewController.h"
 
-#import <CJFFormKit/CJFFormTableViewCell.h>
+#import <CJFFormKit/CJFFormTableViewCell.h> 
 
 #import <CJFFormKit/CJFFormLR002TableViewCell.h>
 #import <CJFFormKit/CJFFormLRTag001TableViewCell.h>
