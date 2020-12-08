@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) CJFFormFFGrid001Model *model; /**< <#property#> */
 
+@property (strong, nonatomic) CJFFormFFGrid001SubCollectionViewFlowLayout *flowLayout; /**< <#property#> */
+
 @end
 
 NS_ASSUME_NONNULL_END

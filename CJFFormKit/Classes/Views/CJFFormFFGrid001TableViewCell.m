@@ -9,8 +9,6 @@
 
 @implementation CJFFormFFGrid001ItemModel
 
-
-
 @end
 
 @implementation CJFFormFFGrid001Model
@@ -120,7 +118,6 @@ static CGFloat kItemHeight = 30.0;
 @interface CJFFormFFGrid001TableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) CJFFormFFGrid001SubCollectionView *collectionView; /**< <#property#> */
-@property (strong, nonatomic) CJFFormFFGrid001SubCollectionViewFlowLayout *flowLayout; /**< <#property#> */
 
 @end
 
@@ -248,12 +245,26 @@ static CGFloat kItemHeight = 30.0;
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setFlowLayout:(CJFFormFFGrid001SubCollectionViewFlowLayout *)flowLayout
+{
+    _flowLayout = flowLayout;
+    
+    [self.collectionView reloadData];
+}
+
 #pragma mark - Getters
 
 - (CJFFormFFGrid001SubCollectionView *)collectionView
 {
     if (!_collectionView) {
-        _collectionView = [[CJFFormFFGrid001SubCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
+        
+        _flowLayout = [[CJFFormFFGrid001SubCollectionViewFlowLayout alloc] init];
+        _flowLayout.minimumLineSpacing = 0;
+        _flowLayout.minimumInteritemSpacing = 0;
+        _flowLayout.columns = 3;
+        _flowLayout.fixedItemHeight = 40.0;
+        
+        _collectionView = [[CJFFormFFGrid001SubCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor clearColor];
@@ -262,17 +273,4 @@ static CGFloat kItemHeight = 30.0;
     }
     return _collectionView;
 }
-
-- (CJFFormFFGrid001SubCollectionViewFlowLayout *)flowLayout
-{
-    if (!_flowLayout) {
-        _flowLayout = [[CJFFormFFGrid001SubCollectionViewFlowLayout alloc] init];
-        _flowLayout.minimumLineSpacing = 0;
-        _flowLayout.minimumInteritemSpacing = 0;
-        _flowLayout.columns = 3;
-        _flowLayout.fixedItemHeight = 40.0;
-    }
-    return _flowLayout;
-}
-
 @end
