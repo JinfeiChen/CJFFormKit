@@ -16,7 +16,7 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{
-        @"dataSource" : [CJFFormFFGrid001ItemModel class]
+        @"value" : [CJFFormFFGrid001ItemModel class]
     };
 }
 
@@ -201,7 +201,7 @@ static CGFloat kItemHeight = 30.0;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.model.dataSource.count;
+    return self.model.value.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -212,7 +212,7 @@ static CGFloat kItemHeight = 30.0;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CJFFormFFGrid001SubCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CJFFormFFGrid001SubCollectionViewCell class]) forIndexPath:indexPath];
-    cell.model = self.model.dataSource[indexPath.row];
+    cell.model = self.model.value[indexPath.row];
     return cell;
 }
 
@@ -237,7 +237,7 @@ static CGFloat kItemHeight = 30.0;
 
 #pragma mark - Setters
 
-- (void)setCellStyle:(CJFTableViewCellStyle *)cellStyle
+- (void)setCellStyle:(CJFFormTableViewCellStyle *)cellStyle
 {
     [super setCellStyle:cellStyle];
     

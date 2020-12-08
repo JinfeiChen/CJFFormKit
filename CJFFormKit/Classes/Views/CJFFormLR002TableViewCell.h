@@ -6,7 +6,7 @@
 //  Created by cjf on 1/12/2020.
 //
 
-#import <CJFFormKit/CJFTableViewCell.h>
+#import <CJFFormKit/CJFFormTableViewCell.h>
 #import <CJFFormKit/CJFObject.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CJFFormLR002TableViewCell : CJFTableViewCell
+@interface CJFFormLR002TableViewCell : CJFFormTableViewCell
 
 @property (strong, nonatomic) UILabel *LTitleLabel; /**< <#property#> */
 @property (strong, nonatomic) UILabel *RValueLabel; /**< <#property#> */

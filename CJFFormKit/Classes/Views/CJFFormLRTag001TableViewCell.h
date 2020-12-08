@@ -6,7 +6,7 @@
 //  Created by cjf on 2/12/2020.
 //
 
-#import <CJFFormKit/CJFTableViewCell.h>
+#import <CJFFormKit/CJFFormTableViewCell.h>
 #import <CJFFormKit/CJFObject.h>
 #import <YYText/YYLabel.h>
 #import <YYText/NSAttributedString+YYText.h>
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CJFFormLRTag001Model : CJFObject
 
 @property (copy, nonatomic) NSString *title; /**< <#property#> */
-@property (copy, nonatomic) NSArray <NSString *> *tags; /**< <#property#> */
+@property (copy, nonatomic) NSArray <NSString *> *value; /**< <#property#> */
 
 @end
 
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 // 建议缓存tableViewCell的高度，减少不必要的高度计算
-@interface CJFFormLRTag001TableViewCell : CJFTableViewCell
+@interface CJFFormLRTag001TableViewCell : CJFFormTableViewCell
 
 @property (strong, nonatomic) CJFFormLRTag001Model *model; /**< <#property#> */
 

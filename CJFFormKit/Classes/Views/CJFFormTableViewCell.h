@@ -6,6 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Masonry/Masonry.h>
+#import <YYModel/YYModel.h>
+#import <YYWebImage/YYWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,6 +30,7 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 #define kFormCellClass @"class"
 #define kFormCellTitle @"title"
 #define kFormCellValue @"value"
+#define kFOrmCellSelector @"cellClick:"
 
 /**
  * Example:
@@ -44,9 +48,21 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
  * NSArray *tableViewDataSource = @[exampleDict1, exampleDict2, ...];
  */
 
+@class CJFFormTableViewCellStyle;
 @interface CJFFormTableViewCell : UITableViewCell
 
-+ (CJFFormTableViewCell *)cellForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath;
++ (CJFFormTableViewCell *)cellForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath dataSource:(NSDictionary *)dataSource;
+
+@property (strong, nonatomic) CJFFormTableViewCellStyle *cellStyle; /**< <#property#> */
+
+- (void)setModelWithDict:(NSDictionary * _Nullable)dict format:(NSDictionary * _Nullable)format;
+
+@end
+
+@interface CJFFormTableViewCellStyle : NSObject
+
+@property (assign, nonatomic) UIEdgeInsets contentInset; /**< <#property#> */
+
 
 @end
 

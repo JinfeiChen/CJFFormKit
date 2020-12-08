@@ -6,7 +6,7 @@
 //  Created by cjf on 3/12/2020.
 //
 
-#import <CJFFormKit/CJFTableViewCell.h>
+#import <CJFFormKit/CJFFormTableViewCell.h>
 #import <CJFFormKit/CJFObject.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormFFGrid001Model : CJFObject
 
-@property (strong, nonatomic) NSArray <CJFFormFFGrid001ItemModel *> *dataSource; /**< <#property#> */
+@property (strong, nonatomic) NSArray <CJFFormFFGrid001ItemModel *> *value; /**< <#property#> */
 
 @end
 
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CJFFormFFGrid001TableViewCell : CJFTableViewCell
+@interface CJFFormFFGrid001TableViewCell : CJFFormTableViewCell
 
 @property (strong, nonatomic) CJFFormFFGrid001Model *model; /**< <#property#> */
 

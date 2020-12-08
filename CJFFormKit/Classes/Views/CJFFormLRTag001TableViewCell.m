@@ -204,7 +204,7 @@ static CGFloat kFontSize = 14.0;
     self.LTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
 
     NSMutableArray *mArr = [NSMutableArray array];
-    for (NSString *text in self.model.tags) {
+    for (NSString *text in self.model.value) {
         WYTagsModel *model = [[WYTagsModel alloc] initWithTagsDict:@{
                                   @"title": text,
                                   @"color": @"eb3027"
