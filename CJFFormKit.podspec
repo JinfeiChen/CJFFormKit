@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     'CJFFormKit' => ['CJFFormKit/Assets/*.xcassets']
   }
 
-  s.prefix_header_contents = '#import <UIKit/UIKit.h>', '#import <CJFFormKit/macros.h>'
+  s.prefix_header_contents = '#import <CJFFormKit/macros.h>'
   
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

@@ -55,17 +55,16 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    self.dataModel.paramValue = @"";
+    self.model.value = @"";
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason API_AVAILABLE(ios(10.0)) {
     [self inputSearchAction];
-//    self.dataModel.name = self.textField.text;
+    self.model.value = self.textField.text;
 //    if ([self.delegate respondsToSelector:@selector(RAAddContactsInputSearchCell:andText:)]) {
 //        [self.delegate RAAddContactsInputSearchCell:self andText:self.textField.text];
 //    }
-    self.model.value = self.textField.text;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -104,8 +103,8 @@
     self.model = [CJFFormTBInputSearch001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
     
-    self.textField.placeholder = self.model.placeholder;
-    self.textField.text = self.model.value;
+    self.textField.placeholder = [NSString stringWithFormat:@"%@", self.model.placeholder];
+    self.textField.text = [NSString stringWithFormat:@"%@", self.model.value];
 }
 
 #pragma mark - Getters

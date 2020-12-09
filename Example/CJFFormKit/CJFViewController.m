@@ -18,7 +18,6 @@
 #import <CJFFormKit/CJFFormTBInputSearch001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
 @property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度所用字典
 @end
@@ -28,96 +27,96 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView registerClass:[CJFFormTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTableViewCell class])];
     [self.tableView registerClass:[CJFFormLR002TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
     [self.tableView registerClass:[CJFFormLRTag001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
     [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
-    
+
     [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
     [self.tableView registerClass:[CJFFormTBInputSearch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBInputSearch001TableViewCell class])];
-    
+
     NSDictionary *exampleDict = @{
-       kFormSectionHeader: @{},
-       kFormSectionBody: @[
-           @{
-               kFormCellClass: @"CJFFormLR001TableViewCell",
-               kFormCellTitle: @"MyTitle",
-               kFormCellValue: @"MyValue"
-           },
-           @{
-               kFormCellClass: @"CJFFormLR002TableViewCell",
-               kFormCellTitle: @"MyTitle",
-               kFormCellValue: @"MyValue"
-           },
-           @{
-               kFormCellClass: @"CJFFormLRTag001TableViewCell",
-               kFormCellTitle: @"MyTags",
-               kFormCellValue: @[
-                                   @"标签tag1",@"表面",@"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
-                                   @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦",
-                                   @"标签tag1",@"表面",@"哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
-                                   @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦",
-                                   @"标签tag1",@"表面",@"哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
-                                   @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦"
-                                ]
-           },
-           @{
-               kFormCellClass: @"CJFFormFFGrid001TableViewCell",
-               kFormCellTitle: @"MyTitle",
-               kFormCellValue: @[
-                                       @{
-                                           @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-                                           @"value": @"lkhlkasdf11"
-                                       },
-                                       @{
-                                           @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-                                           @"value": @"lkhlkasdf22"
-                                       },
-                                       @{
-                                           @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-                                           @"value": @"lkhlkasdf33"
-                                       },
-                                       @{
-                                           @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-                                           @"value": @"lkhlkasdf44"
-                                       },
-                                       @{
-                                           @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-                                           @"value": @"lkhlkasdf55"
-                                       }
-                               ]
-           },
-           @{
-               kFormCellClass: @"CJFFormTBSwitch001TableViewCell",
-               kFormCellTitle: @"MyEditTitle",
-               kFormCellValue: @[
-                       @{
-                           @"state": @(0),
-                           @"title": @"Female",
-                           @"id": @(0)
-                       },
-                       @{
-                           @"state": @(0),
-                           @"title": @"Male",
-                           @"id": @(1)
-                       },
-                       @{
-                           @"state": @(0),
-                           @"title": @"Both",
-                           @"id": @(2)
-                       }
-               ]
-           },
-           @{
-               kFormCellClass: @"CJFFormTBInputSearch001TableViewCell",
-               kFormCellTitle: @"MyEditTitle",
-               kFormCellValue: @"default text",
-               @"placeholder": @"placeholder"
-           }
-       ],
-       kFormSectionFooter: @{}
+        kFormSectionHeader: @{},
+        kFormSectionBody: @[
+            @{
+                kFormCellClass: @"CJFFormLR001TableViewCell",
+                kFormCellTitle: @"MyTitle",
+                kFormCellValue: @"MyValue"
+            },
+            @{
+                kFormCellClass: @"CJFFormLR002TableViewCell",
+                kFormCellTitle: @"MyTitle",
+                kFormCellValue: @"MyValue"
+            },
+            @{
+                kFormCellClass: @"CJFFormLRTag001TableViewCell",
+                kFormCellTitle: @"MyTags",
+                kFormCellValue: @[
+                    @"标签tag1", @"表面", @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",
+                    @"哈哈哈", @"嘻嘻嘻", @"呵呵呵", @"标签", @"表面兄弟", @"你好啊", @"不想你了哦", @"不要这样子啦",
+                    @"标签tag1", @"表面", @"哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",
+                    @"哈哈哈", @"嘻嘻嘻", @"呵呵呵", @"标签", @"表面兄弟", @"你好啊", @"不想你了哦", @"不要这样子啦",
+                    @"标签tag1", @"表面", @"哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",
+                    @"哈哈哈", @"嘻嘻嘻", @"呵呵呵", @"标签", @"表面兄弟", @"你好啊", @"不想你了哦", @"不要这样子啦"
+                ]
+            },
+            @{
+                kFormCellClass: @"CJFFormFFGrid001TableViewCell",
+                kFormCellTitle: @"MyTitle",
+                kFormCellValue: @[
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf11"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf22"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf33"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf44"
+                    },
+                    @{
+                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
+                        @"value": @"lkhlkasdf55"
+                    }
+                ]
+            },
+            @{
+                kFormCellClass: @"CJFFormTBSwitch001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @[
+                    @{
+                        @"state": @(0),
+                        @"title": @"Female",
+                        @"id": @(0)
+                    },
+                    @{
+                        @"state": @(0),
+                        @"title": @"Male",
+                        @"id": @(1)
+                    },
+                    @{
+                        @"state": @(0),
+                        @"title": @"Both",
+                        @"id": @(2)
+                    }
+                ]
+            },
+            @{
+                kFormCellClass: @"CJFFormTBInputSearch001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"default text",
+                @"placeholder": @"placeholder"
+            }
+        ],
+        kFormSectionFooter: @{}
     };
     _dataSource = @[exampleDict];
 }
@@ -127,6 +126,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - UITableViewDelegate, UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -141,65 +142,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
-//    cell.textLabel.text = @"asdf";
-    
-//    if (indexPath.row == 0) {
-//        CJFFormFFGrid001TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
-//        [cell setModelWithDict:@{
-//            @"dataSource" : @[
-//                    @{
-//                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-//                        @"value": @"lkhlkasdf11"
-//                    },
-//                    @{
-//                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-//                        @"value": @"lkhlkasdf22"
-//                    },
-//                    @{
-//                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-//                        @"value": @"lkhlkasdf33"
-//                    },
-//                    @{
-//                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-//                        @"value": @"lkhlkasdf44"
-//                    },
-//                    @{
-//                        @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
-//                        @"value": @"lkhlkasdf55"
-//                    }
-//            ]
-//        } format:nil];
-//        cell.cellStyle.contentInset = UIEdgeInsetsMake(8, 20, 8, 20);
-//        return cell;
-//    }
-//
-//    if (indexPath.row%2 == 0) {
-//        CJFFormLRTag001TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
-//        [cell setModelWithDict:@{
-//            @"title": @"my tags:",
-//            @"tags": @[
-//                    @"标签tag1",@"表面",@"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
-//                    @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦",
-//                    @"标签tag1",@"表面",@"哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
-//                    @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦",
-//                    @"标签tag1",@"表面",@"哈哈哈",@"测试测试",@"不不不不",@"无敌啊",@"标签",@"这样喊得好吗",
-//                    @"哈哈哈",@"嘻嘻嘻",@"呵呵呵",@"标签",@"表面兄弟",@"你好啊",@"不想你了哦",@"不要这样子啦"
-//                    ]
-//        } format:nil];
-//        return cell;
-//    } else {
-//        CJFFormLR002TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
-//        [cell setModelWithDict:@{
-//            @"myTitle": @"my title:",
-//            @"myValue": @"my value"
-//        } format:@{
-//            @"title": @"myTitle",
-//            @"value": @"myValue"
-//        }];
-//        return cell;
-//    }
-    
     NSDictionary *bodyDict = self.dataSource[indexPath.section];
     NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
     NSDictionary *cellDict = bodyArray[indexPath.row];
@@ -210,19 +152,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"click at : %ld,%ld", indexPath.section, indexPath.row);
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    NSLog(@"click at indexPath: %@, data: %@", indexPath, cellDict);
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSNumber *height = [self.heightAtIndexPath objectForKey:indexPath];
-    if(height)
-    {
+    if (height) {
         return height.floatValue;
-    }
-    else
-    {
-        return 100;
+    } else {
+        return UITableViewAutomaticDimension;
     }
 }
 
@@ -231,6 +173,8 @@
     NSNumber *height = @(cell.frame.size.height);
     [self.heightAtIndexPath setObject:height forKey:indexPath];
 }
+
+#pragma mark - Getters
 
 - (NSMutableDictionary *)heightAtIndexPath {
     if (!_heightAtIndexPath) {
