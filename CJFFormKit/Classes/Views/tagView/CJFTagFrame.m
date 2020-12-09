@@ -23,7 +23,7 @@
         _tagItemfontSize = [UIFont systemFontOfSize:12];
         _tagItemHeight = 20.0;
         _contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _tagSuperviewWidth = WIDTH;
+        _tagSuperviewWidth = [UIScreen mainScreen].bounds.size.width;
     }
     return self;
 }

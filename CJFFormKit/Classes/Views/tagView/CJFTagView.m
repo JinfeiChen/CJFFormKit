@@ -15,7 +15,7 @@
 @interface CJFTagView ()
 @property (nonatomic, strong) NSMutableArray *viewArrayM;
 @property (nonatomic, strong) NSMutableArray *labelArrayM;
-@property (nonatomic, strong) TagsFrame *tagsFrame;
+@property (nonatomic, strong) CJFTagFrame *tagsFrame;
 @property (nonatomic, assign) CGFloat supViewWidth;// 记录当前的width
 @end
 
@@ -63,8 +63,8 @@
         
         UIView *bgView = [[UIView alloc]init];
         bgView.backgroundColor = obj.backgroudColor;
-        bgView.borderColor = obj.borderColor;
-        bgView.borderWidth = obj.borderWidth;
+        bgView.layer.borderColor = obj.borderColor.CGColor;
+        bgView.layer.borderWidth = obj.borderWidth;
         bgView.layer.masksToBounds = obj.masksToBounds;
         bgView.layer.cornerRadius = obj.cornerRadius;
         bgView.tag = idx;
@@ -148,7 +148,7 @@
     [self.dataArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UIView *bgView = [[UIView alloc]init];
-        bgView.backgroundColor = HEXCOLOR(0xE8EBF3);
+        bgView.backgroundColor = kCJFFormHexColor(0xE8EBF3);
         bgView.tag = idx;
         bgView.layer.cornerRadius = 2.0;
         bgView.layer.masksToBounds = YES;
@@ -159,7 +159,7 @@
         UILabel *label = [[UILabel alloc]init];
         label.text = obj;
         label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = HEXCOLOR(0x5A6685);
+        label.textColor = kCJFFormHexColor(0x5A6685);
         label.font = self.tagItemfontSize;
         label.numberOfLines = 0;
         [bgView addSubview:label];
@@ -220,9 +220,9 @@
     return _labelArrayM;
 }
 
-- (TagsFrame *)tagsFrame {
+- (CJFTagFrame *)tagsFrame {
     if (_tagsFrame == nil) {
-        _tagsFrame = [[TagsFrame alloc] init];
+        _tagsFrame = [[CJFTagFrame alloc] init];
         _tagsFrame.minimumInteritemSpacing = self.minimumInteritemSpacing;
         _tagsFrame.minimumLineSpacing = self.minimumLineSpacing;
         _tagsFrame.tagItemfontSize = self.tagItemfontSize;
