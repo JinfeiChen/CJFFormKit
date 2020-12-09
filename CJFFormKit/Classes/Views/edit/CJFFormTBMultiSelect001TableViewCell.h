@@ -9,7 +9,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface CJFFormTBMultiSelect001ItemModel : CJFObject
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *key; // 参数
+@property (nonatomic, strong) id value;// 参数值
+
+@end
+
+@interface CJFFormTBMultiSelect001Model : CJFFormModel
+
+@property (strong, nonatomic) NSArray <CJFFormTBMultiSelect001ItemModel *> *value; /**< <#property#> */
+@property (copy, nonatomic) NSString *placeholder; /**< <#property#> */
+
+@end
+
 @interface CJFFormTBMultiSelect001TableViewCell : CJFFormTBTableViewCell
+
+@property (strong, nonatomic) CJFFormTBMultiSelect001Model *model; /**< <#property#> */
 
 @end
 

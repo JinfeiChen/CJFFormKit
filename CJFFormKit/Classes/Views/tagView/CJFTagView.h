@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 数据源
 @property (nonatomic, strong) NSArray <NSString *>*dataArray;
 // delete Image
-@property (nonatomic, strong) UIImage *deleteImage;
+@property (nonatomic, strong) UIImage * _Nullable deleteImage;
 // image 和title 的间距 默认为0。 现在的布局：title在右，image在左
 @property (nonatomic, assign) CGFloat contentPadding;
 /** 标签行间距 default is 10*/

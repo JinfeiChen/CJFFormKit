@@ -9,9 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, CJFormPrivilege) {
-    CJFormPrivilege_Read, // readonly
-    CJFormPrivilege_Write, // writeonly
+typedef NS_ENUM(NSUInteger, CJFFormPrivilege) {
+    CJFFormPrivilege_Read, // readonly
+    CJFFormPrivilege_Write, // writeonly
 };
 
 @interface CJFFormModel : CJFObject
@@ -19,7 +19,8 @@ typedef NS_ENUM(NSUInteger, CJFormPrivilege) {
 @property (copy, nonatomic) NSString *title; /**< <#property#> */
 @property (strong, nonatomic) id value; /**< <#property#> */
 
-@property (assign, nonatomic) CJFormPrivilege privilege; /**< <#property#> */
+@property (assign, nonatomic) CJFFormPrivilege privilege; /**< <#property#> */
+@property (assign, nonatomic, getter=isSelected) BOOL selected; /**< <#property#> */
 
 @end
 
