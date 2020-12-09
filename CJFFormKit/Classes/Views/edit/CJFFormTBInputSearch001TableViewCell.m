@@ -41,16 +41,16 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    self.dataModel.paramValue = @"";
+//    self.dataModel.paramValue = @"";
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
     [self inputSearchAction];
-    self.dataModel.name = self.textField.text;
-    if ([self.delegate respondsToSelector:@selector(RAAddContactsInputSearchCell:andText:)]) {
-        [self.delegate RAAddContactsInputSearchCell:self andText:self.textField.text];
-    }
+//    self.dataModel.name = self.textField.text;
+//    if ([self.delegate respondsToSelector:@selector(RAAddContactsInputSearchCell:andText:)]) {
+//        [self.delegate RAAddContactsInputSearchCell:self andText:self.textField.text];
+//    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -64,11 +64,11 @@
 
 #pragma mark - Setters
 
-- (void)setDataModel:(RAAddContactsChildCellModel *)dataModel {
-    [super setDataModel:dataModel];
-    self.textField.placeholder = dataModel.placeholdString;
-    self.textField.text = dataModel.name;
-}
+//- (void)setDataModel:(RAAddContactsChildCellModel *)dataModel {
+//    [super setDataModel:dataModel];
+//    self.textField.placeholder = dataModel.placeholdString;
+//    self.textField.text = dataModel.name;
+//}
 
 #pragma mark - Getters
 
@@ -77,7 +77,7 @@
         _textField = [[UITextField alloc] init];
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.font = [UIFont systemFontOfSize:14];
-        _textField.textColor = HEXCOLOR(0x565465);
+//        _textField.textColor = HEXCOLOR(0x565465);
         _textField.layer.masksToBounds = YES;
         _textField.layer.cornerRadius  = 8;
         _textField.backgroundColor = [UIColor whiteColor];
@@ -98,7 +98,7 @@
 - (UIView *)searchView {
     if (_searchView == nil) {
         _searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
-        _searchView.backgroundColor = AppBgSelectedColor;
+//        _searchView.backgroundColor = AppBgSelectedColor;
         UIButton *rightButton = [[UIButton alloc]initWithFrame:_searchView.bounds];
         [rightButton addTarget:self action:@selector(inputSearchAction) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
