@@ -7,7 +7,6 @@
 //
 
 #import <CJFFormKit/CJFFormTableViewCell.h>
-#import <CJFFormKit/CJFObject.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CJFFormFFGrid001Model : CJFObject
+@interface CJFFormFFGrid001Model : CJFFormModel
 
 @property (strong, nonatomic) NSArray <CJFFormFFGrid001ItemModel *> *value; /**< <#property#> */
 

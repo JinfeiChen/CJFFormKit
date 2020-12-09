@@ -11,6 +11,8 @@ static CGFloat kFontSize = 14.0;
 
 @implementation CJFFormLRTag001Model
 
+@dynamic value;
+
 @end
 
 @implementation WYTagsModel

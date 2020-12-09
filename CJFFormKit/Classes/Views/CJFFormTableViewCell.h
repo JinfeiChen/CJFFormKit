@@ -6,9 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CJFFormKit/CJFObject.h>
+
+#import <CJFFormKit/CJFFormModel.h>
+
 #import <Masonry/Masonry.h>
+
 #import <YYModel/YYModel.h>
+#import <YYText/YYLabel.h>
+#import <YYText/NSAttributedString+YYText.h>
 #import <YYWebImage/YYWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN

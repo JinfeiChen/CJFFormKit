@@ -14,7 +14,7 @@
 #import <CJFFormKit/CJFFormLRTag001TableViewCell.h>
 #import <CJFFormKit/CJFFormFFGrid001TableViewCell.h>
 
-#import <CJFFormKit/CJFFormTBSwitch001EditTableViewCell.h>
+#import <CJFFormKit/CJFFormTBSwitch001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -34,7 +34,7 @@
     [self.tableView registerClass:[CJFFormLRTag001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
     [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
     
-    [self.tableView registerClass:[CJFFormTBSwitch001EditTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001EditTableViewCell class])];
+    [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
     
     NSDictionary *exampleDict = @{
        kFormSectionHeader: @{},
@@ -88,7 +88,7 @@
                                ]
            },
            @{
-               kFormCellClass: @"CJFFormTBSwitch001EditTableViewCell",
+               kFormCellClass: @"CJFFormTBSwitch001TableViewCell",
                kFormCellTitle: @"MyEditTitle",
                kFormCellValue: @[
                        @{

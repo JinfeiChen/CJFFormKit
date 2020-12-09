@@ -9,7 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface CJFFormTBInputSearch001Model : CJFFormModel
+
+@end
+
 @interface CJFFormTBInputSearch001TableViewCell : CJFFormTBTableViewCell
+
+@property (strong, nonatomic) CJFFormTBInputSearch001Model *model; /**< <#property#> */
 
 @end
 

@@ -9,10 +9,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, CJFormPrivilege) {
+    CJFormPrivilege_Read, // readonly
+    CJFormPrivilege_Write, // writeonly
+};
+
 @interface CJFFormModel : CJFObject
 
 @property (copy, nonatomic) NSString *title; /**< <#property#> */
-@property (copy, nonatomic) NSString *value; /**< <#property#> */
+@property (strong, nonatomic) id value; /**< <#property#> */
+
+@property (assign, nonatomic) CJFormPrivilege privilege; /**< <#property#> */
 
 @end
 

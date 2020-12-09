@@ -1,13 +1,13 @@
 //
-//  CJFFormTBSwitch001EditTableViewCell.m
+//  CJFFormTBSwitch001TableViewCell.m
 //  Pods
 //
 //  Created by cjf on 8/12/2020.
 //
 
-#import "CJFFormTBSwitch001EditTableViewCell.h"
+#import "CJFFormTBSwitch001TableViewCell.h"
 
-@implementation CJFFormTBSwitch001EditButtonModel
+@implementation CJFFormTBSwitch001ButtonModel
 
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
@@ -18,12 +18,14 @@
 @end
 
 
-@implementation CJFFormTBSwitch001EditModel
+@implementation CJFFormTBSwitch001Model
+
+@dynamic value;
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{
-        @"value" : [CJFFormTBSwitch001EditButtonModel class]
+        @"value" : [CJFFormTBSwitch001ButtonModel class]
     };
 }
 
@@ -31,13 +33,13 @@
 
 
 
-@interface CJFFormTBSwitch001EditTableViewCell ()
+@interface CJFFormTBSwitch001TableViewCell ()
 
 @property (nonatomic, strong) NSMutableArray *buttonArrayM;
 
 @end
 
-@implementation CJFFormTBSwitch001EditTableViewCell
+@implementation CJFFormTBSwitch001TableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -79,7 +81,7 @@
             }
         }];
     }
-    self.model = [CJFFormTBSwitch001EditModel yy_modelWithJSON:mDict];
+    self.model = [CJFFormTBSwitch001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
     
     if (self.model.value.count != self.buttonArrayM.count) {
@@ -91,7 +93,7 @@
     
     if (self.model.value.count && !self.buttonArrayM.count) {
         for (int i = 0; i < self.model.value.count; ++i) {
-            CJFFormTBSwitch001EditButtonModel *model = self.model.value[i];
+            CJFFormTBSwitch001ButtonModel *model = self.model.value[i];
             UIButton *button = [[UIButton alloc]init];
             button.tag = i;
             [button setTitle:model.title forState:UIControlStateNormal];
@@ -115,7 +117,7 @@
     }
     
     for (int i = 0; i < self.model.value.count; ++i) {
-        CJFFormTBSwitch001EditButtonModel *model = self.model.value[i];
+        CJFFormTBSwitch001ButtonModel *model = self.model.value[i];
         UIButton *button = self.buttonArrayM[i];
         [button setTitle:model.title forState:UIControlStateNormal];
         button.selected = model.state;
@@ -135,7 +137,7 @@
     
     for (int i = 0; i < self.buttonArrayM.count; ++i) {
         UIButton *button = self.buttonArrayM[i];
-        CJFFormTBSwitch001EditButtonModel *model = self.model.value[i];
+        CJFFormTBSwitch001ButtonModel *model = self.model.value[i];
         
         if (sender.tag != button.tag) {
             model.state = button.selected = NO;

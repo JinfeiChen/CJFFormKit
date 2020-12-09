@@ -7,16 +7,12 @@
 //
 
 #import <CJFFormKit/CJFFormTableViewCell.h>
-#import <CJFFormKit/CJFObject.h>
-#import <YYText/YYLabel.h>
-#import <YYText/NSAttributedString+YYText.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CJFFormLRTag001Model : CJFObject
+@interface CJFFormLRTag001Model : CJFFormModel
 
-@property (copy, nonatomic) NSString *title; /**< <#property#> */
-@property (copy, nonatomic) NSArray <NSString *> *value; /**< <#property#> */
+@property (strong, nonatomic) NSArray <NSString *> *value; /**< <#property#> */
 
 @end
 

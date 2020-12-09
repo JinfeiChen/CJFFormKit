@@ -13,6 +13,8 @@
 
 @implementation CJFFormFFGrid001Model
 
+@dynamic value;
+
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{

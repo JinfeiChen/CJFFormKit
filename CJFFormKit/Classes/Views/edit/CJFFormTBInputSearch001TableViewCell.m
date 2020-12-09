@@ -7,6 +7,10 @@
 
 #import "CJFFormTBInputSearch001TableViewCell.h"
 
+@implementation CJFFormTBInputSearch001Model
+
+@end
+
 @interface CJFFormTBInputSearch001TableViewCell () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *textField;
@@ -70,6 +74,27 @@
 //    self.textField.text = dataModel.name;
 //}
 
+- (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
+{
+    if (!dict) {
+        return;
+    }
+    
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    if (format) {
+        [format.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *key = [format objectForKey:obj];
+            id value = [dict objectForKey:key];
+            if (value) {
+                [mDict setObject:value forKey:obj];
+            }
+        }];
+    }
+    self.model = [CJFFormTBInputSearch001Model yy_modelWithJSON:mDict];
+    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    
+}
+
 #pragma mark - Getters
 
 - (UITextField *)textField {
@@ -77,7 +102,7 @@
         _textField = [[UITextField alloc] init];
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.font = [UIFont systemFontOfSize:14];
-//        _textField.textColor = HEXCOLOR(0x565465);
+        _textField.textColor = kCJFFormHexColor(0x565465);
         _textField.layer.masksToBounds = YES;
         _textField.layer.cornerRadius  = 8;
         _textField.backgroundColor = [UIColor whiteColor];
@@ -98,7 +123,7 @@
 - (UIView *)searchView {
     if (_searchView == nil) {
         _searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
-//        _searchView.backgroundColor = AppBgSelectedColor;
+        _searchView.backgroundColor = kCJFFormMainColor;
         UIButton *rightButton = [[UIButton alloc]initWithFrame:_searchView.bounds];
         [rightButton addTarget:self action:@selector(inputSearchAction) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
