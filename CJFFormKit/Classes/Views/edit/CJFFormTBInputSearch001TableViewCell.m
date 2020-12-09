@@ -139,7 +139,7 @@
         _searchView.backgroundColor = kCJFFormMainColor;
         UIButton *rightButton = [[UIButton alloc]initWithFrame:_searchView.bounds];
         [rightButton addTarget:self action:@selector(inputSearchAction) forControlEvents:UIControlEventTouchUpInside];
-        [rightButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+        [rightButton setImage:[UIImage imageNamed:@"search" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [_searchView addSubview:rightButton];
     }
     return _searchView;
