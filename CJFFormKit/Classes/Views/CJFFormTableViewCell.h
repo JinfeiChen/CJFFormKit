@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CJFFormKit/CJFObject.h>
 #import <Masonry/Masonry.h>
 #import <YYModel/YYModel.h>
 #import <YYWebImage/YYWebImage.h>

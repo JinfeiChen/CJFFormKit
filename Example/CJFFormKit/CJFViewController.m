@@ -8,7 +8,7 @@
 
 #import "CJFViewController.h"
 
-#import <CJFFormKit/CJFFormTableViewCell.h> 
+#import <CJFFormKit/CJFFormTableViewCell.h>
 
 #import <CJFFormKit/CJFFormLR002TableViewCell.h>
 #import <CJFFormKit/CJFFormLRTag001TableViewCell.h>
@@ -90,7 +90,23 @@
            @{
                kFormCellClass: @"CJFFormTBSwitch001EditTableViewCell",
                kFormCellTitle: @"MyEditTitle",
-               kFormCellValue: @"MyValue"
+               kFormCellValue: @[
+                       @{
+                           @"state": @(0),
+                           @"title": @"Female",
+                           @"id": @(0)
+                       },
+                       @{
+                           @"state": @(0),
+                           @"title": @"Male",
+                           @"id": @(1)
+                       },
+                       @{
+                           @"state": @(0),
+                           @"title": @"Both",
+                           @"id": @(2)
+                       }
+               ]
            }
        ],
        kFormSectionFooter: @{}
