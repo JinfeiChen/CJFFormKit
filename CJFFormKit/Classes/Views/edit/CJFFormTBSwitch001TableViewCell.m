@@ -53,8 +53,9 @@
 
 - (void)buildView
 {
-    [self.contentView addSubview:self.TTitleLabel];
+    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
     
+    [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
         make.left.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
@@ -124,7 +125,7 @@
         if (button.selected) {
             button.backgroundColor = [UIColor colorWithRed:255/255.0 green:194/255.0 blue:76/255.0 alpha:1.0];
         }else {
-            button.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+            button.backgroundColor = [UIColor whiteColor];
         }
     }
 }
@@ -141,7 +142,7 @@
         
         if (sender.tag != button.tag) {
             model.state = button.selected = NO;
-            button.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+            button.backgroundColor = [UIColor whiteColor];
         }else {
             model.state = button.selected = YES;
             button.backgroundColor = [UIColor colorWithRed:255/255.0 green:194/255.0 blue:76/255.0 alpha:1.0];;

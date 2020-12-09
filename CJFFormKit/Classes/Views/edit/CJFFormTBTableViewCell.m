@@ -21,14 +21,19 @@
 
 - (void)buildView
 {
-    [self.contentView addSubview:self.TTitleLabel]; 
-    
-    [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
-        make.left.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
-        make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
-        make.height.mas_equalTo(18);
-    }];
+    self.contentView.backgroundColor = [UIColor colorWithWhite:0.98 alpha:1.0];
+}
+
+#pragma mark - Getters
+
+- (UILabel *)TTitleLabel
+{
+    if (!_TTitleLabel) {
+        _TTitleLabel = [[UILabel alloc] init];
+        _TTitleLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
+        _TTitleLabel.textColor = [UIColor colorWithRed:159 / 255.0 green:162 / 255.0 blue:168 / 255.0 alpha:1.0];
+    }
+    return _TTitleLabel;
 }
 
 @end

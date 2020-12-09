@@ -20,6 +20,8 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - Public Methods
+
 + (CJFFormTableViewCell *)cellForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath dataSource:(NSDictionary *)dataSource
 {
     NSLog(@"dataSource: %@", dataSource);
@@ -38,8 +40,6 @@
     }
     return defaultCell;
 }
-
-#pragma mark - Public Methods
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
 {

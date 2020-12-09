@@ -32,9 +32,10 @@ Pod::Spec.new do |s|
 
   s.source_files = 'CJFFormKit/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'CJFFormKit' => ['CJFFormKit/Assets/*.png']
-  # }
+  s.resource_bundles = {
+#      'CJFFormKit' => ['CJFFormKit/Assets/*.png']
+    'CJFFormKit' => ['CJFFormKit/Assets/*.xcassets']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

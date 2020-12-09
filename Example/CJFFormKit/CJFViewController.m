@@ -15,6 +15,7 @@
 #import <CJFFormKit/CJFFormFFGrid001TableViewCell.h>
 
 #import <CJFFormKit/CJFFormTBSwitch001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBInputSearch001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -35,6 +36,7 @@
     [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
     
     [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
+    [self.tableView registerClass:[CJFFormTBInputSearch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBInputSearch001TableViewCell class])];
     
     NSDictionary *exampleDict = @{
        kFormSectionHeader: @{},
@@ -107,6 +109,12 @@
                            @"id": @(2)
                        }
                ]
+           },
+           @{
+               kFormCellClass: @"CJFFormTBInputSearch001TableViewCell",
+               kFormCellTitle: @"MyEditTitle",
+               kFormCellValue: @"default text",
+               @"placeholder": @"placeholder"
            }
        ],
        kFormSectionFooter: @{}
