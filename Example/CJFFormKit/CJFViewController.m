@@ -24,6 +24,7 @@
 #import <CJFFormKit/CJFFormTBTextView001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBSlider001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBRange001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBNumber001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -205,6 +206,11 @@
                 kFormCellValue: @"",
                 @"minValue": @(0),
                 @"maxValue": @(10)
+            },
+            @{
+                kFormCellClass: @"CJFFormTBNumber001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"0"
             }
         ],
         kFormSectionFooter: @{}

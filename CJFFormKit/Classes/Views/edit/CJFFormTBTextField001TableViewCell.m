@@ -112,6 +112,8 @@
     return YES;
 }
 
+#pragma mark - Actions
+
 - (void)singleInputCellDeleteAction:(UIButton *)button {
 //    if ([self.delegate respondsToSelector:@selector(RAAddContactsSingleInputCell:andDeleteButton:)]) {
 //        [self.delegate RAAddContactsSingleInputCell:self andDeleteButton:button];

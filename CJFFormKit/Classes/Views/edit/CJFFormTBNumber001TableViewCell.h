@@ -5,11 +5,16 @@
 //  Created by cjf on 10/12/2020.
 //
 
-#import <CJFFormKit/CJFFormKit.h>
+#import <CJFFormKit/CJFFormTBTableViewCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBNumber001Model : CJFFormModel
+
+@property (assign, nonatomic) CGFloat increment; /**< default 1.0 */
+@property (assign, nonatomic) CGFloat minValue; /**< default 0.0 */
+@property (assign, nonatomic) CGFloat maxValue; /**< default 10000.0 */
+@property (assign, nonatomic) NSInteger digits; /**< default 0, 小数点位数 */
 
 @end
 
