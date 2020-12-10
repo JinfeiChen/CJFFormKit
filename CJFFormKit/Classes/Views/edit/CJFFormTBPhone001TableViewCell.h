@@ -1,6 +1,7 @@
 //
 //  CJFFormTBPhone001TableViewCell.h
 //  Pods
+//  表单控件：电话
 //
 //  Created by cjf on 10/12/2020.
 //
@@ -10,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBPhone001Model : CJFFormModel
+
+@property (nonatomic, copy) NSString *countryCode; // e.g. +86
+@property (nonatomic, copy) NSString *countryArea; // e.g. HongKong
 
 @end
 

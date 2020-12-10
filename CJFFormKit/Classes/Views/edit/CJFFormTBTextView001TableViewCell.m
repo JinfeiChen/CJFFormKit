@@ -1,23 +1,21 @@
 //
-//  CJFFormTBDate001TableViewCell.m
+//  CJFFormTBTextView001TableViewCell.m
 //  Pods
 //
 //  Created by cjf on 10/12/2020.
 //
 
-#import "CJFFormTBDate001TableViewCell.h"
+#import "CJFFormTBTextView001TableViewCell.h"
 
-@implementation CJFFormTBDate001Model
-
-@end
-
-@interface CJFFormTBDate001TableViewCell ()
-
-@property (nonatomic, strong) UITextField *textField;
+@implementation CJFFormTBTextView001Model
 
 @end
 
-@implementation CJFFormTBDate001TableViewCell
+@interface CJFFormTBTextView001TableViewCell ()
+
+@end
+
+@implementation CJFFormTBTextView001TableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -67,35 +65,8 @@
             }
         }];
     }
-    self.model = [CJFFormTBDate001Model yy_modelWithJSON:mDict];
+    self.model = [CJFFormTBTextView001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
-
-    self.textField.placeholder = self.model.placeholder ? : @"Please Select";
-    self.textField.text = self.model.value;
-}
-
-#pragma mark - Gettters
-
-- (UITextField *)textField {
-    if (_textField == nil) {
-        _textField = [[UITextField alloc] init];
-        _textField.font = [UIFont systemFontOfSize:14];
-        _textField.textColor = HEXCOLOR(0x565465);
-        _textField.layer.masksToBounds = YES;
-        _textField.layer.cornerRadius = 8;
-        _textField.backgroundColor = [UIColor whiteColor];
-        _textField.userInteractionEnabled = NO;
-        _textField.returnKeyType = UIReturnKeyDone;
-        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
-        UIButton *buttonView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-        [buttonView setImage:[UIImage imageNamed:@"ic_date" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-        buttonView.userInteractionEnabled = NO;
-        [leftView addSubview:buttonView];
-        _textField.leftView = leftView;
-        _textField.leftViewMode = UITextFieldViewModeAlways;
-    }
-    return _textField;
 }
 
 @end

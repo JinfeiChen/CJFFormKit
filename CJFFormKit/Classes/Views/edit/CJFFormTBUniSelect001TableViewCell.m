@@ -102,7 +102,7 @@
         self.placeHoldLabel.hidden = NO;
     }
     self.contentLabel.text = self.model.value;
-    self.placeHoldLabel.text = self.model.placeholder;
+    self.placeHoldLabel.text = self.model.placeholder ? : @"Please Select";
     
     [UIView animateWithDuration:0.3 animations:^{
         if (self.model.isSelected) {

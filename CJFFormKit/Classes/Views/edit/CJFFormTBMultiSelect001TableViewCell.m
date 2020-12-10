@@ -116,7 +116,7 @@
     if (self.model.value.count) {
         self.placeholdLabel.text = @"";
     } else {
-        self.placeholdLabel.text = self.model.placeholder;
+        self.placeholdLabel.text = self.model.placeholder ? : @"Please Select";
     }
 
     if (self.model.privilege == CJFFormPrivilege_Write) {

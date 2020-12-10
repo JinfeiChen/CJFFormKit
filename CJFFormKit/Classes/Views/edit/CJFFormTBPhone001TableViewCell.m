@@ -11,7 +11,14 @@
 
 @end
 
-@interface CJFFormTBPhone001TableViewCell ()
+@interface CJFFormTBPhone001TableViewCell () <UITextFieldDelegate>
+
+@property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) UILabel *phoneAreaLabel;
+@property (nonatomic, strong) UIImageView *lineLabel;
+@property (nonatomic, strong) UIImageView *searchDownImageView;
+@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) UIView *deleteView;
 
 @end
 
@@ -39,6 +46,45 @@
         make.height.mas_equalTo(18);
     }];
 
+    [self.contentView addSubview:self.bgView];
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+        make.height.mas_equalTo(40);
+        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
+    }];
+
+    [self.bgView addSubview:self.phoneAreaLabel];
+    [self.phoneAreaLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.bgView);
+        make.left.equalTo(self.bgView).offset(10);
+        make.width.mas_equalTo(60);
+    }];
+
+    [self.bgView addSubview:self.searchDownImageView];
+    [self.searchDownImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.phoneAreaLabel);
+        make.left.equalTo(self.phoneAreaLabel.mas_right).offset(5);
+        make.width.mas_equalTo(9);
+        make.height.mas_equalTo(6);
+    }];
+
+    [self.bgView addSubview:self.lineLabel];
+    [self.lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.bgView);
+        make.left.equalTo(self.searchDownImageView.mas_right).offset(10);
+        make.width.mas_equalTo(0.5);
+    }];
+
+    [self.bgView addSubview:self.textField];
+    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.bottom.equalTo(self.bgView);
+        make.left.equalTo(self.lineLabel.mas_right);
+    }];
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bgViewTapAction)];
+    [self.bgView addGestureRecognizer:tap];
 }
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
@@ -60,6 +106,129 @@
     self.model = [CJFFormTBPhone001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
 
+    self.phoneAreaLabel.text = [NSString stringWithFormat:@"%@ %@", self.model.countryCode, self.model.countryArea];
+    self.phoneAreaLabel.text = [NSString stringWithFormat:@"%@", self.model.countryCode];
+    self.textField.placeholder = self.model.placeholder ? : @"Please Input";
+    self.textField.text = self.model.value;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        if (self.model.isSelected) {
+            self.searchDownImageView.transform = CGAffineTransformMakeRotation(M_PI);
+        } else {
+            self.searchDownImageView.transform = CGAffineTransformIdentity;
+        }
+    }];
+
+    if (self.model.privilege == CJFFormPrivilege_Write) {
+        if (self.model.value && [self.model.value length] > 0) {
+            _textField.rightView = self.deleteView;
+            _textField.rightViewMode = UITextFieldViewModeAlways;
+        }
+    }
+}
+
+#pragma mark - Actions
+
+- (void)bgViewTapAction {
+//    if ([self.delegate respondsToSelector:@selector(RAAddContactsPhonesCell:andDataModel:)]) {
+//        [self.delegate RAAddContactsPhonesCell:self andDataModel:self.dataModel];
+//    }
+}
+
+- (void)phonCellDeleteAction:(UIButton *)button {
+//    if ([self.delegate respondsToSelector:@selector(RAAddContactsPhonesCell:andDeleteButton:)]) {
+//        [self.delegate RAAddContactsPhonesCell:self andDeleteButton:button];
+//    }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.model.value = str;
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+    UITableView *tableView = (UITableView *)self.superview;
+    [tableView reloadData];
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    self.model.value = @"";
+    return YES;
+}
+
+#pragma mark - Getters
+
+- (UIView *)bgView {
+    if (_bgView == nil) {
+        _bgView = [[UIView alloc] init];
+        _bgView.backgroundColor = [UIColor whiteColor];
+        _bgView.layer.cornerRadius = 8.0;
+        _bgView.layer.masksToBounds = YES;
+    }
+    return _bgView;
+}
+
+- (UILabel *)phoneAreaLabel {
+    if (_phoneAreaLabel == nil) {
+        _phoneAreaLabel = [[UILabel alloc] init];
+        _phoneAreaLabel.textColor = HEXCOLOR(0x565465);
+        _phoneAreaLabel.font = [UIFont systemFontOfSize:14];
+        _phoneAreaLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _phoneAreaLabel;
+}
+
+- (UIImageView *)searchDownImageView {
+    if (_searchDownImageView == nil) {
+        _searchDownImageView = [[UIImageView alloc] init];
+        _searchDownImageView.image = [UIImage imageNamed:@"search_down" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
+    }
+    return _searchDownImageView;
+}
+
+- (UIImageView *)lineLabel {
+    if (_lineLabel == nil) {
+        _lineLabel = [[UIImageView alloc] init];
+        _lineLabel.backgroundColor = HEXCOLOR(0xD6DCDF);
+    }
+    return _lineLabel;
+}
+
+- (UITextField *)textField {
+    if (_textField == nil) {
+        _textField = [[UITextField alloc] init];
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _textField.font = [UIFont systemFontOfSize:14];
+        _textField.textColor = HEXCOLOR(0x565465);
+        _textField.layer.masksToBounds = YES;
+        _textField.layer.cornerRadius = 8;
+        _textField.backgroundColor = [UIColor whiteColor];
+        _textField.delegate = self;
+        _textField.keyboardType = UIKeyboardTypePhonePad;
+        _textField.returnKeyType = UIReturnKeyDone;
+
+        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+        leftView.backgroundColor = [UIColor whiteColor];
+        _textField.leftView = leftView;
+        _textField.leftViewMode = UITextFieldViewModeAlways;
+    }
+    return _textField;
+}
+
+- (UIView *)deleteView {
+    if (_deleteView == nil) {
+        _deleteView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
+        _deleteView.backgroundColor = [UIColor whiteColor];
+        UIButton *rightButton = [[UIButton alloc]initWithFrame:_deleteView.bounds];
+        [rightButton addTarget:self action:@selector(phonCellDeleteAction:) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton setImage:[UIImage imageNamed:@"search_clean" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_deleteView addSubview:rightButton];
+    }
+    return _deleteView;
 }
 
 @end

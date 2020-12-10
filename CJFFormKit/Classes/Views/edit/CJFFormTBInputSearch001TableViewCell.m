@@ -103,7 +103,7 @@
     self.model = [CJFFormTBInputSearch001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
     
-    self.textField.placeholder = [NSString stringWithFormat:@"%@", self.model.placeholder];
+    self.textField.placeholder = [NSString stringWithFormat:@"%@", self.model.placeholder ? : @"Please Input"];
     self.textField.text = [NSString stringWithFormat:@"%@", self.model.value];
 }
 

@@ -72,16 +72,16 @@
     self.model = [CJFFormTBTextField001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
 
-    self.textField.placeholder = self.model.placeholder;
+    self.textField.placeholder = self.model.placeholder ? : @"Please Input";
     self.textField.text = [NSString stringWithFormat:@"%@", self.model.value];
 
-//    if (self.model.isShowDelete) {
-//        _textField.rightView = self.deleteView;
-//        _textField.rightViewMode = UITextFieldViewModeAlways;
-//    }else {
-//        _textField.rightView = nil;
-//        _textField.rightViewMode = UITextFieldViewModeNever;
-//    }
+    if (self.model.value && [self.model.value length] > 0) {
+        _textField.rightView = self.deleteView;
+        _textField.rightViewMode = UITextFieldViewModeAlways;
+    }else {
+        _textField.rightView = nil;
+        _textField.rightViewMode = UITextFieldViewModeNever;
+    }
 }
 
 #pragma mark - UITextFieldDelegate

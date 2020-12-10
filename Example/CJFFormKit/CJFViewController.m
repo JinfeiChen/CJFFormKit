@@ -20,6 +20,7 @@
 #import <CJFFormKit/CJFFormTBUniSelect001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBTextField001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBDate001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBPhone001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -173,6 +174,14 @@
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
                 @"placeholder": @"placeholder",
+            },
+            @{
+                kFormCellClass: @"CJFFormTBPhone001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"default text",
+                @"placeholder": @"placeholder",
+                @"countryCode": @"+86",
+                @"countryArea": @"China"
             }
         ],
         kFormSectionFooter: @{}
