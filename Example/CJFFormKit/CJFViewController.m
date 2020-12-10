@@ -17,6 +17,7 @@
 #import <CJFFormKit/CJFFormTBSwitch001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBInputSearch001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBMultiSelect001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBUniSelect001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -39,6 +40,7 @@
     [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
     [self.tableView registerClass:[CJFFormTBInputSearch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBInputSearch001TableViewCell class])];
     [self.tableView registerClass:[CJFFormTBMultiSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBMultiSelect001TableViewCell class])];
+    [self.tableView registerClass:[CJFFormTBUniSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBUniSelect001TableViewCell class])];
 
     NSDictionary *exampleDict = @{
         kFormSectionHeader: @{},
@@ -149,6 +151,12 @@
                         }
                 ],
                 @"placeholder": @"placeholder"
+            },
+            @{
+                kFormCellClass: @"CJFFormTBUniSelect001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"default text",
+                @"placeholder": @"placeholder",
             }
         ],
         kFormSectionFooter: @{}
