@@ -5,7 +5,7 @@
 //  Created by cjf on 10/12/2020.
 //
 
-#import <CJFFormKit/CJFFormKit.h>
+#import <CJFFormKit/CJFView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CJFValuePopUpView : UIView
+@interface CJFValuePopUpView : CJFView
 
 @property (nonatomic, weak) id <CJFValuePopUpViewDelegate> delegate;
 

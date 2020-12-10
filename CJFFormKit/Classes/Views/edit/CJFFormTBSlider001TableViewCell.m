@@ -45,8 +45,8 @@
     [self.contentView addSubview:self.sliderView];
     [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@30);
-        make.top.equalTo(self.contentView).offset(25);
-        make.bottom.equalTo(self.contentView).offset(-8);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
+        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
         make.right.equalTo(self.contentView).offset(-10);
         make.left.equalTo(self.contentView).offset(10);
     }];
@@ -71,16 +71,16 @@
     self.model = [CJFFormTBSlider001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
     
+    self.sliderView.minimumValue = self.model.minValue;
     self.sliderView.maximumValue = self.model.maxValue;
-    self.sliderView.value = self.model.value;
+    self.sliderView.value = [self.model.value floatValue];
 }
 
 #pragma mark - Actions
 
 - (void)sliderAction {
-    DLog(@"%f",_sliderView.value);
-    self.dataModel.currentValue = _sliderView.value;
-    self.dataModel.paramValue = @((int)_sliderView.value);
+    NSLog(@"%f",_sliderView.value);
+    self.model.value = [NSString stringWithFormat:@"%f", self.sliderView.value];
 }
 
 #pragma mark - Getters
@@ -91,10 +91,8 @@
         _sliderView.minimumValue = 0;
         _sliderView.font = [UIFont systemFontOfSize:14];
 //        _sliderView.popUpViewColor = [UIColor clearColor];
-        [_sliderView setMaxFractionDigitsDisplayed:0];
+        [_sliderView setMaxFractionDigitsDisplayed:2];
         [_sliderView addTarget:self action:@selector(sliderAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        
     }
     return _sliderView;
 }

@@ -22,6 +22,7 @@
 #import <CJFFormKit/CJFFormTBDate001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBPhone001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBTextView001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBSlider001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -189,6 +190,13 @@
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
                 kFormCellPlaceholder: @"placeholder",
+            },
+            @{
+                kFormCellClass: @"CJFFormTBSlider001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"0.8",
+                @"minValue": @(0),
+                @"maxValue": @(1)
             }
         ],
         kFormSectionFooter: @{}
