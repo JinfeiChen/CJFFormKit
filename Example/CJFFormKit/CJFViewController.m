@@ -21,6 +21,7 @@
 #import <CJFFormKit/CJFFormTBTextField001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBDate001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBPhone001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBTextView001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -118,7 +119,7 @@
                 kFormCellClass: @"CJFFormTBInputSearch001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                @"placeholder": @"placeholder"
+                kCJFFormCellPlaceholder: @"placeholder"
             },
             @{
                 kFormCellClass: @"CJFFormTBMultiSelect001TableViewCell",
@@ -155,33 +156,39 @@
                             @"value": @"6"
                         }
                 ],
-                @"placeholder": @"placeholder"
+                kCJFFormCellPlaceholder: @"placeholder"
             },
             @{
                 kFormCellClass: @"CJFFormTBUniSelect001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                @"placeholder": @"placeholder",
+                kCJFFormCellPlaceholder: @"placeholder",
             },
             @{
                 kFormCellClass: @"CJFFormTBTextField001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                @"placeholder": @"placeholder",
+                kCJFFormCellPlaceholder: @"placeholder",
             },
             @{
                 kFormCellClass: @"CJFFormTBDate001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                @"placeholder": @"placeholder",
+                kCJFFormCellPlaceholder: @"placeholder",
             },
             @{
                 kFormCellClass: @"CJFFormTBPhone001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                @"placeholder": @"placeholder",
+                kCJFFormCellPlaceholder: @"placeholder",
                 @"countryCode": @"+86",
                 @"countryArea": @"China"
+            },
+            @{
+                kFormCellClass: @"CJFFormTBTextView001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"default text",
+                kCJFFormCellPlaceholder: @"placeholder",
             }
         ],
         kFormSectionFooter: @{}

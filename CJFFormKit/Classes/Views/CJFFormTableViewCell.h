@@ -14,6 +14,7 @@
 #import <YYModel/YYModel.h>
 #import <YYText/YYLabel.h>
 #import <YYText/NSAttributedString+YYText.h>
+#import <YYText/YYTextView.h>
 #import <YYWebImage/YYWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -36,7 +37,8 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 #define kFormCellClass @"class"
 #define kFormCellTitle @"title"
 #define kFormCellValue @"value"
-#define kFOrmCellSelector @"cellClick:"
+#define kFormCellSelector @"cellClick:"
+#define kFormCellPlaceholder @"placeholder"
 
 /**
  * Example:

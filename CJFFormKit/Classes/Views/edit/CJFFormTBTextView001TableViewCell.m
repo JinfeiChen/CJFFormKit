@@ -11,7 +11,9 @@
 
 @end
 
-@interface CJFFormTBTextView001TableViewCell ()
+@interface CJFFormTBTextView001TableViewCell () <YYTextViewDelegate> 
+
+@property (nonatomic, strong) YYTextView *textView;
 
 @end
 
@@ -38,13 +40,13 @@
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.height.mas_equalTo(18);
     }];
-
-    [self.contentView addSubview:self.textField];
-    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.contentView addSubview:self.textView];
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
         make.left.equalTo(self.contentView).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(80);
         make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
 }
@@ -67,6 +69,40 @@
     }
     self.model = [CJFFormTBTextView001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    
+    self.textView.placeholderText = self.model.placeholder;
+    self.textView.text = self.model.value;
+}
+
+#pragma mark - YYTextViewDelegate
+
+- (void)textViewDidEndEditing:(YYTextView *)textView {
+    NSLog(@"===>%@",textView.text);
+    self.model.value = textView.text;
+}
+
+- (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - Getters
+
+- (YYTextView *)textView {
+    if (_textView == nil) {
+        _textView = [[YYTextView alloc] init];
+        _textView.font = [UIFont systemFontOfSize:14];
+        _textView.textColor = HEXCOLOR(0x565465);
+        _textView.layer.masksToBounds = YES;
+        _textView.layer.cornerRadius  = 8;
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.returnKeyType = UIReturnKeyDone;
+        _textView.delegate = self;
+    }
+    return _textView;
 }
 
 @end
