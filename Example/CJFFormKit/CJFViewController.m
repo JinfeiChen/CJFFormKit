@@ -19,6 +19,7 @@
 #import <CJFFormKit/CJFFormTBMultiSelect001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBUniSelect001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBTextField001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBDate001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -32,17 +33,18 @@
     [super viewDidLoad];
 
     // Read
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-    [self.tableView registerClass:[CJFFormTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTableViewCell class])];
-    [self.tableView registerClass:[CJFFormLR002TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
-    [self.tableView registerClass:[CJFFormLRTag001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
-    [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
-    // Edit
-    [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
-    [self.tableView registerClass:[CJFFormTBInputSearch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBInputSearch001TableViewCell class])];
-    [self.tableView registerClass:[CJFFormTBMultiSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBMultiSelect001TableViewCell class])];
-    [self.tableView registerClass:[CJFFormTBUniSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBUniSelect001TableViewCell class])];
-    [self.tableView registerClass:[CJFFormTBTextField001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBTextField001TableViewCell class])];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+//    [self.tableView registerClass:[CJFFormTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTableViewCell class])];
+//    [self.tableView registerClass:[CJFFormLR002TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormLRTag001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
+//    // Edit
+//    [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormTBInputSearch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBInputSearch001TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormTBMultiSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBMultiSelect001TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormTBUniSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBUniSelect001TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormTBTextField001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBTextField001TableViewCell class])];
+//    [self.tableView registerClass:[CJFFormTBDate001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBDate001TableViewCell class])];
 
     NSDictionary *exampleDict = @{
         kFormSectionHeader: @{},
@@ -165,11 +167,24 @@
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
                 @"placeholder": @"placeholder",
+            },
+            @{
+                kFormCellClass: @"CJFFormTBDate001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @"default text",
+                @"placeholder": @"placeholder",
             }
         ],
         kFormSectionFooter: @{}
     };
     _dataSource = @[exampleDict];
+    
+    // Regist Cells
+    NSArray *bodyArray = exampleDict[kFormSectionBody];
+    [bodyArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *classStr = obj[kFormCellClass];
+        [self.tableView registerClass:NSClassFromString(classStr) forCellReuseIdentifier:classStr];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
