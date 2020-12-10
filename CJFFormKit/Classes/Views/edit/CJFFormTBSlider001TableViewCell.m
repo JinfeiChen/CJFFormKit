@@ -91,7 +91,7 @@
         _sliderView.minimumValue = 0;
         _sliderView.font = [UIFont systemFontOfSize:14];
 //        _sliderView.popUpViewColor = [UIColor clearColor];
-        [_sliderView setMaxFractionDigitsDisplayed:2];
+        [_sliderView setMaxFractionDigitsDisplayed:0]; // 小数点位数
         [_sliderView addTarget:self action:@selector(sliderAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sliderView;

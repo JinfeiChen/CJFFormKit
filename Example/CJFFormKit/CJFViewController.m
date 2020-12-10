@@ -194,9 +194,9 @@
             @{
                 kFormCellClass: @"CJFFormTBSlider001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"0.8",
+                kFormCellValue: @"8",
                 @"minValue": @(0),
-                @"maxValue": @(1)
+                @"maxValue": @(10)
             }
         ],
         kFormSectionFooter: @{}
