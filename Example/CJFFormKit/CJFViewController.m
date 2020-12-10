@@ -119,7 +119,7 @@
                 kFormCellClass: @"CJFFormTBInputSearch001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                kCJFFormCellPlaceholder: @"placeholder"
+                kFormCellPlaceholder: @"placeholder"
             },
             @{
                 kFormCellClass: @"CJFFormTBMultiSelect001TableViewCell",
@@ -156,31 +156,31 @@
                             @"value": @"6"
                         }
                 ],
-                kCJFFormCellPlaceholder: @"placeholder"
+                kFormCellPlaceholder: @"placeholder"
             },
             @{
                 kFormCellClass: @"CJFFormTBUniSelect001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                kCJFFormCellPlaceholder: @"placeholder",
+                kFormCellPlaceholder: @"placeholder",
             },
             @{
                 kFormCellClass: @"CJFFormTBTextField001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                kCJFFormCellPlaceholder: @"placeholder",
+                kFormCellPlaceholder: @"placeholder",
             },
             @{
                 kFormCellClass: @"CJFFormTBDate001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                kCJFFormCellPlaceholder: @"placeholder",
+                kFormCellPlaceholder: @"placeholder",
             },
             @{
                 kFormCellClass: @"CJFFormTBPhone001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                kCJFFormCellPlaceholder: @"placeholder",
+                kFormCellPlaceholder: @"placeholder",
                 @"countryCode": @"+86",
                 @"countryArea": @"China"
             },
@@ -188,7 +188,7 @@
                 kFormCellClass: @"CJFFormTBTextView001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"default text",
-                kCJFFormCellPlaceholder: @"placeholder",
+                kFormCellPlaceholder: @"placeholder",
             }
         ],
         kFormSectionFooter: @{}
