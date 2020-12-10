@@ -211,7 +211,7 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(decreaseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor whiteColor];
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
         button.layer.cornerRadius = 8.0;
         button.layer.masksToBounds = YES;
         _decreaseButton = button;
@@ -228,7 +228,7 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(increaseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor whiteColor];
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
         button.layer.cornerRadius = 8.0;
         button.layer.masksToBounds = YES;
         _increaseButton = button;
