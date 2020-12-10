@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBRange001Model : CJFFormModel
 
+@property (copy, nonatomic) NSString *minPlaceholder; /**< <#property#> */
+@property (copy, nonatomic) NSString *maxPlaceholder; /**< <#property#> */
+@property (assign, nonatomic) CGFloat minValue;
+@property (assign, nonatomic) CGFloat maxValue; 
+
 @end
 
 @interface CJFFormTBRange001TableViewCell : CJFFormTBTableViewCell

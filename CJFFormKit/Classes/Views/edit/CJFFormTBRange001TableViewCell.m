@@ -34,7 +34,7 @@
 - (void)buildView
 {
     self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
-    
+
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
@@ -42,15 +42,15 @@
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.height.mas_equalTo(18);
     }];
-    
-    CGFloat width = (IMSScreen_Width - 10*2 -10*2 -8)/2;
+
+    CGFloat width = ([UIScreen mainScreen].bounds.size.width - 10 * 2 - 10 * 2 - 8) / 2;
     [self.contentView addSubview:self.minTextField];
     [self.minTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
         make.left.equalTo(self.contentView).offset(10);
         make.height.mas_equalTo(40);
         make.width.mas_equalTo(width);
-        make.bottom.equalTo(self.contentView).offset(-20);
+        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
 
     [self.contentView addSubview:self.maxTextField];
@@ -58,7 +58,7 @@
         make.right.equalTo(self.contentView).offset(-10);
         make.height.width.centerY.equalTo(self.minTextField);
     }];
-    
+
     [self.contentView addSubview:self.lineLabel];
     [self.lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.minTextField.mas_right).offset(10);
@@ -86,35 +86,33 @@
     }
     self.model = [CJFFormTBRange001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
-    
-    self.minTextField.placeholder = self.model.placeholder;
-    self.minTextField.text = dataModel.name;
-    self.maxTextField.placeholder = dataModel.placeholdStringTwo;
-    self.maxTextField.text = dataModel.nameTwo;
+
+    self.minTextField.placeholder = self.model.minPlaceholder ? : @"Please Input";
+    self.minTextField.text = [NSString stringWithFormat:@"%f", self.model.minValue];
+    self.maxTextField.placeholder = self.model.maxPlaceholder ? : @"Please Input";
+    self.maxTextField.text = [NSString stringWithFormat:@"%f", self.model.maxValue];
 }
 
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (range.location > self.dataModel.maxCount) return NO;
-    NSString * str = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
+//    if (range.location > self.dataModel.maxCount) return NO;
+    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+
     if (textField.tag == 100) {
-        self.dataModel.name = str;
-        self.dataModel.paramValue = @(str.integerValue);
-    }else if (textField.tag == 101) {
-        self.dataModel.nameTwo = str;
-        self.dataModel.paramValueTwo = @(str.integerValue);
+        self.model.minValue = [str floatValue];
+    } else if (textField.tag == 101) {
+        self.model.maxValue = [str floatValue];
     }
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
-    if (self.dataModel.name.integerValue > self.dataModel.nameTwo.integerValue) {
-        self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
-    }else {
-        self.dataModel.showTipType = RAAddContactsShowTipType_non;
-    }
+//    if (self.dataModel.name.integerValue > self.dataModel.nameTwo.integerValue) {
+//        self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
+//    }else {
+//        self.dataModel.showTipType = RAAddContactsShowTipType_non;
+//    }
     UITableView *tableView = (UITableView *)self.superview;
     [tableView reloadData];
 }
@@ -140,14 +138,15 @@
         _minTextField.tag = 100;
         _minTextField.font = [UIFont systemFontOfSize:14];
         _minTextField.textColor = HEXCOLOR(0x565465);
-        _minTextField.tintColor = AppMainColor;
+        _minTextField.tintColor = HEXCOLOR(0x184585);
         _minTextField.delegate = self;
         _minTextField.keyboardType = UIKeyboardTypeNumberPad;
         _minTextField.returnKeyType = UIReturnKeyDone;
         _minTextField.backgroundColor = [UIColor whiteColor];
         _minTextField.textAlignment = NSTextAlignmentCenter;
-        [_minTextField rounded:8];
-        
+        _minTextField.layer.cornerRadius = 8.0;
+        _minTextField.layer.masksToBounds = YES;
+
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
         leftView.backgroundColor = [UIColor whiteColor];
         _minTextField.leftView = leftView;
@@ -162,14 +161,15 @@
         _maxTextField.tag = 101;
         _maxTextField.font = [UIFont systemFontOfSize:14];
         _maxTextField.textColor = HEXCOLOR(0x565465);
-        _maxTextField.tintColor = AppMainColor;
+        _maxTextField.tintColor = HEXCOLOR(0x184585);
         _maxTextField.delegate = self;
         _maxTextField.keyboardType = UIKeyboardTypeNumberPad;
         _maxTextField.returnKeyType = UIReturnKeyDone;
         _maxTextField.backgroundColor = [UIColor whiteColor];
         _maxTextField.textAlignment = NSTextAlignmentCenter;
-        [_maxTextField rounded:8];
-        
+        _maxTextField.layer.cornerRadius = 8.0;
+        _maxTextField.layer.masksToBounds = YES;
+
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
         leftView.backgroundColor = [UIColor whiteColor];
         _maxTextField.leftView = leftView;
