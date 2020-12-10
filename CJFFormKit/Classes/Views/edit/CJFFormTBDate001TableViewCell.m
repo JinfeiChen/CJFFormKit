@@ -7,6 +7,10 @@
 
 #import "CJFFormTBDate001TableViewCell.h"
 
+@implementation CJFFormTBDate001Model
+
+@end
+
 @interface CJFFormTBDate001TableViewCell ()
 
 @property (nonatomic, strong) UITextField *textField;
@@ -63,7 +67,7 @@
             }
         }];
     }
-    self.model = [CJFFormTBDate001 yy_modelWithJSON:mDict];
+    self.model = [CJFFormTBDate001Model yy_modelWithJSON:mDict]; 
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
     
     self.textField.placeholder = self.model.placeholder;

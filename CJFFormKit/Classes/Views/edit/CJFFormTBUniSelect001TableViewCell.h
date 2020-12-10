@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBUniSelect001Model : CJFFormModel
 
-@property (copy, nonatomic) NSString *placeholder; /**< <#property#> */
-
 @end
 
 @interface CJFFormTBUniSelect001TableViewCell : CJFFormTBTableViewCell

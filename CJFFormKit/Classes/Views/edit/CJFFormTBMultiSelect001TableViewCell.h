@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CJFFormTBMultiSelect001Model : CJFFormModel
 
 @property (strong, nonatomic) NSArray <CJFFormTBMultiSelect001ItemModel *> *value; /**< <#property#> */
-@property (copy, nonatomic) NSString *placeholder; /**< <#property#> */
 
 @end
 

@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, CJFFormPrivilege) {
 
 @property (copy, nonatomic) NSString *title; /**< <#property#> */
 @property (strong, nonatomic) id value; /**< <#property#> */
+@property (copy, nonatomic) NSString *placeholder; /**< <#property#> */
 
 @property (assign, nonatomic) CJFFormPrivilege privilege; /**< <#property#> */
 @property (assign, nonatomic, getter=isSelected) BOOL selected; /**< <#property#> */
