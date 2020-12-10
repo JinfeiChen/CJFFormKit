@@ -10,8 +10,6 @@
 
 @implementation CJFFormTBTextField001Model
 
-
-
 @end
 
 @interface CJFFormTBTextField001TableViewCell () <UITextFieldDelegate>
@@ -36,7 +34,7 @@
 - (void)buildView
 {
     self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
-    
+
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
@@ -44,30 +42,16 @@
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.height.mas_equalTo(18);
     }];
-    
+
     [self.contentView addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
         make.left.equalTo(self.contentView).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
         make.height.mas_equalTo(40);
-        make.bottom.equalTo(self.contentView).offset(-25);
+        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
 }
-
-//- (void)setDataModel:(RAAddContactsChildCellModel *)dataModel {
-//    [super setDataModel:dataModel];
-//    self.textField.placeholder = dataModel.placeholdString;
-//    self.textField.text = dataModel.name;
-//    
-//    if (dataModel.isShowDelete) {
-//        _textField.rightView = self.deleteView;
-//        _textField.rightViewMode = UITextFieldViewModeAlways;
-//    }else {
-//        _textField.rightView = nil;
-//        _textField.rightViewMode = UITextFieldViewModeNever;
-//    }
-//}
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
 {
@@ -87,10 +71,10 @@
     }
     self.model = [CJFFormTBTextField001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
-    
+
     self.textField.placeholder = self.model.placeholder;
-    self.textField.text = dataModel.name;
-    
+    self.textField.text = [NSString stringWithFormat:@"%@", self.model.value];
+
 //    if (self.model.isShowDelete) {
 //        _textField.rightView = self.deleteView;
 //        _textField.rightViewMode = UITextFieldViewModeAlways;
@@ -103,15 +87,11 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (range.location >= 40)  return NO;
-    NSString * str = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    self.dataModel.name = self.dataModel.paramValue = str;
-    if (kStringIsEmpty(str)) {
-         self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
-    }else {
-         self.dataModel.showTipType = RAAddContactsShowTipType_non;
-    }
-   
+    if (range.location >= 40) return NO;
+    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//    self.dataModel.name = self.dataModel.paramValue = @"";
+    self.model.value = str;
+
     return YES;
 }
 
@@ -119,21 +99,23 @@
     UITableView *tableView = (UITableView *)self.superview;
     [tableView reloadData];
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    self.dataModel.name = self.dataModel.paramValue = @"";
-    self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
+    self.model.value = @"";
+//    self.dataModel.name = self.dataModel.paramValue = @"";
+//    self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
     return YES;
 }
 
 - (void)singleInputCellDeleteAction:(UIButton *)button {
-    if ([self.delegate respondsToSelector:@selector(RAAddContactsSingleInputCell:andDeleteButton:)]) {
-        [self.delegate RAAddContactsSingleInputCell:self andDeleteButton:button];
-    }
+//    if ([self.delegate respondsToSelector:@selector(RAAddContactsSingleInputCell:andDeleteButton:)]) {
+//        [self.delegate RAAddContactsSingleInputCell:self andDeleteButton:button];
+//    }
 }
 
 #pragma mark - Getters
@@ -145,11 +127,11 @@
         _textField.font = [UIFont systemFontOfSize:14];
         _textField.textColor = HEXCOLOR(0x565465);
         _textField.layer.masksToBounds = YES;
-        _textField.layer.cornerRadius  = 8;
+        _textField.layer.cornerRadius = 8;
         _textField.backgroundColor = [UIColor whiteColor];
         _textField.delegate = self;
         _textField.returnKeyType = UIReturnKeyDone;
-        
+
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
         leftView.backgroundColor = [UIColor whiteColor];
         _textField.leftView = leftView;

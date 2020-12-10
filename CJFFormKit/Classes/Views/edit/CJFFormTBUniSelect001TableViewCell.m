@@ -52,7 +52,7 @@
         make.left.equalTo(self.contentView).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
         make.height.mas_equalTo(40);
-        make.bottom.equalTo(self.contentView).offset(-25);
+        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
     
     [self.bgView addSubview:self.rightButton];
