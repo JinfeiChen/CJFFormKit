@@ -10,8 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, CJFFormPrivilege) {
-    CJFFormPrivilege_Read, // readonly
     CJFFormPrivilege_Write, // writeonly
+    CJFFormPrivilege_Read, // readonly
 };
 
 @interface CJFFormModel : CJFObject

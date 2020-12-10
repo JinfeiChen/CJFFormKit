@@ -20,7 +20,7 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{
-        @"value" : [CJFFormTBMultiSelect001ItemModel class]
+        @"value": [CJFFormTBMultiSelect001ItemModel class]
     };
 }
 
@@ -28,6 +28,7 @@
 
 @interface CJFFormTBMultiSelect001TableViewCell ()<CJFTagViewDelegate>
 
+@property (strong, nonatomic) UIView *containerView; /**< <#property#> */
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UILabel *placeholdLabel;
 @property (nonatomic, strong) UIButton *arrowButton;
@@ -50,7 +51,7 @@
 - (void)buildView
 {
     self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
-    
+
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
@@ -58,31 +59,30 @@
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.height.mas_equalTo(18);
     }];
-    
+
     [self.contentView addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
-        make.right.equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
-        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
+        make.top.equalTo(self.contentView).offset(self.cellStyle.contentInset.top + 18 + 10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+        make.bottom.equalTo(self.contentView).offset(-10);
     }];
-    
+
     [self.bgView addSubview:self.arrowButton];
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView);
         make.centerY.equalTo(self.bgView);
         make.width.height.equalTo(@40);
     }];
-    
+
     [self.bgView addSubview:self.tagView];
     [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView);
         make.left.equalTo(self.bgView);
-        make.height.mas_equalTo(40);
         make.right.equalTo(self.arrowButton.mas_left);
         make.bottom.equalTo(self.bgView);
     }];
-    
+
     [self.bgView addSubview:self.placeholdLabel];
     [self.placeholdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(10);
@@ -92,52 +92,17 @@
     }];
 }
 
-- (void)setupUI {
-    
-//    [super setupUI];
-}
-
-//- (void)setDataModel:(RAAddContactsChildCellModel *)dataModel {
-//    [super setDataModel:dataModel];
-//
-//    if (dataModel.selectDataArrayM.count) {
-//        self.placeholdLabel.text = @"";
-//    }else {
-//        self.placeholdLabel.text = dataModel.placeholdString;
-//    }
-//
-//    if (!dataModel.notEdit) {
-//        self.arrowButton.hidden = NO;
-//        self.tagView.deleteImage = [UIImage imageNamed:@"search_close_tag"];
-//    }else {
-//        self.arrowButton.hidden = YES;
-//        self.tagView.deleteImage = nil;
-//    }
-//
-//    NSMutableArray *titleArrayM = [NSMutableArray array];
-//    for (RAContactNaviFilterModel *model in dataModel.selectDataArrayM) {
-//        [titleArrayM addObject:model.name];
-//    }
-//    self.tagView.dataArray = titleArrayM;
-//
-//    [UIView animateWithDuration:0.3 animations:^{
-//        if (dataModel.isSelected) {
-//            self.arrowButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-//        }else {
-//            self.arrowButton.transform = CGAffineTransformIdentity;
-//        }
-//    }];
-//}
+#pragma mark - Public Methods
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
 {
     if (!dict) {
         return;
     }
-    
+
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:dict];
     if (format) {
-        [format.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [format.allKeys enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             NSString *key = [format objectForKey:obj];
             id value = [dict objectForKey:key];
             if (value) {
@@ -147,17 +112,17 @@
     }
     self.model = [CJFFormTBMultiSelect001Model yy_modelWithJSON:mDict];
     self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
-    
+
     if (self.model.value.count) {
         self.placeholdLabel.text = @"";
-    }else {
+    } else {
         self.placeholdLabel.text = self.model.placeholder;
     }
 
     if (self.model.privilege == CJFFormPrivilege_Write) {
         self.arrowButton.hidden = NO;
         self.tagView.deleteImage = [UIImage imageNamed:@"search_close_tag" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
-    }else {
+    } else {
         self.arrowButton.hidden = YES;
         self.tagView.deleteImage = nil;
     }
@@ -171,23 +136,30 @@
     [UIView animateWithDuration:0.3 animations:^{
         if (self.model.isSelected) {
             self.arrowButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-        }else {
+        } else {
             self.arrowButton.transform = CGAffineTransformIdentity;
         }
     }];
+    
 }
 
 #pragma mark - RATagViewDelegate
 
 - (void)tagView:(CJFTagView *)tagView didSelectAtIndex:(NSInteger)index {
-    
 //    if ([self.delegate respondsToSelector:@selector(tableVieCell:didSelectAtIndex:)] && !self.dataModel.notEdit) {
 //        [self.delegate tableVieCell:self didSelectAtIndex:index];
 //    }
 }
 
-
 #pragma mark - lazy load
+
+- (UIView *)containerView
+{
+    if (!_containerView) {
+        _containerView = [[UIView alloc] init];
+    }
+    return _containerView;
+}
 
 - (UIView *)bgView {
     if (_bgView == nil) {
@@ -210,7 +182,7 @@
 
 - (UIButton *)arrowButton {
     if (_arrowButton == nil) {
-        _arrowButton = [[UIButton alloc] init];
+        _arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_arrowButton setImage:[UIImage imageNamed:@"search_next" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         _arrowButton.userInteractionEnabled = NO;
     }

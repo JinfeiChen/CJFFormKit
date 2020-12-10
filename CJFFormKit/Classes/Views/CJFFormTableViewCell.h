@@ -60,6 +60,7 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 + (CJFFormTableViewCell *)cellForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath dataSource:(NSDictionary *)dataSource;
 
 @property (strong, nonatomic) CJFFormTableViewCellStyle *cellStyle; /**< <#property#> */
+@property (strong, nonatomic) NSIndexPath *indexPath; /**< <#property#> */
 
 - (void)setModelWithDict:(NSDictionary * _Nullable)dict format:(NSDictionary * _Nullable)format;
 

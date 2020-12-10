@@ -29,6 +29,7 @@
     NSString *cellClassStr = [dataSource objectForKey:kFormCellClass];
     id cell = [tableView dequeueReusableCellWithIdentifier:cellClassStr];
     if (cell) {
+        [cell setValue:indexPath forKey:@"indexPath"];
         return cell;
     }
     
@@ -37,12 +38,14 @@
     if (!defaultCell) {
         defaultCell = [[CJFFormTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CJFFormTableViewCell class])];
         defaultCell.textLabel.text = @"Default";
+        [cell setValue:indexPath forKey:@"indexPath"];
     }
     return defaultCell;
 }
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
 {
+    
 }
 
 #pragma mark - Setters

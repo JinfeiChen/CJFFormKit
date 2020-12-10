@@ -29,12 +29,13 @@
 {
     [super viewDidLoad];
 
+    // Read
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     [self.tableView registerClass:[CJFFormTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTableViewCell class])];
     [self.tableView registerClass:[CJFFormLR002TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLR002TableViewCell class])];
     [self.tableView registerClass:[CJFFormLRTag001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormLRTag001TableViewCell class])];
     [self.tableView registerClass:[CJFFormFFGrid001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormFFGrid001TableViewCell class])];
-
+    // Edit
     [self.tableView registerClass:[CJFFormTBSwitch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBSwitch001TableViewCell class])];
     [self.tableView registerClass:[CJFFormTBInputSearch001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBInputSearch001TableViewCell class])];
     [self.tableView registerClass:[CJFFormTBMultiSelect001TableViewCell class] forCellReuseIdentifier:NSStringFromClass([CJFFormTBMultiSelect001TableViewCell class])];
@@ -56,12 +57,7 @@
                 kFormCellClass: @"CJFFormLRTag001TableViewCell",
                 kFormCellTitle: @"MyTags",
                 kFormCellValue: @[
-                    @"标签tag1", @"表面", @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",
-                    @"哈哈哈", @"嘻嘻嘻", @"呵呵呵", @"标签", @"表面兄弟", @"你好啊", @"不想你了哦", @"不要这样子啦",
-                    @"标签tag1", @"表面", @"哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",
-                    @"哈哈哈", @"嘻嘻嘻", @"呵呵呵", @"标签", @"表面兄弟", @"你好啊", @"不想你了哦", @"不要这样子啦",
-                    @"标签tag1", @"表面", @"哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",
-                    @"哈哈哈", @"嘻嘻嘻", @"呵呵呵", @"标签", @"表面兄弟", @"你好啊", @"不想你了哦", @"不要这样子啦"
+                    @"标签tag1", @"表面", @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"
                 ]
             },
             @{
@@ -120,7 +116,38 @@
             @{
                 kFormCellClass: @"CJFFormTBMultiSelect001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
+                kFormCellValue: @[
+                        @{
+                            @"name": @"example01",
+                            @"key": @"1",
+                            @"value": @"1"
+                        },
+                        @{
+                            @"name": @"example02",
+                            @"key": @"2",
+                            @"value": @"2"
+                        },
+                        @{
+                            @"name": @"example03",
+                            @"key": @"3",
+                            @"value": @"3"
+                        },
+                        @{
+                            @"name": @"example04",
+                            @"key": @"4",
+                            @"value": @"4"
+                        },
+                        @{
+                            @"name": @"example05",
+                            @"key": @"5",
+                            @"value": @"5"
+                        },
+                        @{
+                            @"name": @"example06",
+                            @"key": @"6",
+                            @"value": @"6"
+                        }
+                ],
                 @"placeholder": @"placeholder"
             }
         ],
@@ -163,24 +190,24 @@
     NSDictionary *bodyDict = self.dataSource[indexPath.section];
     NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
     NSDictionary *cellDict = bodyArray[indexPath.row];
-    NSLog(@"click at indexPath: %@, data: %@", indexPath, cellDict);
+    NSLog(@"click at indexPath: %@, data: %@, selected: %d", indexPath, cellDict, [tableView cellForRowAtIndexPath:indexPath].selected);
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSNumber *height = [self.heightAtIndexPath objectForKey:indexPath];
-    if (height) {
-        return height.floatValue;
-    } else {
-        return UITableViewAutomaticDimension;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSNumber *height = @(cell.frame.size.height);
-    [self.heightAtIndexPath setObject:height forKey:indexPath];
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSNumber *height = [self.heightAtIndexPath objectForKey:indexPath];
+//    if (height) {
+//        return height.floatValue;
+//    } else {
+//        return UITableViewAutomaticDimension;
+//    }
+//}
+//
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSNumber *height = @(cell.frame.size.height);
+//    [self.heightAtIndexPath setObject:height forKey:indexPath];
+//}
 
 #pragma mark - Getters
 
