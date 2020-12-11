@@ -6,6 +6,7 @@
 //
 
 #import "CJFFormTBImageUpload001TableViewCell.h"
+#import <CJFFormKit/UIView+ext.h>
 #import <CJFFormKit/TZImagePickerController.h>
 #import <CJFFormKit/UIView+TZLayout.h>
 #import <CJFFormKit/TZImageManager.h>
@@ -118,8 +119,8 @@
     NSMutableArray *_selectedAssets;
     BOOL _isSelectOriginalPhoto;
     
-//    CGFloat _itemWH;
-//    CGFloat _margin;
+    CGFloat _itemWH;
+    CGFloat _margin;
 }
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
@@ -205,9 +206,9 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat spacing = 10;
-    CGFloat itemWH = (CGRectGetWidth(collectionView.frame) - 2 * spacing) / 3;
-    return CGSizeMake(itemWH, itemWH);
+    _margin = 10;
+    _itemWH = (CGRectGetWidth(collectionView.frame) - 2 * _margin) / 3;
+    return CGSizeMake(_itemWH, _itemWH);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -257,7 +258,7 @@
                 popover.sourceRect = cell.bounds;
                 popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
             }
-            [self presentViewController:alertVc animated:YES completion:nil];
+            [[self viewController] presentViewController:alertVc animated:YES completion:nil];
         } else {
             [self pushTZImagePickerController];
         }
@@ -270,13 +271,13 @@
             TZAssetModel *model = [TZAssetModel modelWithAsset:asset type:TZAssetModelMediaTypePhotoGif timeLength:@""];
             vc.model = model;
             vc.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:vc animated:YES completion:nil];
-        } else if (isVideo && !self.allowPickingMuitlpleVideoSwitch) { // perview video / 预览视频
+            [[self viewController] presentViewController:vc animated:YES completion:nil];
+        } else if (isVideo && !self.model.allowPickingMuitlpleVideo) { // perview video / 预览视频
             TZVideoPlayerController *vc = [[TZVideoPlayerController alloc] init];
             TZAssetModel *model = [TZAssetModel modelWithAsset:asset type:TZAssetModelMediaTypeVideo timeLength:@""];
             vc.model = model;
             vc.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:vc animated:YES completion:nil];
+            [[self viewController] presentViewController:vc animated:YES completion:nil];
         } else { // preview photos / 预览照片
             TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithSelectedAssets:_selectedAssets selectedPhotos:_selectedPhotos index:indexPath.item];
             imagePickerVc.maxImagesCount = self.model.maxPhotos;
@@ -294,7 +295,7 @@
                 [self->_collectionView reloadData];
                 self->_collectionView.contentSize = CGSizeMake(0, ((self->_selectedPhotos.count + 2) / 3 ) * (self->_margin + self->_itemWH));
             }];
-            [self presentViewController:imagePickerVc animated:YES completion:nil];
+            [[self viewController] presentViewController:imagePickerVc animated:YES completion:nil];
         }
     }
 }
@@ -395,10 +396,11 @@
     imagePickerVc.showSelectBtn = NO;
     imagePickerVc.allowCrop = self.model.allowCrop;
     imagePickerVc.needCircleCrop = self.model.needCircleCrop;
-    // 设置竖屏下的裁剪尺寸
+    // 设置竖屏下的裁剪尺寸'
+    UIViewController *vc = [self viewController];
     NSInteger left = 30;
-    NSInteger widthHeight = self.view.tz_width - 2 * left;
-    NSInteger top = (self.view.tz_height - widthHeight) / 2;
+    NSInteger widthHeight = vc.view.frame.size.width - 2 * left;
+    NSInteger top = (vc.view.frame.size.height - widthHeight) / 2;
     imagePickerVc.cropRect = CGRectMake(left, top, widthHeight, widthHeight);
     imagePickerVc.scaleAspectFillCrop = YES;
     // 设置横屏下的裁剪尺寸
@@ -460,7 +462,7 @@
     }];
     
     imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
+    [[self viewController] presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
 /*
@@ -485,7 +487,7 @@
         [alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [[self viewController] presentViewController:alertController animated:YES completion:nil];
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         // fix issue 466, 防止用户首次拍照拒绝授权时相机页黑屏
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
@@ -502,7 +504,7 @@
         [alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [[self viewController] presentViewController:alertController animated:YES completion:nil];
     } else if ([PHPhotoLibrary authorizationStatus] == 0) { // 未请求过相册权限
         [[TZImageManager manager] requestAuthorizationWithCompletion:^{
             [self takePhoto];
@@ -537,7 +539,7 @@
         if (mediaTypes.count) {
             _imagePickerVc.mediaTypes = mediaTypes;
         }
-        [self presentViewController:_imagePickerVc animated:YES completion:nil];
+        [[self viewController] presentViewController:_imagePickerVc animated:YES completion:nil];
     } else {
         NSLog(@"模拟器中无法打开照相机,请在真机中使用");
     }
@@ -567,7 +569,7 @@
                     imagePicker.allowPickingImage = YES;
                     imagePicker.needCircleCrop = self.model.needCircleCrop;
                     imagePicker.circleCropRadius = 100;
-                    [self presentViewController:imagePicker animated:YES completion:nil];
+                    [[self viewController] presentViewController:imagePicker animated:YES completion:nil];
                 } else {
                     [self refreshCollectionViewWithAddedAsset:assetModel.asset image:image];
                 }
@@ -636,19 +638,19 @@
     }
     
     // 3. 获取原图的示例，用队列限制最大并发为1，避免内存暴增
-    self.operationQueue = [[NSOperationQueue alloc] init];
-    self.operationQueue.maxConcurrentOperationCount = 1;
-    for (NSInteger i = 0; i < assets.count; i++) {
-        PHAsset *asset = assets[i];
-        // 图片上传operation，上传代码请写到operation内的start方法里，内有注释
-        TZImageUploadOperation *operation = [[TZImageUploadOperation alloc] initWithAsset:asset completion:^(UIImage * photo, NSDictionary *info, BOOL isDegraded) {
-            if (isDegraded) return;
-            NSLog(@"图片获取&上传完成");
-        } progressHandler:^(double progress, NSError * _Nonnull error, BOOL * _Nonnull stop, NSDictionary * _Nonnull info) {
-            NSLog(@"获取原图进度 %f", progress);
-        }];
-        [self.operationQueue addOperation:operation];
-    }
+//    self.operationQueue = [[NSOperationQueue alloc] init];
+//    self.operationQueue.maxConcurrentOperationCount = 1;
+//    for (NSInteger i = 0; i < assets.count; i++) {
+//        PHAsset *asset = assets[i];
+//        // 图片上传operation，上传代码请写到operation内的start方法里，内有注释
+//        TZImageUploadOperation *operation = [[TZImageUploadOperation alloc] initWithAsset:asset completion:^(UIImage * photo, NSDictionary *info, BOOL isDegraded) {
+//            if (isDegraded) return;
+//            NSLog(@"图片获取&上传完成");
+//        } progressHandler:^(double progress, NSError * _Nonnull error, BOOL * _Nonnull stop, NSDictionary * _Nonnull info) {
+//            NSLog(@"获取原图进度 %f", progress);
+//        }];
+//        [self.operationQueue addOperation:operation];
+//    }
 }
 
 // If user picking a video and allowPickingMultipleVideo is NO, this callback will be called.
@@ -818,8 +820,9 @@
         _imagePickerVc = [[UIImagePickerController alloc] init];
         _imagePickerVc.delegate = self;
         // set appearance / 改变相册选择页的导航栏外观
-        _imagePickerVc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
-        _imagePickerVc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
+        UIViewController *vc = [self viewController];
+        _imagePickerVc.navigationBar.barTintColor = vc.navigationController.navigationBar.barTintColor;
+        _imagePickerVc.navigationBar.tintColor = vc.navigationController.navigationBar.tintColor;
         UIBarButtonItem *tzBarItem, *BarItem;
         if (@available(iOS 9, *)) {
             tzBarItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[TZImagePickerController class]]];
