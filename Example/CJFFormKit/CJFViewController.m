@@ -37,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     // Read
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];

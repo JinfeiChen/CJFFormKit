@@ -106,8 +106,19 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _maxPhotos = 9;
+        _maxPhotos = 20;
+        _rowPhotos = 4;
         _allowPickingMuitlpleVideo = YES;
+        _allowPickingVideo = YES;
+        _allowPickingImage = YES;
+        _allowPickingGif = YES;
+        _allowPickingOriginalPhoto = YES;
+        _allowCrop = YES;
+        _needCircleCrop = YES;
+        _showTakePhotoBtn = YES;
+        _showTakeVideoBtn = YES;
+        _showSelectedIndex = YES;
+        _showSheet = YES;
     }
     return self;
 }
@@ -208,6 +219,7 @@
 {
     _margin = 10;
     _itemWH = (CGRectGetWidth(collectionView.frame) - 2 * _margin) / 3;
+    _itemWH = 100;
     return CGSizeMake(_itemWH, _itemWH);
 }
 
@@ -314,7 +326,7 @@
     
     // 由于这里collection的高度是动态的，这里cell的高度我们根据collection来计算
     CGSize collectionSize = self.collectionView.collectionViewLayout.collectionViewContentSize;
-    CGFloat contentViewHeight = collectionSize.height > 44.0 ? collectionSize.height : 44 + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + CGRectGetHeight(self.TTitleLabel.frame);
+    CGFloat contentViewHeight = (collectionSize.height > 44.0 ? collectionSize.height : 44) + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + CGRectGetHeight(self.TTitleLabel.frame);
     
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
 }
@@ -802,7 +814,7 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(4, 4, 4, 4);
+        _collectionView.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
         _collectionView.alwaysBounceVertical = YES;
         _collectionView.layer.cornerRadius = 8.0;
         _collectionView.layer.masksToBounds = YES;
