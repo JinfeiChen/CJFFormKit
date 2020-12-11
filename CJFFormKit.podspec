@@ -34,8 +34,7 @@ Pod::Spec.new do |s|
   
   s.resource_bundles = {
 #      'CJFFormKit' => ['CJFFormKit/Assets/*.png']
-    'CJFFormKit' => ['CJFFormKit/Assets/CJFFormKit.xcassets'],
-    'TZImagePickerController' => ['CJFFormKit/Assets/TZImagePickerController.bundle']
+    'CJFFormKit' => ['CJFFormKit/Assets/*.*']
   }
 #  s.resources = ['CJFFormKit/Classes/Views/imagePicker/TZImagePickerController/TZImagePickerController.bundle']
 
