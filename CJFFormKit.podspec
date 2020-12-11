@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   
   s.resource_bundles = {
 #      'CJFFormKit' => ['CJFFormKit/Assets/*.png']
-    'CJFFormKit' => ['CJFFormKit/Assets/*.*']
+    'CJFFormKit' => ['CJFFormKit/Assets/*']
   }
 
   s.prefix_header_contents = '#import <CJFFormKit/macros.h>'

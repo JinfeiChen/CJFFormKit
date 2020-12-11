@@ -17,7 +17,7 @@
 #else
     NSBundle *bundle = [NSBundle bundleForClass:[TZImagePickerController class]];
 #endif
-    bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]].resourcePath stringByAppendingPathComponent:@"/CJFFormKit.bundle"]];
+//    bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]].resourcePath stringByAppendingPathComponent:@"/CJFFormKit.bundle"]];
     NSURL *url = [bundle URLForResource:@"TZImagePickerController" withExtension:@"bundle"];
     bundle = [NSBundle bundleWithURL:url];
     return bundle;
