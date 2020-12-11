@@ -17,7 +17,8 @@
 #import <CJFFormKit/TZAssetCell.h>
 #import <CJFFormKit/FLAnimatedImage.h>
 #import <Photos/Photos.h>
-#import <MobileCoreServices/MobileCoreServices.h>
+//#import <MobileCoreServices/MobileCoreServices.h>
+#import <CoreServices/CoreServices.h>
 
 @implementation CJFFormTBImageUpload001CollectionViewCell
 

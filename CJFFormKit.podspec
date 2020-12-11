@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CJFFormKit'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = '常用的各种Form表单控件.'
 
 # This description is used to generate tags and improve search results.
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 #      'CJFFormKit' => ['CJFFormKit/Assets/*.png']
     'CJFFormKit' => ['CJFFormKit/Assets/CJFFormKit.xcassets']
   }
-  s.resource = 'CJFFormKit/Classes/Views/imagePicker/TZImagePickerController/TZImagePickerController.bundle'
+  s.resource = 'CJFFormKit/Assets/TZImagePickerController.bundle'
 
   s.prefix_header_contents = '#import <CJFFormKit/macros.h>'
   
