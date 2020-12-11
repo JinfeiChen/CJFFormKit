@@ -114,7 +114,7 @@
         _allowPickingGif = YES;
         _allowPickingOriginalPhoto = YES;
         _allowCrop = YES;
-        _needCircleCrop = YES;
+        _needCircleCrop = NO;
         _showTakePhotoBtn = YES;
         _showTakeVideoBtn = YES;
         _showSelectedIndex = YES;

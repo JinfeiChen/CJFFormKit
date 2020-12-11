@@ -34,8 +34,9 @@ Pod::Spec.new do |s|
   
   s.resource_bundles = {
 #      'CJFFormKit' => ['CJFFormKit/Assets/*.png']
-    'CJFFormKit' => ['CJFFormKit/Assets/*']
+    'CJFFormKit' => ['CJFFormKit/Assets/CJFFormKit.xcassets']
   }
+  s.resource = 'CJFFormKit/Assets/TZImagePickerController.bundle'
 
   s.prefix_header_contents = '#import <CJFFormKit/macros.h>'
   
