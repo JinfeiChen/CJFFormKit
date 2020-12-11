@@ -18,6 +18,9 @@
     NSBundle *bundle = [NSBundle bundleForClass:[TZImagePickerController class]];
 #endif
     NSURL *url = [bundle URLForResource:@"TZImagePickerController" withExtension:@"bundle"];
+    if (!url) {
+        return [NSBundle mainBundle];
+    }
     bundle = [NSBundle bundleWithURL:url];
     return bundle;
 }
