@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL allowPickingImage; /**< 是否允许选择图片 默认 YES */
 @property (assign, nonatomic) BOOL allowPickingGif; /**< 是否允许选择动图 默认 YES */
 @property (assign, nonatomic) BOOL allowPickingOriginalPhoto; /**< 是否允许选择原图 默认 YES */
-@property (assign, nonatomic) BOOL allowCrop; /**< 单选模式下是否允许裁剪 默认 YES */
+@property (assign, nonatomic) BOOL allowCrop; /**< 单选模式下是否允许裁剪 默认 NO */
 @property (assign, nonatomic) BOOL needCircleCrop; /**< 是否使用圆形裁剪框 默认 NO */
 @property (assign, nonatomic) BOOL showTakePhotoBtn; /**< 是否允许拍照 默认 YES */
 @property (assign, nonatomic) BOOL showTakeVideoBtn; /**< 是否允许拍视频 默认 YES */

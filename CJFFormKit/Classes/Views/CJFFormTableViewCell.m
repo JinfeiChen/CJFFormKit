@@ -30,6 +30,7 @@
     id cell = [tableView dequeueReusableCellWithIdentifier:cellClassStr];
     if (cell) {
         [cell setValue:indexPath forKey:@"indexPath"];
+        [cell setValue:tableView forKey:@"tableView"];
         return cell;
     }
     
@@ -39,6 +40,7 @@
         defaultCell = [[CJFFormTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CJFFormTableViewCell class])];
         defaultCell.textLabel.text = @"Default";
         [cell setValue:indexPath forKey:@"indexPath"];
+        [cell setValue:tableView forKey:@"tableView"];
     }
     return defaultCell;
 }

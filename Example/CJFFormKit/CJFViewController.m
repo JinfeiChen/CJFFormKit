@@ -218,7 +218,10 @@
             @{
                 kFormCellClass: @"CJFFormTBImageUpload001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @[]
+                kFormCellValue: @[
+                        @"https://cdn.pixabay.com/photo/2020/11/12/15/45/dog-5735837__480.jpg",
+                        @"https://cdn.pixabay.com/photo/2020/11/26/11/48/cat-5778777__480.jpg"
+                ]
             }
         ],
         kFormSectionFooter: @{}
@@ -270,21 +273,21 @@
     NSLog(@"click at indexPath: %@, data: %@, selected: %d", indexPath, cellDict, [tableView cellForRowAtIndexPath:indexPath].selected);
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSNumber *height = [self.heightAtIndexPath objectForKey:indexPath];
-//    if (height) {
-//        return height.floatValue;
-//    } else {
-//        return UITableViewAutomaticDimension;
-//    }
-//}
-//
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSNumber *height = @(cell.frame.size.height);
-//    [self.heightAtIndexPath setObject:height forKey:indexPath];
-//}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *height = [self.heightAtIndexPath objectForKey:indexPath];
+    if (height) {
+        return height.floatValue;
+    } else {
+        return UITableViewAutomaticDimension;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *height = @(cell.frame.size.height);
+    [self.heightAtIndexPath setObject:height forKey:indexPath];
+}
 
 #pragma mark - Getters
 
