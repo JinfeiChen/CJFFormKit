@@ -5,11 +5,13 @@
 //  Created by cjf on 10/12/2020.
 //
 
-#import <CJFFormKit/CJFFormKit.h>
+#import <CJFFormKit/CJFFormTBTableViewCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBImageUpload001Model : CJFFormModel
+
+@property (strong, nonatomic) NSArray *value; /**< <#property#> */
 
 @end
 

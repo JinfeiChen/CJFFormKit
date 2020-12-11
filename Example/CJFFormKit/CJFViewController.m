@@ -25,6 +25,7 @@
 #import <CJFFormKit/CJFFormTBSlider001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBRange001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBNumber001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBImageUpload001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -211,6 +212,11 @@
                 kFormCellClass: @"CJFFormTBNumber001TableViewCell",
                 kFormCellTitle: @"MyEditTitle",
                 kFormCellValue: @"0"
+            },
+            @{
+                kFormCellClass: @"CJFFormTBImageUpload001TableViewCell",
+                kFormCellTitle: @"MyEditTitle",
+                kFormCellValue: @[]
             }
         ],
         kFormSectionFooter: @{}
