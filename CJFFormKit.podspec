@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CJFFormKit'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = '常用的各种Form表单控件.'
 
 # This description is used to generate tags and improve search results.
