@@ -841,6 +841,7 @@
         _collectionView.layer.cornerRadius = 8.0;
         _collectionView.layer.masksToBounds = YES;
         _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        _collectionView.scrollEnabled = NO;
 
         [_collectionView registerClass:[CJFFormTBImageUpload001CollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([CJFFormTBImageUpload001CollectionViewCell class])];
     }
