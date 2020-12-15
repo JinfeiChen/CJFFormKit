@@ -59,10 +59,9 @@
     
     [self.bgView addSubview:self.rightButton];
     [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.right.equalTo(self.bgView);
         make.centerY.equalTo(self.bgView);
-        make.right.equalTo(self.bgView);
-        make.height.equalTo(self.bgView);
-        make.width.mas_equalTo(40);
+        make.width.equalTo(@40);
     }];
     
     [self.bgView addSubview:self.contentLabel];
@@ -112,6 +111,12 @@
     self.contentLabel.text = self.model.value;
     self.placeHoldLabel.text = self.model.placeholder ? : @"Please Select";
     
+    if (self.model.isEditable) {
+        self.rightButton.hidden = NO;
+    } else {
+        self.rightButton.hidden = YES;
+    }
+    
     [UIView animateWithDuration:0.3 animations:^{
         if (self.model.isSelected) {
             self.rightButton.transform = CGAffineTransformMakeRotation(M_PI_2);
@@ -119,10 +124,17 @@
             self.rightButton.transform = CGAffineTransformIdentity;
         }
     }];
-
-    self.rightButton.hidden = self.model.isEditable;
     
     self.bgView.userInteractionEnabled = self.model.isEditable;
+}
+
+#pragma mark - Actions
+
+- (void)clickAction:(UIButton *)button
+{
+    if (self.customDidSelectedBlock) {
+        self.customDidSelectedBlock(self, self.model, button);
+    }
 }
 
 #pragma mark - Getters
@@ -159,10 +171,9 @@
 - (UIButton *)rightButton {
     if (_rightButton == nil) {
         _rightButton = [[UIButton alloc] init];
-        _rightButton.userInteractionEnabled = NO;
         [_rightButton setImage:[UIImage imageNamed:@"search_next" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-        _contentLabel.textColor = kCJFFormHexColor(0x565465);
-        _contentLabel.font = [UIFont systemFontOfSize:14];
+        _rightButton.userInteractionEnabled = NO;
+        [_rightButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightButton;
 }

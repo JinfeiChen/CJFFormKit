@@ -106,8 +106,9 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    if (range.location > self.dataModel.maxCount) return NO;
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > self.model.maxValue) return NO;
     NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
 
     if (textField.tag == 100) {
@@ -118,12 +119,8 @@
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
-//    if (self.dataModel.name.integerValue > self.dataModel.nameTwo.integerValue) {
-//        self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
-//    }else {
-//        self.dataModel.showTipType = RAAddContactsShowTipType_non;
-//    }
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason
+{
     UITableView *tableView = (UITableView *)self.superview;
     [tableView reloadData];
 }

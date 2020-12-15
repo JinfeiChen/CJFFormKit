@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 #define kFormItemClassKey @"class"
 #define kFormItemTitleKey @"title"
 #define kFormItemValueKey @"value"
-#define kFormItemSelectorKey @"cellClick:"
+#define kFormItemSelectorKey @"customEvent"
 #define kFormItemPlaceholderKey @"placeholder"
 #define kFormItemRequiredKey @"required"
 #define kFormItemEditableKey @"editable"

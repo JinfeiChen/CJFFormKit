@@ -108,7 +108,7 @@
             
             @{
                 kFormItemClassKey: @"CJFFormTBSwitch001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"Switch001",
                 kFormItemValueKey: @[
                     @{
                         @"state": @(0),
@@ -132,7 +132,16 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"InputSearch001",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testClick"
+            },
+            @{
+                kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
+                kFormItemTitleKey: @"InputSearch001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
@@ -141,7 +150,7 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBMultiSelect001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"MultiSelect001",
                 kFormItemValueKey: @[
                         @{
                             @"name": @"example01",
@@ -180,7 +189,7 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBUniSelect001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"UniSelect001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
@@ -188,7 +197,7 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBTextField001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"TextField001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
@@ -196,15 +205,16 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBDate001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"Date001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testDate:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBPhone001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"Phone001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 @"countryCode": @"+86",
@@ -214,7 +224,7 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBTextView001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"TextView001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
@@ -222,7 +232,7 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBSlider001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"Slider001",
                 kFormItemValueKey: @"8",
                 @"minValue": @(0),
                 @"maxValue": @(10),
@@ -231,7 +241,7 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBRange001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"Range001",
                 kFormItemValueKey: @"",
                 @"minValue": @(0),
                 @"maxValue": @(10),
@@ -240,14 +250,14 @@
             },
             @{
                 kFormItemClassKey: @"CJFFormTBNumber001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"Number001",
                 kFormItemValueKey: @"0",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES)
             },
             @{
                 kFormItemClassKey: @"CJFFormTBImageUpload001TableViewCell",
-                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemTitleKey: @"ImageUpload001",
                 kFormItemValueKey: @[
                         @"https://cdn.pixabay.com/photo/2020/11/12/15/45/dog-5735837__480.jpg",
                         @"https://cdn.pixabay.com/photo/2020/11/26/11/48/cat-5778777__480.jpg"
@@ -272,6 +282,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)testDate:(id)cell
+{
+    NSLog(@"test date: %@", cell);
+}
+
+- (void)testClick
+{
+    NSLog(@"aaaa");
 }
 
 - (void)testClick:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath
@@ -314,13 +334,13 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *bodyDict = self.dataSource[indexPath.section];
-    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
-    NSDictionary *cellDict = bodyArray[indexPath.row];
-    NSLog(@"click at indexPath: %@, data: %@, selected: %d", indexPath, cellDict, [tableView cellForRowAtIndexPath:indexPath].selected);
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+//    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+//    NSDictionary *cellDict = bodyArray[indexPath.row];
+//    NSLog(@"click at indexPath: %@, data: %@, selected: %d", indexPath, cellDict, [tableView cellForRowAtIndexPath:indexPath].selected);
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

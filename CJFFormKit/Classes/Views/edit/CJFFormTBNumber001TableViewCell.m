@@ -191,6 +191,8 @@
     CGFloat current = [self.textField.text floatValue];
     CGFloat result = (current - self.model.increment) > self.model.minValue ? (current - self.model.increment) : self.model.minValue;
     self.textField.text = [self getRoundFloat:result withPrecisionNum:self.model.digits];
+    
+    self.model.value = self.textField.text;
 }
 
 - (void)increaseButtonAction:(UIButton *)button
@@ -198,6 +200,8 @@
     CGFloat current = [self.textField.text floatValue];
     CGFloat result = (current + self.model.increment) < self.model.maxValue ? (current + self.model.increment) : self.model.maxValue;
     self.textField.text = [self getRoundFloat:result withPrecisionNum:self.model.digits];
+    
+    self.model.value = self.textField.text;
 }
 
 #pragma mark - Getters

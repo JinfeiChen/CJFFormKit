@@ -139,16 +139,16 @@
 
 #pragma mark - Actions
 
-- (void)bgViewTapAction {
-//    if ([self.delegate respondsToSelector:@selector(RAAddContactsPhonesCell:andDataModel:)]) {
-//        [self.delegate RAAddContactsPhonesCell:self andDataModel:self.dataModel];
-//    }
+- (void)bgViewTapAction
+{
+    if (self.customDidSelectedBlock) {
+        self.customDidSelectedBlock(self, self.model, nil);
+    }
 }
 
-- (void)phonCellDeleteAction:(UIButton *)button {
-//    if ([self.delegate respondsToSelector:@selector(RAAddContactsPhonesCell:andDeleteButton:)]) {
-//        [self.delegate RAAddContactsPhonesCell:self andDeleteButton:button];
-//    }
+- (void)phonCellDeleteAction:(UIButton *)button
+{
+    self.textField.text = @"";
 }
 
 #pragma mark - UITextFieldDelegate

@@ -22,7 +22,7 @@ pod 'CJFFormKit'
 
 ## Author
 
-jinfei_chen@icloud.com, jinfei_chen@icloud.com
+jinfei_chen@icloud.com
 
 ## License
 
@@ -35,7 +35,9 @@ CJFFormKit is available under the MIT license. See the LICENSE file for more inf
 前缀：CJF
 
 LR : 布局方式，左右，left-right
+
 TB : 布局方式，上下，top-bottom
+
 FF : 布局方式，满铺，full-fill
 
 1.类命名 

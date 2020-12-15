@@ -100,9 +100,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (range.location >= 40) return NO;
     NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//    self.dataModel.name = self.dataModel.paramValue = @"";
     self.model.value = str;
-
     return YES;
 }
 
@@ -118,17 +116,15 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.model.value = @"";
-//    self.dataModel.name = self.dataModel.paramValue = @"";
-//    self.dataModel.showTipType = RAAddContactsShowTipType_mustSelectTipError;
     return YES;
 }
 
 #pragma mark - Actions
 
-- (void)singleInputCellDeleteAction:(UIButton *)button {
-//    if ([self.delegate respondsToSelector:@selector(RAAddContactsSingleInputCell:andDeleteButton:)]) {
-//        [self.delegate RAAddContactsSingleInputCell:self andDeleteButton:button];
-//    }
+- (void)singleInputCellDeleteAction:(UIButton *)button
+{
+    self.textField.text = @"";
+    self.model.value = @"";
 }
 
 #pragma mark - Getters

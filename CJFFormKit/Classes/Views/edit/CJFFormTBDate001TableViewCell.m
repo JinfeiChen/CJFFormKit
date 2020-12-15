@@ -14,6 +14,7 @@
 @interface CJFFormTBDate001TableViewCell ()
 
 @property (nonatomic, strong) UITextField *textField;
+@property (strong, nonatomic) UIButton *extButton; /**< <#property#> */
 
 @end
 
@@ -51,7 +52,15 @@
         make.height.mas_equalTo(40);
         make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
+    
+    [self.contentView addSubview:self.extButton];
+    [self.extButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(self.textField);
+        make.center.mas_equalTo(self.textField);
+    }];
 }
+
+#pragma mark - Public Methods
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
 {
@@ -85,6 +94,15 @@
     self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
+#pragma mark - Actions
+
+- (void)extButtonAction:(UIButton *)button
+{
+    if (self.customDidSelectedBlock) {
+        self.customDidSelectedBlock(self, self.model, nil);
+    }
+}
+
 #pragma mark - Gettters
 
 - (UITextField *)textField {
@@ -107,6 +125,16 @@
         _textField.leftViewMode = UITextFieldViewModeAlways;
     }
     return _textField;
+}
+
+- (UIButton *)extButton
+{
+    if (!_extButton) {
+        _extButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_extButton setTitle:@"" forState:UIControlStateNormal];
+        [_extButton addTarget:self action:@selector(extButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _extButton;
 }
 
 @end

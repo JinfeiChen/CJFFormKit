@@ -72,9 +72,9 @@
 
     [self.bgView addSubview:self.arrowButton];
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView);
+        make.height.right.equalTo(self.bgView);
         make.centerY.equalTo(self.bgView);
-        make.width.height.equalTo(@40);
+        make.width.equalTo(@40);
     }];
 
     [self.bgView addSubview:self.tagView];
@@ -158,9 +158,21 @@
 //    if ([self.delegate respondsToSelector:@selector(tableVieCell:didSelectAtIndex:)] && !self.dataModel.notEdit) {
 //        [self.delegate tableVieCell:self didSelectAtIndex:index];
 //    }
+    if (self.customDidSelectedBlock) {
+        self.customDidSelectedBlock(self, self.model, @(index));
+    }
 }
 
-#pragma mark - lazy load
+#pragma mark - Actions
+
+- (void)clickAction:(UIButton *)button
+{
+    if (self.customDidSelectedBlock) {
+        self.customDidSelectedBlock(self, self.model, button);
+    }
+}
+
+#pragma mark - Getters
 
 - (UIView *)containerView
 {
@@ -194,6 +206,7 @@
         _arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_arrowButton setImage:[UIImage imageNamed:@"search_next" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         _arrowButton.userInteractionEnabled = NO;
+        [_arrowButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _arrowButton;
 }
