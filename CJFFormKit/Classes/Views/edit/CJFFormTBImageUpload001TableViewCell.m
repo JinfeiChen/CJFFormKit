@@ -148,6 +148,8 @@
 
 @implementation CJFFormTBImageUpload001TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -162,7 +164,7 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
     
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -174,7 +176,7 @@
     
     [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(self.cellStyle.spacing);
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.left.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
         make.bottom.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
@@ -200,8 +202,15 @@
         }];
     }
     self.model = [CJFFormTBImageUpload001Model yy_modelWithJSON:mDict];
-    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    [mAttr addAttributes:@{
+        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+        NSForegroundColorAttributeName: [UIColor redColor]
+    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+    self.TTitleLabel.attributedText = mAttr;
     
+    self.collectionView.userInteractionEnabled = self.model.isEditable;
 }
 
 #pragma mark - UICollectionViewDelegate/UICollectionViewDataSource

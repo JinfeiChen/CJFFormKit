@@ -171,7 +171,7 @@
     
     self.popUpView.alpha = 0.0;
     self.popUpView.delegate = self;
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+//    UIWindow *window = [UIApplication sharedApplication].delegate.window;
     [self addSubview:self.popUpView];
     
     self.textColor = [UIColor whiteColor];

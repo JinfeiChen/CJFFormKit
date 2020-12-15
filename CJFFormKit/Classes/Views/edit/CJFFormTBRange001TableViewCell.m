@@ -21,6 +21,8 @@
 
 @implementation CJFFormTBRange001TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -33,7 +35,7 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
 
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,8 +48,8 @@
     CGFloat width = ([UIScreen mainScreen].bounds.size.width - 10 * 2 - 10 * 2 - 8) / 2;
     [self.contentView addSubview:self.minTextField];
     [self.minTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentView).offset(10);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(self.cellStyle.spacing);
+        make.left.equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
         make.height.mas_equalTo(40);
         make.width.mas_equalTo(width);
         make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
@@ -55,7 +57,7 @@
 
     [self.contentView addSubview:self.maxTextField];
     [self.maxTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView).offset(-10);
+        make.right.equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.height.width.centerY.equalTo(self.minTextField);
     }];
 
@@ -85,12 +87,21 @@
         }];
     }
     self.model = [CJFFormTBRange001Model yy_modelWithJSON:mDict];
-    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    [mAttr addAttributes:@{
+        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+        NSForegroundColorAttributeName: [UIColor redColor]
+    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+    self.TTitleLabel.attributedText = mAttr;
 
     self.minTextField.placeholder = self.model.minPlaceholder ? : @"Please Input";
     self.minTextField.text = [NSString stringWithFormat:@"%f", self.model.minValue];
     self.maxTextField.placeholder = self.model.maxPlaceholder ? : @"Please Input";
     self.maxTextField.text = [NSString stringWithFormat:@"%f", self.model.maxValue];
+    
+    self.minTextField.enabled = self.model.isEditable;
+    self.maxTextField.enabled = self.model.isEditable;
 }
 
 #pragma mark - UITextFieldDelegate

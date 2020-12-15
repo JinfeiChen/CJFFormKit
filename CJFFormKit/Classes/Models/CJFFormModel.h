@@ -10,18 +10,23 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, CJFFormPrivilege) {
-    CJFFormPrivilege_Write, // writeonly
-    CJFFormPrivilege_Read, // readonly
+    CJFFormPrivilege_Write = 0, // writeonly，可编辑, default
+    CJFFormPrivilege_Read = 1, // readonly，不可编辑
 };
 
 @interface CJFFormModel : CJFObject
 
-@property (copy, nonatomic) NSString *title; /**< <#property#> */
-@property (strong, nonatomic) id value; /**< <#property#> */
-@property (copy, nonatomic) NSString *placeholder; /**< <#property#> */
+@property (copy, nonatomic) NSString *title; /**< 标题 */
+@property (strong, nonatomic) id value; /**< 值 */
+@property (copy, nonatomic) NSString *placeholder; /**< 占位文字 */
 
-@property (assign, nonatomic) CJFFormPrivilege privilege; /**< <#property#> */
-@property (assign, nonatomic, getter=isSelected) BOOL selected; /**< <#property#> */
+@property (assign, nonatomic, getter=isRequired) BOOL required; /**< 是否为必填项, default NO */
+@property (assign, nonatomic, getter=isEditable) BOOL editable; /**< 是否可编辑, default YES */
+@property (assign, nonatomic, getter=isSelected) BOOL selected; /**< 是否已选中, default NO */
+
+// Reserved Parameters
+@property (assign, nonatomic) CJFFormPrivilege privilege; /**< 模式：编辑、阅读 */
+@property (copy, nonatomic) BOOL(^validateBlock)(CJFFormModel *model); /**< 表单校验block */
 
 @end
 

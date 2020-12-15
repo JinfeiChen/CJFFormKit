@@ -41,6 +41,8 @@
 
 @implementation CJFFormTBSwitch001TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -53,7 +55,7 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
     
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,7 +85,13 @@
         }];
     }
     self.model = [CJFFormTBSwitch001Model yy_modelWithJSON:mDict];
-    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    [mAttr addAttributes:@{
+        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+        NSForegroundColorAttributeName: [UIColor redColor]
+    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+    self.TTitleLabel.attributedText = mAttr;
     
     if (self.model.value.count != self.buttonArrayM.count) {
         for (UIButton *button in self.buttonArrayM) {
@@ -126,6 +134,10 @@
             button.backgroundColor = [UIColor colorWithRed:255/255.0 green:194/255.0 blue:76/255.0 alpha:1.0];
         }else {
             button.backgroundColor = [UIColor whiteColor];
+        }
+        // cell为不可用状态时，清除所有按钮事件
+        if (!self.model.isEditable) {
+            [button removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
         }
     }
 }

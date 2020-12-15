@@ -13,6 +13,8 @@
 
 @implementation CJFFormLR002TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {

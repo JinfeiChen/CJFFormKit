@@ -34,11 +34,13 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 #define kFormSectionBody @"body"
 #define kFormSectionFooter @"footer"
 
-#define kFormCellClass @"class"
-#define kFormCellTitle @"title"
-#define kFormCellValue @"value"
-#define kFormCellSelector @"cellClick:"
-#define kFormCellPlaceholder @"placeholder"
+#define kFormItemClassKey @"class"
+#define kFormItemTitleKey @"title"
+#define kFormItemValueKey @"value"
+#define kFormItemSelectorKey @"cellClick:"
+#define kFormItemPlaceholderKey @"placeholder"
+#define kFormItemRequiredKey @"required"
+#define kFormItemEditableKey @"editable"
 
 /**
  * Example:
@@ -46,9 +48,9 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
     kFormSectionHeader: @{},
     kFormSectionBody: @[
         @{
-            kFormCellClass: @"CJFFormTableViewCell",
-            kFormCellTitle: @"MyTitle",
-            kFormCellValue: @"MyValue"
+            kFormItemClassKey: @"CJFFormTableViewCell",
+            kFormItemTitleKey: @"MyTitle",
+            kFormItemValueKey: @"MyValue"
         }
     ],
     kFromSectionFooter: @{}
@@ -65,6 +67,9 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 @property (strong, nonatomic) NSIndexPath *indexPath; /**< <#property#> */
 @property (weak, nonatomic) UITableView *tableView; /**< <#property#> */
 
+@property (strong, nonatomic) CJFFormModel *model; /**< <#property#> */
+@property (copy, nonatomic) void(^customDidSelectedBlock)(CJFFormTableViewCell *cell, CJFFormModel *model, id _Nullable reservedObj); /**< reservedObj 预留参数 */
+
 - (void)setModelWithDict:(NSDictionary * _Nullable)dict format:(NSDictionary * _Nullable)format;
 
 @end
@@ -73,6 +78,19 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 
 @property (assign, nonatomic) UIEdgeInsets contentInset; /**< <#property#> */
 
+@property (strong, nonatomic) UIColor *titleColor; /**< <#property#> */
+@property (strong, nonatomic) UIFont *titleFont; /**< <#property#> */
+
+@property (strong, nonatomic) UIColor *backgroundColor; /**< <#property#> */
+
+@property (strong, nonatomic) UIColor *valueColor; /**< <#property#> */
+@property (strong, nonatomic) UIFont *valueFont; /**< <#property#> */
+
+@property (strong, nonatomic) UIColor *placeholderColor; /**< <#property#> */
+
+@property (assign, nonatomic) CGFloat spacing; /**< cell内控件间距，default 10.0 */
+
++ (instancetype)defaultCellStyle;
 
 @end
 

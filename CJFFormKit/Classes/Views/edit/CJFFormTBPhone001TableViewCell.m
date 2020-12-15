@@ -24,6 +24,8 @@
 
 @implementation CJFFormTBPhone001TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -36,7 +38,7 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
 
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,11 +50,11 @@
 
     [self.contentView addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentView).offset(10);
-        make.right.equalTo(self.contentView).offset(-10);
-        make.height.mas_equalTo(40);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(self.cellStyle.spacing);
+        make.left.equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
+        make.right.equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
+        make.height.mas_equalTo(40);
     }];
 
     [self.bgView addSubview:self.phoneAreaLabel];
@@ -104,7 +106,13 @@
         }];
     }
     self.model = [CJFFormTBPhone001Model yy_modelWithJSON:mDict];
-    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    [mAttr addAttributes:@{
+        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+        NSForegroundColorAttributeName: [UIColor redColor]
+    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+    self.TTitleLabel.attributedText = mAttr;
 
     self.phoneAreaLabel.text = [NSString stringWithFormat:@"%@ %@", self.model.countryCode, self.model.countryArea];
     self.phoneAreaLabel.text = [NSString stringWithFormat:@"%@", self.model.countryCode];
@@ -119,12 +127,14 @@
         }
     }];
 
-    if (self.model.privilege == CJFFormPrivilege_Write) {
+    if (self.model.isEditable) {
         if (self.model.value && [self.model.value length] > 0) {
             _textField.rightView = self.deleteView;
             _textField.rightViewMode = UITextFieldViewModeAlways;
         }
     }
+    
+    self.bgView.userInteractionEnabled = self.model.isEditable;
 }
 
 #pragma mark - Actions

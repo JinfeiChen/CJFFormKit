@@ -58,26 +58,26 @@
         kFormSectionHeader: @{},
         kFormSectionBody: @[
             @{
-                kFormCellClass: @"CJFFormLR001TableViewCell",
-                kFormCellTitle: @"MyTitle",
-                kFormCellValue: @"MyValue"
+                kFormItemClassKey: @"CJFFormLR001TableViewCell",
+                kFormItemTitleKey: @"MyTitle",
+                kFormItemValueKey: @"MyValue"
             },
             @{
-                kFormCellClass: @"CJFFormLR002TableViewCell",
-                kFormCellTitle: @"MyTitle",
-                kFormCellValue: @"MyValue"
+                kFormItemClassKey: @"CJFFormLR002TableViewCell",
+                kFormItemTitleKey: @"MyTitle",
+                kFormItemValueKey: @"MyValue"
             },
             @{
-                kFormCellClass: @"CJFFormLRTag001TableViewCell",
-                kFormCellTitle: @"MyTags",
-                kFormCellValue: @[
+                kFormItemClassKey: @"CJFFormLRTag001TableViewCell",
+                kFormItemTitleKey: @"MyTags",
+                kFormItemValueKey: @[
                     @"标签tag1", @"表面", @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈", @"测试测试", @"不不不不", @"无敌啊", @"标签", @"这样喊得好吗",@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"@"无敌啊", @"标签", @"这样喊得好吗"
                 ]
             },
             @{
-                kFormCellClass: @"CJFFormFFGrid001TableViewCell",
-                kFormCellTitle: @"MyTitle",
-                kFormCellValue: @[
+                kFormItemClassKey: @"CJFFormFFGrid001TableViewCell",
+                kFormItemTitleKey: @"MyTitle",
+                kFormItemValueKey: @[
                     @{
                         @"imageUrl": @"https://common.cnblogs.com/images/icon_weibo_24.png",
                         @"value": @"lkhlkasdf11"
@@ -100,10 +100,16 @@
                     }
                 ]
             },
+            
+            
+            
+            
+            
+            
             @{
-                kFormCellClass: @"CJFFormTBSwitch001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @[
+                kFormItemClassKey: @"CJFFormTBSwitch001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @[
                     @{
                         @"state": @(0),
                         @"title": @"Female",
@@ -119,18 +125,24 @@
                         @"title": @"Both",
                         @"id": @(2)
                     }
-                ]
+                ],
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testClick:"
             },
             @{
-                kFormCellClass: @"CJFFormTBInputSearch001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
-                kFormCellPlaceholder: @"placeholder"
+                kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testClick:model:indexPath:"
             },
             @{
-                kFormCellClass: @"CJFFormTBMultiSelect001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @[
+                kFormItemClassKey: @"CJFFormTBMultiSelect001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @[
                         @{
                             @"name": @"example01",
                             @"key": @"1",
@@ -162,66 +174,86 @@
                             @"value": @"6"
                         }
                 ],
-                kFormCellPlaceholder: @"placeholder"
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBUniSelect001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
-                kFormCellPlaceholder: @"placeholder",
+                kFormItemClassKey: @"CJFFormTBUniSelect001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBTextField001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
-                kFormCellPlaceholder: @"placeholder",
+                kFormItemClassKey: @"CJFFormTBTextField001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBDate001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
-                kFormCellPlaceholder: @"placeholder",
+                kFormItemClassKey: @"CJFFormTBDate001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBPhone001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
-                kFormCellPlaceholder: @"placeholder",
+                kFormItemClassKey: @"CJFFormTBPhone001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
                 @"countryCode": @"+86",
-                @"countryArea": @"China"
+                @"countryArea": @"China",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBTextView001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"default text",
-                kFormCellPlaceholder: @"placeholder",
+                kFormItemClassKey: @"CJFFormTBTextView001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBSlider001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"8",
+                kFormItemClassKey: @"CJFFormTBSlider001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"8",
                 @"minValue": @(0),
-                @"maxValue": @(10)
+                @"maxValue": @(10),
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBRange001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"",
+                kFormItemClassKey: @"CJFFormTBRange001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"",
                 @"minValue": @(0),
-                @"maxValue": @(10)
+                @"maxValue": @(10),
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBNumber001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @"0"
+                kFormItemClassKey: @"CJFFormTBNumber001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @"0",
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             },
             @{
-                kFormCellClass: @"CJFFormTBImageUpload001TableViewCell",
-                kFormCellTitle: @"MyEditTitle",
-                kFormCellValue: @[
+                kFormItemClassKey: @"CJFFormTBImageUpload001TableViewCell",
+                kFormItemTitleKey: @"MyEditTitle",
+                kFormItemValueKey: @[
                         @"https://cdn.pixabay.com/photo/2020/11/12/15/45/dog-5735837__480.jpg",
                         @"https://cdn.pixabay.com/photo/2020/11/26/11/48/cat-5778777__480.jpg"
-                ]
+                ],
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES)
             }
         ],
         kFormSectionFooter: @{}
@@ -231,7 +263,7 @@
     // Regist Cells
     NSArray *bodyArray = exampleDict[kFormSectionBody];
     [bodyArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *classStr = obj[kFormCellClass];
+        NSString *classStr = obj[kFormItemClassKey];
         [self.tableView registerClass:NSClassFromString(classStr) forCellReuseIdentifier:classStr];
     }];
 }
@@ -240,6 +272,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)testClick:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath
+{
+    BOOL result = model.validateBlock(model);
+    NSLog(@"test click: %@, %@, %@, %d", cell, model, indexPath, result);
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -262,6 +300,17 @@
     NSDictionary *cellDict = bodyArray[indexPath.row];
     CJFFormTableViewCell *cell = [CJFFormTableViewCell cellForTableView:tableView atIndexPath:indexPath dataSource:cellDict];
     [cell setModelWithDict:cellDict format:nil];
+    // didSelect imp
+    [cell performSelector:@selector(setCustomDidSelectedBlock:) withObject:^(CJFFormTableViewCell *cell, CJFFormModel *model, id reservedObj) {
+        SEL selector = NSSelectorFromString(cellDict[kFormItemSelectorKey]);
+        if ([self respondsToSelector:selector]) {
+           IMP imp = [self methodForSelector:selector];
+           void (*func)(id, SEL, id, id, id, id) = (void *)imp;
+           func(self, selector, cell, model, indexPath, reservedObj);
+        }
+    }];
+    // validate imp
+    
     return cell;
 }
 

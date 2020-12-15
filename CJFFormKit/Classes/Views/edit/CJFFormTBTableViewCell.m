@@ -21,17 +21,28 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.98 alpha:1.0];
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
 }
 
 #pragma mark - Getters
+
+- (UILabel *)requiredLabel
+{
+    if (!_requiredLabel) {
+        _requiredLabel = [[UILabel alloc] init];
+        _requiredLabel.font = [UIFont systemFontOfSize:16];
+        _requiredLabel.textColor = [UIColor redColor];
+        _requiredLabel.text = @"*";
+    }
+    return _requiredLabel;
+}
 
 - (UILabel *)TTitleLabel
 {
     if (!_TTitleLabel) {
         _TTitleLabel = [[UILabel alloc] init];
-        _TTitleLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
-        _TTitleLabel.textColor = [UIColor colorWithRed:159 / 255.0 green:162 / 255.0 blue:168 / 255.0 alpha:1.0];
+        _TTitleLabel.font = self.cellStyle.titleFont;
+        _TTitleLabel.textColor = self.cellStyle.titleColor;
     }
     return _TTitleLabel;
 }

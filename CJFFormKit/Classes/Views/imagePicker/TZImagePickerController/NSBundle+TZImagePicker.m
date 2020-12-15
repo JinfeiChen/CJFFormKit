@@ -12,6 +12,7 @@
 @implementation NSBundle (TZImagePicker)
 
 + (NSBundle *)tz_imagePickerBundle {
+//    return [NSBundle bundleWithBundleName:@"TZImagePickerController" podName:@"CJFFormKit"];
 #ifdef SWIFT_PACKAGE
     NSBundle *bundle = SWIFTPM_MODULE_BUNDLE;
 #else

@@ -19,6 +19,8 @@
 
 @implementation CJFFormTBDate001TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -31,8 +33,8 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
-
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
+    
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
@@ -43,9 +45,9 @@
 
     [self.contentView addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentView).offset(10);
-        make.right.equalTo(self.contentView).offset(-10);
+        make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(self.cellStyle.spacing);
+        make.left.equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
+        make.right.equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.height.mas_equalTo(40);
         make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
@@ -68,10 +70,19 @@
         }];
     }
     self.model = [CJFFormTBDate001Model yy_modelWithJSON:mDict];
-    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    [mAttr addAttributes:@{
+        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+        NSForegroundColorAttributeName: [UIColor redColor]
+    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+    self.TTitleLabel.attributedText = mAttr;
 
     self.textField.placeholder = self.model.placeholder ? : @"Please Select";
     self.textField.text = self.model.value;
+    
+    self.textField.enabled = self.model.isEditable;
+    self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - Gettters

@@ -38,6 +38,8 @@
 
 @implementation CJFFormTBMultiSelect001TableViewCell
 
+@dynamic model;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -50,7 +52,7 @@
 
 - (void)buildView
 {
-    self.contentView.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
+    self.contentView.backgroundColor = self.cellStyle.backgroundColor;
 
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,10 +64,10 @@
 
     [self.contentView addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(self.cellStyle.contentInset.top + 18 + 10);
-        make.left.equalTo(self.contentView).offset(10);
-        make.right.equalTo(self.contentView).offset(-10);
-        make.bottom.equalTo(self.contentView).offset(-10);
+        make.top.equalTo(self.TTitleLabel.mas_bottom).offset(self.cellStyle.spacing);
+        make.left.equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
+        make.right.equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
+        make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
     }];
 
     [self.bgView addSubview:self.arrowButton];
@@ -111,7 +113,13 @@
         }];
     }
     self.model = [CJFFormTBMultiSelect001Model yy_modelWithJSON:mDict];
-    self.TTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    [mAttr addAttributes:@{
+        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+        NSForegroundColorAttributeName: [UIColor redColor]
+    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+    self.TTitleLabel.attributedText = mAttr;
 
     if (self.model.value.count) {
         self.placeholdLabel.text = @"";
@@ -119,7 +127,7 @@
         self.placeholdLabel.text = self.model.placeholder ? : @"Please Select";
     }
 
-    if (self.model.privilege == CJFFormPrivilege_Write) {
+    if (self.model.isEditable) {
         self.arrowButton.hidden = NO;
         self.tagView.deleteImage = [UIImage imageNamed:@"search_close_tag" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
     } else {
@@ -141,6 +149,7 @@
         }
     }];
     
+    self.bgView.userInteractionEnabled = self.model.isEditable;
 }
 
 #pragma mark - RATagViewDelegate
