@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) CJFFormTBFileUpload001Model *model; /**< <#property#> */
 
+@property (copy, nonatomic) void(^testBlock)(id obj); /**< <#property#> */
+
 @end
 
 NS_ASSUME_NONNULL_END

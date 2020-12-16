@@ -107,6 +107,18 @@
             
             
             @{
+                kFormItemClassKey: @"CJFFormTBFileUpload001TableViewCell",
+                kFormItemTitleKey: @"FileUpload001",
+                kFormItemValueKey: @[
+                    @"file name 01",
+                    @"file name 02",
+                    @"file name 03"
+                ],
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"fileUploadClick:model:indexPath:reserve:"
+            },
+            @{
                 kFormItemClassKey: @"CJFFormTBSwitch001TableViewCell",
                 kFormItemTitleKey: @"Switch001",
                 kFormItemValueKey: @[
@@ -300,6 +312,11 @@
     NSLog(@"test click: %@, %@, %@, %d", cell, model, indexPath, result);
 }
 
+- (void)fileUploadClick:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserve
+{
+    NSLog(@"test click: %@, %@, %@, %@", cell, model, indexPath, reserve);
+}
+
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -329,6 +346,11 @@
            func(self, selector, cell, model, indexPath, reservedObj);
         }
     }];
+    if ([cell respondsToSelector:@selector(setTestBlock:)]) {
+        [cell performSelector:@selector(setTestBlock:) withObject:^(id obj) {
+            NSLog(@"test block: %@", obj);
+        }];
+    }
     // validate imp
     
     return cell;
