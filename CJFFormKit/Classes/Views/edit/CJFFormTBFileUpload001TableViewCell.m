@@ -266,14 +266,14 @@
         [_addButton setImage:[UIImage imageNamed:@"ic_add_comment" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [_addButton setTitle:@"Click to upload" forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_addButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_addButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         _addButton.titleLabel.font = [UIFont systemFontOfSize:13.0];
         UIEdgeInsets edge = _addButton.titleEdgeInsets;
         edge.left = 12.0;
         _addButton.titleEdgeInsets = edge;
         _addButton.layer.cornerRadius = 8.0;
-        _addButton.layer.borderWidth = 1.0;
-        _addButton.layer.borderColor = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
+//        _addButton.layer.borderWidth = 1.0;
+//        _addButton.layer.borderColor = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
         [_addButton setBackgroundColor:[UIColor whiteColor]];
     }
     return _addButton;
