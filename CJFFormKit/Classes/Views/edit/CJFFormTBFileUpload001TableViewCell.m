@@ -48,7 +48,7 @@
     [self.myTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(self.contentView);
         make.left.mas_equalTo(self.iconImgView.mas_right).offset(10);
-        make.right.mas_equalTo(self.deleteBtn.mas_left).offset(010);
+        make.right.mas_equalTo(self.deleteBtn.mas_left).offset(-10);
     }];
 }
 
@@ -267,7 +267,7 @@
         [_addButton setTitle:@"Click to upload" forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        _addButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        _addButton.titleLabel.font = [UIFont systemFontOfSize:13.0];
         UIEdgeInsets edge = _addButton.titleEdgeInsets;
         edge.left = 12.0;
         _addButton.titleEdgeInsets = edge;
