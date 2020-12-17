@@ -109,6 +109,14 @@
 
 @dynamic value;
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _maxCount = 20;
+    }
+    return self;
+}
+
 @end
 
 @interface CJFFormTBFileUpload001TableViewCell () <UITableViewDelegate, UITableViewDataSource>
@@ -196,6 +204,8 @@
         make.top.mas_equalTo(self.addButton.mas_bottom).offset((self.model.value.count > 0)?self.cellStyle.spacing:0);
     }];
     
+    self.addButton.enabled = (self.model.value.count < self.model.maxCount);
+    
     [self.listTableView reloadData];
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
@@ -205,13 +215,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.model.value.count;
+    return self.model.value.count < self.model.maxCount ? self.model.value.count : self.model.maxCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CJFFormTBFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([CJFFormTBFileTableViewCell class])];
-    cell.iconImgView.image = [UIImage imageNamed:@"img_files" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
+    cell.iconImgView.image = [UIImage imageNamed:@"file" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
     cell.myTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.value[indexPath.row]];
     cell.deleteBlock = ^(UIButton *button) {
         if (self.testBlock) {
@@ -225,7 +235,8 @@
 
 - (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize withHorizontalFittingPriority:(UILayoutPriority)horizontalFittingPriority verticalFittingPriority:(UILayoutPriority)verticalFittingPriority
 {
-    CGFloat contentViewHeight = kFormTBFileRowHeight * self.model.value.count + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + 18 + self.listTableView.contentInset.top + self.listTableView.contentInset.bottom + 10 * ((self.model.value.count>0)?2:1) + 40;
+    NSInteger count = self.model.value.count < self.model.maxCount ? self.model.value.count : self.model.maxCount;
+    CGFloat contentViewHeight = kFormTBFileRowHeight * count + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + 18 + self.listTableView.contentInset.top + self.listTableView.contentInset.bottom + 10 * ((self.model.value.count>0)?2:1) + 40;
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
 }
 
@@ -233,6 +244,9 @@
 
 - (void)addButtonAction:(UIButton *)button
 {
+    if (self.model.value.count >= self.model.maxCount) {
+        return;
+    }
     if (self.customDidSelectedBlock) {
         self.customDidSelectedBlock(self, self.model, nil);
     }
@@ -263,7 +277,7 @@
 {
     if (!_addButton) {
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_addButton setImage:[UIImage imageNamed:@"ic_add_comment" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_addButton setImage:[UIImage imageNamed:@"upload" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [_addButton setTitle:@"Click to upload" forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];

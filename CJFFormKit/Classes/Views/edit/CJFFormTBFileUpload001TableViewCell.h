@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSArray<NSString *> *value; /**< <#property#> */
 
+@property (assign, nonatomic) NSInteger maxCount; /**< <#property#> */
+
 @end
 
 @interface CJFFormTBFileUpload001TableViewCell : CJFFormTBTableViewCell

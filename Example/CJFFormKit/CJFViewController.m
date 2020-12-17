@@ -8,6 +8,8 @@
 
 #import "CJFViewController.h"
 
+#import <YYModel/YYModel.h>
+
 #import <CJFFormKit/CJFFormTableViewCell.h>
 
 #import <CJFFormKit/CJFFormLR002TableViewCell.h>
@@ -26,6 +28,7 @@
 #import <CJFFormKit/CJFFormTBRange001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBNumber001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBImageUpload001TableViewCell.h>
+#import <CJFFormKit/CJFFormTBNested001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
@@ -106,6 +109,45 @@
             
             
             
+            @{
+                kFormItemClassKey: @"CJFFormTBNested001TableViewCell",
+                kFormItemTitleKey: @"Nested001",
+                kFormItemValueKey: @[
+                        @{
+                            @"prefixText": @"N/Aaaaaaaa",
+                            @"text": @"",
+                            @"placeholder": @"Please input"
+                        },
+                        @{
+                            @"prefixText": @"N/Abbbbb",
+                            @"text": @"",
+                            @"placeholder": @"Please input"
+                        },
+                        @{
+                            @"prefixText": @"N/Acccc",
+                            @"text": @"",
+                            @"placeholder": @"Please input"
+                        },
+                        @{
+                            @"prefixText": @"N/Addd",
+                            @"text": @"",
+                            @"placeholder": @"Please input"
+                        },
+                        @{
+                            @"prefixText": @"N/Aeeeeeeeeee",
+                            @"text": @"",
+                            @"placeholder": @"Please input"
+                        }
+                ],
+                kFormItemRequiredKey: @(YES),
+                kFormItemSelectorKey: @"didSelectedCarparkCell:model:indexPath:subIndexPath:",
+                @"addButtonTitle": @"Add New Carpark",
+                @"prefixArray": @[
+                        @"Default",
+                        @"aaaaaaaa",
+                        @"bbbbbbbbbbbbbbbbbbbbb"
+                ]
+            },
             @{
                 kFormItemClassKey: @"CJFFormTBFileUpload001TableViewCell",
                 kFormItemTitleKey: @"FileUpload001",
@@ -317,6 +359,47 @@
     NSLog(@"test click: %@, %@, %@, %@", cell, model, indexPath, reserve);
 }
 
+- (void)didSelectedCarparkCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath subIndexPath:(NSIndexPath *)subIndexPath
+{
+    NSLog(@"%@, %@, %@, %@", cell, model.value, indexPath, subIndexPath);
+    if (!subIndexPath) {
+        return;
+    }
+    [model.value enumerateObjectsUsingBlock:^(CJFFormTBNested001SubModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSLog(@"model: %@, selected status: %ld", [model yy_modelToJSONObject], (long)obj.selected);
+        
+        NSDictionary *bodyDict = self.dataSource[indexPath.section];
+        NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+        
+        NSDictionary *cellDict = bodyArray[indexPath.row];
+        
+        NSMutableArray *mArr = [NSMutableArray arrayWithArray:cellDict[kFormItemValueKey]];
+        NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:mArr[idx]];
+        
+        // update prefixText
+        if (subIndexPath.row == idx) {
+            NSLog(@"%@", obj.prefixText);
+            [mDict setValue:@"updated" forKey:@"prefixText"];
+        }
+        
+        // update selected status
+        [mDict setValue:@(obj.selected) forKey:@"selected"];
+        [mArr replaceObjectAtIndex:idx withObject:mDict];
+        NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+        [mCellDict setValue:mArr forKey:kFormItemValueKey];
+        
+        NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+        [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+        NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+        [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+        NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+        [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+        self.dataSource = mDataSource;
+    }];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -346,11 +429,28 @@
            func(self, selector, cell, model, indexPath, reservedObj);
         }
     }];
+    
     if ([cell respondsToSelector:@selector(setTestBlock:)]) {
         [cell performSelector:@selector(setTestBlock:) withObject:^(id obj) {
             NSLog(@"test block: %@", obj);
         }];
     }
+    
+    if ([cell respondsToSelector:@selector(setDidUpdateFormTBNested001ModelBlock:)]) {
+        [cell performSelector:@selector(setDidUpdateFormTBNested001ModelBlock:) withObject:^(NSDictionary *newModelDict) {
+            NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+            [mCellDict setValue:[newModelDict valueForKey:kFormItemValueKey] forKey:kFormItemValueKey];
+            NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+            [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+            NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+            [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+            NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+            [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+            self.dataSource = mDataSource;
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    }
+    
     // validate imp
     
     return cell;
