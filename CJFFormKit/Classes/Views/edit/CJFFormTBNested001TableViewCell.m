@@ -420,14 +420,17 @@
 
 - (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize withHorizontalFittingPriority:(UILayoutPriority)horizontalFittingPriority verticalFittingPriority:(UILayoutPriority)verticalFittingPriority
 {
+    self.listTableView.frame = CGRectMake(0, 0, targetSize.width, 44);
     [self.listTableView layoutIfNeeded];
-    CGSize contentSize = self.listTableView.contentSize;
-
+    
+    CGFloat subCellHeight = kCJFFormTBNested001SubTableViewCellHeight + 10;
+    NSInteger count = self.listArray.count;
+    CGFloat contentSizeHeight = subCellHeight * count;
     CGFloat titleHeight = 18;
     CGFloat buttonHeight = (self.listArray.count < self.model.maxCount) ? 40 : 0;
     CGFloat spacing = 2 * (self.cellStyle.spacing - 5);
-    CGFloat contentViewHeight = contentSize.height + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + titleHeight + self.listTableView.contentInset.top + self.listTableView.contentInset.bottom + buttonHeight + spacing;
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
+    CGFloat contentViewHeight = contentSizeHeight + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + titleHeight + self.listTableView.contentInset.top + self.listTableView.contentInset.bottom + buttonHeight + spacing;
+    return CGSizeMake(targetSize.width, contentViewHeight);
 }
 
 #pragma mark - Actions
