@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *prefixText; /**< <#property#> */
 @property (copy, nonatomic) NSString *text; /**< <#property#> */
 @property (copy, nonatomic) NSString *placeholder; /**< <#property#> */
-@property (assign, nonatomic) NSInteger selected; /**< <#property#> */
+@property (assign, nonatomic) NSInteger selected; /**< 控制三角形指示图标的旋转，需要开发者通过数据源控制关闭 */
 
 @end
 

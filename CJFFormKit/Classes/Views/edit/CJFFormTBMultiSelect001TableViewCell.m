@@ -150,6 +150,7 @@
     }];
     
     self.bgView.userInteractionEnabled = self.model.isEditable;
+    self.bgView.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - RATagViewDelegate
@@ -165,10 +166,10 @@
 
 #pragma mark - Actions
 
-- (void)clickAction:(UIButton *)button
+- (void)clickAction:(id)sender
 {
     if (self.customDidSelectedBlock) {
-        self.customDidSelectedBlock(self, self.model, button);
+        self.customDidSelectedBlock(self, self.model, nil);
     }
 }
 
@@ -188,6 +189,8 @@
         _bgView.backgroundColor = [UIColor whiteColor];
         _bgView.layer.cornerRadius = 8.0;
         _bgView.layer.masksToBounds = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAction:)];
+        [_bgView addGestureRecognizer:tap];
     }
     return _bgView;
 }
@@ -206,7 +209,7 @@
         _arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_arrowButton setImage:[UIImage imageNamed:@"search_next" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         _arrowButton.userInteractionEnabled = NO;
-        [_arrowButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [_arrowButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _arrowButton;
 }

@@ -239,7 +239,33 @@
                 ],
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBMultSelectCell:model:indexPath:reserve:"
+            },
+            @{
+                kFormItemClassKey: @"CJFFormTBMultiSelect001TableViewCell",
+                kFormItemTitleKey: @"MultiSelect001",
+                kFormItemValueKey: @[
+                        @{
+                            @"name": @"example01",
+                            @"key": @"1",
+                            @"value": @"1"
+                        },
+                        @{
+                            @"name": @"example02",
+                            @"key": @"2",
+                            @"value": @"2"
+                        },
+                        @{
+                            @"name": @"example03",
+                            @"key": @"3",
+                            @"value": @"3"
+                        }
+                ],
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBMultSelectCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBUniSelect001TableViewCell",
@@ -247,7 +273,17 @@
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:"
+            },
+            @{
+                kFormItemClassKey: @"CJFFormTBUniSelect001TableViewCell",
+                kFormItemTitleKey: @"UniSelect001",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBTextField001TableViewCell",
@@ -398,6 +434,16 @@
     }];
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)testFormTBUniSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s", __FUNCTION__);
+}
+
+- (void)testFormTBMultSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s", __FUNCTION__);
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

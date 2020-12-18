@@ -126,14 +126,15 @@
     }];
     
     self.bgView.userInteractionEnabled = self.model.isEditable;
+    self.bgView.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - Actions
 
-- (void)clickAction:(UIButton *)button
+- (void)clickAction:(id)sender
 {
     if (self.customDidSelectedBlock) {
-        self.customDidSelectedBlock(self, self.model, button);
+        self.customDidSelectedBlock(self, self.model, nil);
     }
 }
 
@@ -145,6 +146,8 @@
         _bgView.layer.masksToBounds = YES;
         _bgView.layer.cornerRadius  = 8;
         _bgView.backgroundColor = [UIColor whiteColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAction:)];
+        [_bgView addGestureRecognizer:tap];
     }
     return _bgView;
 }
@@ -173,7 +176,7 @@
         _rightButton = [[UIButton alloc] init];
         [_rightButton setImage:[UIImage imageNamed:@"search_next" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         _rightButton.userInteractionEnabled = NO;
-        [_rightButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [_rightButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightButton;
 }
