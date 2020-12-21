@@ -135,11 +135,7 @@
         self.tagView.deleteImage = nil;
     }
 
-    NSMutableArray *titleArrayM = [NSMutableArray array];
-    for (CJFFormTBMultiSelect001ItemModel *model in self.model.value) {
-        [titleArrayM addObject:model.name];
-    }
-    self.tagView.dataArray = titleArrayM;
+    [self updateTagViewDataSource];
 
     [UIView animateWithDuration:0.3 animations:^{
         if (self.model.isSelected) {
@@ -153,14 +149,31 @@
     self.bgView.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
+#pragma mark - Private Methods
+
+- (void)updateTagViewDataSource
+{
+    NSMutableArray *titleArrayM = [NSMutableArray array];
+    for (CJFFormTBMultiSelect001ItemModel *model in self.model.value) {
+        [titleArrayM addObject:model.name];
+    }
+    self.tagView.dataArray = titleArrayM;
+}
+
 #pragma mark - RATagViewDelegate
 
 - (void)tagView:(CJFTagView *)tagView didSelectAtIndex:(NSInteger)index {
-//    if ([self.delegate respondsToSelector:@selector(tableVieCell:didSelectAtIndex:)] && !self.dataModel.notEdit) {
-//        [self.delegate tableVieCell:self didSelectAtIndex:index];
-//    }
-    if (self.customDidSelectedBlock) {
-        self.customDidSelectedBlock(self, self.model, @(index));
+
+    NSMutableArray *mArr = [NSMutableArray arrayWithArray:self.model.value];
+    [mArr removeObjectAtIndex:index];
+    self.model.value = mArr;
+    [self updateTagViewDataSource];
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
     }
 }
 
@@ -168,6 +181,7 @@
 
 - (void)clickAction:(id)sender
 {
+    // call back
     if (self.customDidSelectedBlock) {
         self.customDidSelectedBlock(self, self.model, nil);
     }

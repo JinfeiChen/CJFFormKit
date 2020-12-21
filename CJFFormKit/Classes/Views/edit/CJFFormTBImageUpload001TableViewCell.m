@@ -211,6 +211,7 @@
     self.TTitleLabel.attributedText = mAttr;
     
     self.collectionView.userInteractionEnabled = self.model.isEditable;
+    self.collectionView.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - UICollectionViewDelegate/UICollectionViewDataSource

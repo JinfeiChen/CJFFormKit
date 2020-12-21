@@ -92,12 +92,15 @@
     
     self.textField.enabled = self.model.isEditable;
     self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
+    
+    self.extButton.enabled = self.model.isEditable;
 }
 
 #pragma mark - Actions
 
 - (void)extButtonAction:(UIButton *)button
 {
+    // call back
     if (self.customDidSelectedBlock) {
         self.customDidSelectedBlock(self, self.model, nil);
     }
@@ -115,8 +118,9 @@
         _textField.backgroundColor = [UIColor whiteColor];
         _textField.userInteractionEnabled = NO;
         _textField.returnKeyType = UIReturnKeyDone;
+        
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
+        leftView.backgroundColor = [UIColor clearColor];
         UIButton *buttonView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
         [buttonView setImage:[UIImage imageNamed:@"ic_date" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         buttonView.userInteractionEnabled = NO;

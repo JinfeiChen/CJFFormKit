@@ -65,8 +65,9 @@
     [self inputSearchAction];
     self.model.value = self.textField.text;
     
-    if (self.customDidSelectedBlock) {
-        self.customDidSelectedBlock(self, self.model, nil);
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
     }
 }
 
@@ -112,6 +113,7 @@
     self.textField.text = [NSString stringWithFormat:@"%@", self.model.value];
     
     self.textField.enabled = self.model.isEditable;
+    self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - Getters
@@ -129,7 +131,7 @@
         _textField.returnKeyType = UIReturnKeySearch;
         
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
+        leftView.backgroundColor = [UIColor clearColor];
         _textField.leftView = leftView;
         _textField.leftViewMode = UITextFieldViewModeAlways;
 

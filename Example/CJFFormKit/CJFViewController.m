@@ -140,8 +140,9 @@
                         }
                 ],
                 kFormItemRequiredKey: @(YES),
-                kFormItemSelectorKey: @"didSelectedCarparkCell:model:indexPath:subIndexPath:",
-                @"addButtonTitle": @"Add New Carpark",
+                kFormItemSelectorKey: @"testFormTBNestedCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBNestedCell:model:indexPath:reserve:",
+                @"addButtonTitle": @"Add New SubCell",
                 @"prefixArray": @[
                         @"Default",
                         @"aaaaaaaa",
@@ -158,31 +159,31 @@
                 ],
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"fileUploadClick:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBFileUploadCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBSwitch001TableViewCell",
                 kFormItemTitleKey: @"Switch001",
                 kFormItemValueKey: @[
                     @{
-                        @"state": @(0),
+                        @"selected": @(YES),
                         @"title": @"Female",
                         @"id": @(0)
                     },
                     @{
-                        @"state": @(0),
+                        @"selected": @(NO),
                         @"title": @"Male",
                         @"id": @(1)
                     },
                     @{
-                        @"state": @(0),
+                        @"selected": @(NO),
                         @"title": @"Both",
                         @"id": @(2)
                     }
                 ],
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testClick:"
+                kFormItemSelectorKey: @"testFormTBSwitchCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
@@ -191,16 +192,16 @@
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testClick"
+                kFormItemSelectorKey: @"testFormTBInputSearchCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
                 kFormItemTitleKey: @"InputSearch001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
-                kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testClick:model:indexPath:"
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBInputSearchCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBMultiSelect001TableViewCell",
@@ -291,7 +292,8 @@
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBTextFieldCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBDate001TableViewCell",
@@ -300,7 +302,7 @@
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testDate:"
+                kFormItemSelectorKey: @"testFormTBDateCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBPhone001TableViewCell",
@@ -310,7 +312,8 @@
                 @"countryCode": @"+86",
                 @"countryArea": @"China",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBPhoneCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBTextView001TableViewCell",
@@ -318,7 +321,8 @@
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBTextViewCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBSlider001TableViewCell",
@@ -327,7 +331,8 @@
                 @"minValue": @(0),
                 @"maxValue": @(10),
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBSliderCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBRange001TableViewCell",
@@ -336,14 +341,16 @@
                 @"minValue": @(0),
                 @"maxValue": @(10),
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBRangeCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBNumber001TableViewCell",
                 kFormItemTitleKey: @"Number001",
                 kFormItemValueKey: @"0",
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBNumberCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBImageUpload001TableViewCell",
@@ -353,7 +360,8 @@
                         @"https://cdn.pixabay.com/photo/2020/11/26/11/48/cat-5778777__480.jpg"
                 ],
                 kFormItemRequiredKey: @(YES),
-                kFormItemEditableKey: @(YES)
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBImageUploadCell:model:indexPath:reserve:"
             }
         ],
         kFormSectionFooter: @{}
@@ -374,30 +382,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)testDate:(id)cell
+#pragma mark - Custom Cell's Event
+
+- (void)customFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
-    NSLog(@"test date: %@", cell);
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    
+    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
+    
+    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+    self.dataSource = mDataSource;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone]; 
 }
 
-- (void)testClick
+- (void)testFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
-    NSLog(@"aaaa");
-}
-
-- (void)testClick:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath
-{
-    BOOL result = model.validateBlock(model);
-    NSLog(@"test click: %@, %@, %@, %d", cell, model, indexPath, result);
-}
-
-- (void)fileUploadClick:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserve
-{
-    NSLog(@"test click: %@, %@, %@, %@", cell, model, indexPath, reserve);
-}
-
-- (void)didSelectedCarparkCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath subIndexPath:(NSIndexPath *)subIndexPath
-{
-    NSLog(@"%@, %@, %@, %@", cell, model.value, indexPath, subIndexPath);
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    
+    NSIndexPath *subIndexPath = (NSIndexPath *)reserveObj;
     if (!subIndexPath) {
         return;
     }
@@ -406,7 +419,6 @@
         
         NSDictionary *bodyDict = self.dataSource[indexPath.section];
         NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
-        
         NSDictionary *cellDict = bodyArray[indexPath.row];
         
         NSMutableArray *mArr = [NSMutableArray arrayWithArray:cellDict[kFormItemValueKey]];
@@ -436,14 +448,125 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void)testFormTBUniSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)testFormTBFileUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
-    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    // update
+    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
+    // add
+    NSMutableArray *mArr = [NSMutableArray arrayWithArray:[model.value yy_modelToJSONObject]];
+    [mArr addObject:@"Example file name"];
+    [mCellDict setValue:mArr forKey:kFormItemValueKey];
+    
+    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+    self.dataSource = mDataSource;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)testFormTBSwitchCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    
+    // update
+    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
+    
+    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+    self.dataSource = mDataSource;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)testFormTBInputSearchCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, model.value, indexPath, reserveObj);
+    
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    
+    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    [mCellDict setValue:@"update from outside" forKey:kFormItemValueKey];
+    
+    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+    self.dataSource = mDataSource;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)testFormTBMultSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
-    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBUniSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBTextFieldCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBDateCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBPhoneCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)textFormTBTextViewCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBSliderCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBRangeCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBNumberCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBImageUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -466,34 +589,24 @@
     NSDictionary *cellDict = bodyArray[indexPath.row];
     CJFFormTableViewCell *cell = [CJFFormTableViewCell cellForTableView:tableView atIndexPath:indexPath dataSource:cellDict];
     [cell setModelWithDict:cellDict format:nil];
-    // didSelect imp
+    // custom selector
     [cell performSelector:@selector(setCustomDidSelectedBlock:) withObject:^(CJFFormTableViewCell *cell, CJFFormModel *model, id reservedObj) {
-        SEL selector = NSSelectorFromString(cellDict[kFormItemSelectorKey]);
+        SEL selector = NSSelectorFromString(cellDict[kFormItemCustomSelectorKey]);
         if ([self respondsToSelector:selector]) {
            IMP imp = [self methodForSelector:selector];
            void (*func)(id, SEL, id, id, id, id) = (void *)imp;
            func(self, selector, cell, model, indexPath, reservedObj);
         }
     }];
-    
-    if ([cell respondsToSelector:@selector(setTestBlock:)]) {
-        [cell performSelector:@selector(setTestBlock:) withObject:^(id obj) {
-            NSLog(@"test block: %@", obj);
-        }];
-    }
-    
-    if ([cell respondsToSelector:@selector(setDidUpdateFormTBNested001ModelBlock:)]) {
-        [cell performSelector:@selector(setDidUpdateFormTBNested001ModelBlock:) withObject:^(NSDictionary *newModelDict) {
-            NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
-            [mCellDict setValue:[newModelDict valueForKey:kFormItemValueKey] forKey:kFormItemValueKey];
-            NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
-            [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
-            NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
-            [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
-            NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
-            [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
-            self.dataSource = mDataSource;
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    // default selector
+    if ([cell respondsToSelector:@selector(setDidUpdateFormModelBlock:)]) {
+        [cell performSelector:@selector(setDidUpdateFormModelBlock:) withObject:^(CJFFormTableViewCell *cell, CJFFormModel *model, id reservedObj) {
+            SEL selector = NSSelectorFromString(cellDict[kFormItemSelectorKey]);
+            if ([self respondsToSelector:selector]) {
+               IMP imp = [self methodForSelector:selector];
+               void (*func)(id, SEL, id, id, id, id) = (void *)imp;
+               func(self, selector, cell, model, indexPath, reservedObj);
+            }
         }];
     }
     

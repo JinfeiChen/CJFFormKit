@@ -135,6 +135,7 @@
     }
     
     self.bgView.userInteractionEnabled = self.model.isEditable;
+    self.bgView.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - Actions
@@ -149,6 +150,12 @@
 - (void)phonCellDeleteAction:(UIButton *)button
 {
     self.textField.text = @"";
+    self.model.value = @"";
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -157,6 +164,11 @@
     NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
     str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.model.value = str;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
     return YES;
 }
 
@@ -167,6 +179,11 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.model.value = @"";
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
     return YES;
 }
 
@@ -222,7 +239,7 @@
         _textField.returnKeyType = UIReturnKeyDone;
 
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
+        leftView.backgroundColor = [UIColor clearColor];
         _textField.leftView = leftView;
         _textField.leftViewMode = UITextFieldViewModeAlways;
     }
@@ -232,7 +249,7 @@
 - (UIView *)deleteView {
     if (_deleteView == nil) {
         _deleteView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
-        _deleteView.backgroundColor = [UIColor whiteColor];
+        _deleteView.backgroundColor = [UIColor clearColor];
         UIButton *rightButton = [[UIButton alloc]initWithFrame:_deleteView.bounds];
         [rightButton addTarget:self action:@selector(phonCellDeleteAction:) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"search_clean" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];

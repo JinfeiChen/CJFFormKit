@@ -37,7 +37,8 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 #define kFormItemClassKey @"class"
 #define kFormItemTitleKey @"title"
 #define kFormItemValueKey @"value"
-#define kFormItemSelectorKey @"customEvent"
+#define kFormItemSelectorKey @"defaultEvent"
+#define kFormItemCustomSelectorKey @"customEvent"
 #define kFormItemPlaceholderKey @"placeholder"
 #define kFormItemRequiredKey @"required"
 #define kFormItemEditableKey @"editable"
@@ -68,9 +69,11 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 @property (weak, nonatomic) UITableView *tableView; /**< <#property#> */
 
 @property (strong, nonatomic) CJFFormModel *model; /**< <#property#> */
-@property (copy, nonatomic) void(^customDidSelectedBlock)(CJFFormTableViewCell *cell, CJFFormModel *model, id _Nullable reservedObj); /**< reservedObj 预留参数 */
 
 - (void)setModelWithDict:(NSDictionary * _Nullable)dict format:(NSDictionary * _Nullable)format;
+
+@property (copy, nonatomic) void(^didUpdateFormModelBlock)(CJFFormTableViewCell *cell, CJFFormModel *model, id _Nullable reservedObj); /**< 默认数据源更新事件， reservedObj 预留参数 */
+@property (copy, nonatomic) void(^customDidSelectedBlock)(CJFFormTableViewCell *cell, CJFFormModel *model, id _Nullable reservedObj); /**< 自定义点击事件， reservedObj 预留参数 */
 
 @end
 

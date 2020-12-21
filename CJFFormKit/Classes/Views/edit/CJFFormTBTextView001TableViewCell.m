@@ -82,6 +82,7 @@
     self.textView.text = self.model.value;
     
     self.textView.editable = self.model.isEditable;
+    self.textView.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - YYTextViewDelegate
@@ -89,6 +90,11 @@
 - (void)textViewDidEndEditing:(YYTextView *)textView {
     NSLog(@"===>%@",textView.text);
     self.model.value = textView.text;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 }
 
 - (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

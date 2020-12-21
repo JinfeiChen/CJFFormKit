@@ -101,7 +101,9 @@
     self.maxTextField.text = [NSString stringWithFormat:@"%f", self.model.maxValue];
     
     self.minTextField.enabled = self.model.isEditable;
+    self.minTextField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
     self.maxTextField.enabled = self.model.isEditable;
+    self.maxTextField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -116,6 +118,12 @@
     } else if (textField.tag == 101) {
         self.model.maxValue = [str floatValue];
     }
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
+    
     return YES;
 }
 
@@ -155,10 +163,10 @@
         _minTextField.layer.cornerRadius = 8.0;
         _minTextField.layer.masksToBounds = YES;
 
-        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
-        _minTextField.leftView = leftView;
-        _minTextField.leftViewMode = UITextFieldViewModeAlways;
+//        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+//        leftView.backgroundColor = [UIColor clearColor];
+//        _minTextField.leftView = leftView;
+//        _minTextField.leftViewMode = UITextFieldViewModeAlways;
     }
     return _minTextField;
 }
@@ -178,10 +186,10 @@
         _maxTextField.layer.cornerRadius = 8.0;
         _maxTextField.layer.masksToBounds = YES;
 
-        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
-        _maxTextField.leftView = leftView;
-        _maxTextField.leftViewMode = UITextFieldViewModeAlways;
+//        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+//        leftView.backgroundColor = [UIColor clearColor];
+//        _maxTextField.leftView = leftView;
+//        _maxTextField.leftViewMode = UITextFieldViewModeAlways;
     }
     return _maxTextField;
 }

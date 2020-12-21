@@ -28,6 +28,11 @@ typedef NS_ENUM(NSUInteger, CJFFormPrivilege) {
 @property (assign, nonatomic) CJFFormPrivilege privilege; /**< 模式：编辑、阅读 */
 @property (copy, nonatomic) BOOL(^validateBlock)(CJFFormModel *model); /**< 表单校验block */
 
+// 用于存储提交服务器数据的保留参数
+@property (copy, nonatomic) NSString *IMSValue; /**< <#property#> */
+@property (copy, nonatomic) NSString *IMSValue2; /**< <#property#> */
+@property (copy, nonatomic) NSString *IMSValue3; /**< <#property#> */
+
 @end
 
 NS_ASSUME_NONNULL_END

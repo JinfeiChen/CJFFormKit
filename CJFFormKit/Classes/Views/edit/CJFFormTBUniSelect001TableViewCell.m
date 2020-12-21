@@ -133,6 +133,7 @@
 
 - (void)clickAction:(id)sender
 {
+    // call back
     if (self.customDidSelectedBlock) {
         self.customDidSelectedBlock(self, self.model, nil);
     }

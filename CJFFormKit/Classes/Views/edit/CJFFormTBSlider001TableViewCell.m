@@ -91,6 +91,11 @@
 - (void)sliderAction {
     NSLog(@"%f",_sliderView.value);
     self.model.value = [NSString stringWithFormat:@"%f", self.sliderView.value];
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 }
 
 #pragma mark - Getters

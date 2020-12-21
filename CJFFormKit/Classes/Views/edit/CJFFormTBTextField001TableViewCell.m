@@ -101,6 +101,11 @@
     if (range.location >= 40) return NO;
     NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
     self.model.value = str;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
     return YES;
 }
 
@@ -116,6 +121,11 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.model.value = @"";
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
     return YES;
 }
 
@@ -125,6 +135,11 @@
 {
     self.textField.text = @"";
     self.model.value = @"";
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 }
 
 #pragma mark - Getters

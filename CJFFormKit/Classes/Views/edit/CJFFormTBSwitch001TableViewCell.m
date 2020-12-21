@@ -11,12 +11,11 @@
 
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
-        @"idField" : @"id"
+        @"idField": @"id"
     };
 }
 
 @end
-
 
 @implementation CJFFormTBSwitch001Model
 
@@ -25,13 +24,11 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{
-        @"value" : [CJFFormTBSwitch001ButtonModel class]
+        @"value": [CJFFormTBSwitch001ButtonModel class]
     };
 }
 
 @end
-
-
 
 @interface CJFFormTBSwitch001TableViewCell ()
 
@@ -56,7 +53,7 @@
 - (void)buildView
 {
     self.contentView.backgroundColor = self.cellStyle.backgroundColor;
-    
+
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
@@ -73,10 +70,10 @@
     if (!dict) {
         return;
     }
-    
+
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:dict];
     if (format) {
-        [format.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [format.allKeys enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             NSString *key = [format objectForKey:obj];
             id value = [dict objectForKey:key];
             if (value) {
@@ -85,21 +82,21 @@
         }];
     }
     self.model = [CJFFormTBSwitch001Model yy_modelWithJSON:mDict];
-    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required ? @"* " : @"", self.model.title];
     NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
     [mAttr addAttributes:@{
-        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
-        NSForegroundColorAttributeName: [UIColor redColor]
-    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+         NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+         NSForegroundColorAttributeName: [UIColor redColor]
+     } range:self.model.required ? NSMakeRange(0, 1) : NSMakeRange(0, 0)];
     self.TTitleLabel.attributedText = mAttr;
-    
+
     if (self.model.value.count != self.buttonArrayM.count) {
         for (UIButton *button in self.buttonArrayM) {
             [button removeFromSuperview];
         }
         [self.buttonArrayM removeAllObjects];
     }
-    
+
     if (self.model.value.count && !self.buttonArrayM.count) {
         for (int i = 0; i < self.model.value.count; ++i) {
             CJFFormTBSwitch001ButtonModel *model = self.model.value[i];
@@ -115,7 +112,6 @@
             button.layer.masksToBounds = YES;
             [self.contentView addSubview:button];
             [self.buttonArrayM addObject:button];
-            
         }
         [self.buttonArrayM mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:self.cellStyle.contentInset.left tailSpacing:self.cellStyle.contentInset.right];
         [self.buttonArrayM mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -124,15 +120,15 @@
             make.bottom.equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
         }];
     }
-    
+
     for (int i = 0; i < self.model.value.count; ++i) {
         CJFFormTBSwitch001ButtonModel *model = self.model.value[i];
         UIButton *button = self.buttonArrayM[i];
         [button setTitle:model.title forState:UIControlStateNormal];
-        button.selected = model.state;
+        button.selected = model.isSelected;
         if (button.selected) {
-            button.backgroundColor = [UIColor colorWithRed:255/255.0 green:194/255.0 blue:76/255.0 alpha:1.0];
-        }else {
+            button.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:194 / 255.0 blue:76 / 255.0 alpha:1.0];
+        } else {
             button.backgroundColor = [UIColor whiteColor];
         }
         // cell为不可用状态时，清除所有按钮事件
@@ -147,18 +143,23 @@
 - (void)buttonAction:(UIButton *)sender
 {
     if (sender.selected) return;
-    
+
     for (int i = 0; i < self.buttonArrayM.count; ++i) {
         UIButton *button = self.buttonArrayM[i];
         CJFFormTBSwitch001ButtonModel *model = self.model.value[i];
-        
+
         if (sender.tag != button.tag) {
-            model.state = button.selected = NO;
+            model.selected = button.selected = NO;
             button.backgroundColor = [UIColor whiteColor];
-        }else {
-            model.state = button.selected = YES;
-            button.backgroundColor = [UIColor colorWithRed:255/255.0 green:194/255.0 blue:76/255.0 alpha:1.0];;
+        } else {
+            model.selected = button.selected = YES;
+            button.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:194 / 255.0 blue:76 / 255.0 alpha:1.0];
         }
+    }
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
     }
 }
 

@@ -14,7 +14,7 @@
 @property (strong, nonatomic) UIButton *deleteBtn; /**< <#property#> */
 @property (strong, nonatomic) UIImageView *iconImgView; /**< <#property#> */
 @property (strong, nonatomic) UILabel *myTitleLabel; /**< <#property#> */
-@property (copy, nonatomic) void(^deleteBlock)(UIButton *button); /**< <#property#> */
+@property (copy, nonatomic) void (^ deleteBlock)(UIButton *button); /**< <#property#> */
 
 @end
 
@@ -35,15 +35,15 @@
     [self.iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).offset(12);
         make.centerY.mas_equalTo(self.contentView);
-        make.size.mas_equalTo(CGSizeMake(kFormTBFileRowHeight/4, kFormTBFileRowHeight/3));
+        make.size.mas_equalTo(CGSizeMake(kFormTBFileRowHeight / 4, kFormTBFileRowHeight / 3));
     }];
-    
+
     [self.contentView addSubview:self.deleteBtn];
     [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.bottom.mas_equalTo(self.contentView);
         make.size.mas_equalTo(CGSizeMake(kFormTBFileRowHeight, kFormTBFileRowHeight));
     }];
-    
+
     [self.contentView addSubview:self.myTitleLabel];
     [self.myTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(self.contentView);
@@ -147,7 +147,7 @@
 - (void)buildView
 {
     self.contentView.backgroundColor = self.cellStyle.backgroundColor;
-    
+
     [self.contentView addSubview:self.TTitleLabel];
     [self.TTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.top);
@@ -155,7 +155,7 @@
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
 //        make.height.mas_equalTo(18);
     }];
-    
+
     [self.contentView addSubview:self.addButton];
     [self.addButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.TTitleLabel.mas_bottom).offset(self.cellStyle.spacing);
@@ -163,13 +163,20 @@
         make.height.mas_equalTo(40);
         make.width.mas_equalTo(180);
     }];
-    
+
     [self.contentView addSubview:self.listTableView];
     [self.listTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.addButton.mas_bottom).offset(self.cellStyle.spacing);
         make.right.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.right);
         make.left.mas_equalTo(self.contentView).offset(self.cellStyle.contentInset.left);
         make.bottom.mas_equalTo(self.contentView).offset(-self.cellStyle.contentInset.bottom);
+    }];
+}
+
+- (void)updateMyConstraints
+{
+    [self.listTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.addButton.mas_bottom).offset(self.model.value.count > 0 ? self.cellStyle.spacing : 0);
     }];
 }
 
@@ -192,20 +199,21 @@
         }];
     }
     self.model = [CJFFormTBFileUpload001Model yy_modelWithJSON:mDict];
-    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required?@"* ":@"", self.model.title];
+    NSString *title = [NSString stringWithFormat:@"%@%@", self.model.required ? @"* " : @"", self.model.title];
     NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:title];
     [mAttr addAttributes:@{
-        NSFontAttributeName: [UIFont systemFontOfSize:16.0],
-        NSForegroundColorAttributeName: [UIColor redColor]
-    } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
+         NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+         NSForegroundColorAttributeName: [UIColor redColor]
+     } range:self.model.required ? NSMakeRange(0, 1) : NSMakeRange(0, 0)];
     self.TTitleLabel.attributedText = mAttr;
-    
+
     [self.listTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.addButton.mas_bottom).offset((self.model.value.count > 0)?self.cellStyle.spacing:0);
+        make.top.mas_equalTo(self.addButton.mas_bottom).offset((self.model.value.count > 0) ? self.cellStyle.spacing : 0);
     }];
-    
+
     self.addButton.enabled = (self.model.value.count < self.model.maxCount);
-    
+
+    [self updateMyConstraints];
     [self.listTableView reloadData];
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
@@ -220,12 +228,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CJFFormTBFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([CJFFormTBFileTableViewCell class])];
+    CJFFormTBFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormTBFileTableViewCell class])];
     cell.iconImgView.image = [UIImage imageNamed:@"file" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
     cell.myTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.value[indexPath.row]];
     cell.deleteBlock = ^(UIButton *button) {
-        if (self.testBlock) {
-            self.testBlock(indexPath);
+        // delete
+        NSMutableArray *mArr = [NSMutableArray arrayWithArray:self.model.value];
+        [mArr removeObjectAtIndex:indexPath.row];
+        self.model.value = [mArr copy];
+        self.addButton.enabled = (self.model.value.count < self.model.maxCount);
+        [self updateMyConstraints];
+        [self.listTableView reloadData];
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        // call back
+        if (self.didUpdateFormModelBlock) {
+            self.didUpdateFormModelBlock(self, self.model, nil);
         }
     };
     return cell;
@@ -235,9 +253,15 @@
 
 - (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize withHorizontalFittingPriority:(UILayoutPriority)horizontalFittingPriority verticalFittingPriority:(UILayoutPriority)verticalFittingPriority
 {
+    self.listTableView.frame = CGRectMake(0, 0, targetSize.width, 44);
+    [self.listTableView layoutIfNeeded];
+
+    CGFloat titleHeight = 18;
+    CGFloat spacingHeight = 10 * ((self.model.value.count > 0) ? 2 : 1);
+    CGFloat buttonHeight = 40;
     NSInteger count = self.model.value.count < self.model.maxCount ? self.model.value.count : self.model.maxCount;
-    CGFloat contentViewHeight = kFormTBFileRowHeight * count + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + 18 + self.listTableView.contentInset.top + self.listTableView.contentInset.bottom + 10 * ((self.model.value.count>0)?2:1) + 40;
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width, contentViewHeight);
+    CGFloat contentViewHeight = kFormTBFileRowHeight * count + self.cellStyle.contentInset.top + self.cellStyle.contentInset.bottom + titleHeight + self.listTableView.contentInset.top + self.listTableView.contentInset.bottom + spacingHeight + buttonHeight;
+    return CGSizeMake(targetSize.width, contentViewHeight);
 }
 
 #pragma mark - Actions
@@ -247,6 +271,7 @@
     if (self.model.value.count >= self.model.maxCount) {
         return;
     }
+    
     if (self.customDidSelectedBlock) {
         self.customDidSelectedBlock(self, self.model, nil);
     }
@@ -281,6 +306,7 @@
         [_addButton setTitle:@"Click to upload" forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [_addButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         _addButton.titleLabel.font = [UIFont systemFontOfSize:13.0];
         UIEdgeInsets edge = _addButton.titleEdgeInsets;
         edge.left = 12.0;

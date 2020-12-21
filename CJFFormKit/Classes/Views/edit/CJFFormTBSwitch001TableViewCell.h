@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBSwitch001ButtonModel : CJFObject
 
-@property (nonatomic, assign) UIControlState state;
+@property (nonatomic, assign, getter=isSelected) BOOL selected;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *idField;
 

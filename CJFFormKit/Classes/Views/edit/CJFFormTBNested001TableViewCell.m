@@ -385,7 +385,8 @@
     CJFFormTBNested001SubTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormTBNested001SubTableViewCell class])];
     CJFFormTBNested001SubModel *subModel = self.listArray[indexPath.row];
     cell.model = subModel;
-    
+    // MARK: Action - NO.1 click at arrow button
+    // 开发人员自行实现具体方法，并更新数据源
     cell.didClickAtArrowButtonBlock = ^(UIButton *button) {
 
         [self.listArray enumerateObjectsUsingBlock:^(CJFFormTBNested001SubModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -394,14 +395,11 @@
         subModel.selected = YES;
         [tableView reloadData];
         
-//        NSLog(@"%@", [self.listArray yy_modelToJSONObject]);
-        
-        
         if (self.customDidSelectedBlock) {
             self.customDidSelectedBlock(self, self.model, indexPath);
         }
     };
-    
+    // MARK: Action - NO.2 delete a subcell
     cell.didClickAtDeleteButtonBlock = ^(UIButton *button) {
         [self.listArray removeObjectAtIndex:indexPath.row];
         self.model.value = self.listArray;
@@ -409,8 +407,9 @@
         [self.listTableView reloadData];
         [self.tableView beginUpdates];
         [self.tableView endUpdates];
-        if (self.didUpdateFormTBNested001ModelBlock) {
-            self.didUpdateFormTBNested001ModelBlock([self.model yy_modelToJSONObject]);
+        
+        if (self.didUpdateFormModelBlock) {
+            self.didUpdateFormModelBlock(self, self.model, nil);
         }
     };
     return cell;
@@ -437,6 +436,7 @@
 
 - (void)addButtonAction:(UIButton *)button
 {
+    // MARK: Action - NO. 3 add new subcell
     if (self.listArray.count >= self.model.maxCount) {
         [self layoutIfNeeded];
         [self.tableView beginUpdates];
@@ -459,8 +459,9 @@
     [self.listTableView reloadData];
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
-    if (self.didUpdateFormTBNested001ModelBlock) {
-        self.didUpdateFormTBNested001ModelBlock([self.model yy_modelToJSONObject]);
+    
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
     }
 }
 

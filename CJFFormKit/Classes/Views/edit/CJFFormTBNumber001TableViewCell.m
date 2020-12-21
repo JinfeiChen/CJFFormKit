@@ -117,6 +117,10 @@
     self.textField.placeholder = self.model.placeholder ? : @"Please Input";
     self.textField.text = [self getRoundFloat:[self.model.value floatValue] withPrecisionNum:self.model.digits];
     
+    self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
+    self.decreaseButton.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
+    self.increaseButton.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
+    
     self.bgView.userInteractionEnabled = self.model.isEditable;
 }
 
@@ -165,6 +169,11 @@
         }
     }
     self.model.value = toBeString;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 
     return YES;
 }
@@ -181,6 +190,12 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.model.value = @"";
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
+    
     return YES;
 }
 
@@ -193,6 +208,11 @@
     self.textField.text = [self getRoundFloat:result withPrecisionNum:self.model.digits];
     
     self.model.value = self.textField.text;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 }
 
 - (void)increaseButtonAction:(UIButton *)button
@@ -202,6 +222,11 @@
     self.textField.text = [self getRoundFloat:result withPrecisionNum:self.model.digits];
     
     self.model.value = self.textField.text;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
 }
 
 #pragma mark - Getters
@@ -264,7 +289,7 @@
         _textField.textAlignment = NSTextAlignmentCenter;
 
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-        leftView.backgroundColor = [UIColor whiteColor];
+        leftView.backgroundColor = [UIColor clearColor];
         _textField.leftView = leftView;
         _textField.leftViewMode = UITextFieldViewModeAlways;
     }

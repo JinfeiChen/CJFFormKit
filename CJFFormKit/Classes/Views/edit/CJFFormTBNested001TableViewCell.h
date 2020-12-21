@@ -35,8 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) CJFFormTBNested001Model *model; /**< <#property#> */
 
-@property (copy, nonatomic) void(^didUpdateFormTBNested001ModelBlock)(NSDictionary *newModelDict); /**< <#property#> */
-
 @end
 
 NS_ASSUME_NONNULL_END
