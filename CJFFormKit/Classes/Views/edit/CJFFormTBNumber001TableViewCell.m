@@ -246,8 +246,8 @@
     if (!_decreaseButton) {
         UIButton *button = [[UIButton alloc]init];
         [button setTitle:@"-" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [button addTarget:self action:@selector(decreaseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor whiteColor];
         button.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -263,8 +263,8 @@
     if (!_increaseButton) {
         UIButton *button = [[UIButton alloc]init];
         [button setTitle:@"+" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [button addTarget:self action:@selector(increaseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor whiteColor];
         button.titleLabel.font = [UIFont systemFontOfSize:16];

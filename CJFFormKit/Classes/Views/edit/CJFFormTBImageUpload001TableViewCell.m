@@ -7,6 +7,7 @@
 
 #import "CJFFormTBImageUpload001TableViewCell.h"
 #import <CJFFormKit/UIView+ext.h>
+
 #import <CJFFormKit/TZImagePickerController.h>
 #import <CJFFormKit/UIView+TZLayout.h>
 #import <CJFFormKit/TZImageManager.h>
@@ -16,6 +17,7 @@
 #import <CJFFormKit/TZLocationManager.h>
 #import <CJFFormKit/TZAssetCell.h>
 #import <CJFFormKit/FLAnimatedImage.h>
+
 #import <Photos/Photos.h>
 //#import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreServices/CoreServices.h>

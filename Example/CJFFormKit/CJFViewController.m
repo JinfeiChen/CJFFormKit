@@ -149,6 +149,7 @@
                         @"bbbbbbbbbbbbbbbbbbbbb"
                 ]
             },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBFileUpload001TableViewCell",
                 kFormItemTitleKey: @"FileUpload001",
@@ -159,8 +160,10 @@
                 ],
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBFileUploadCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBFileUploadCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBFileUploadCell:model:indexPath:reserve:"
             },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBSwitch001TableViewCell",
                 kFormItemTitleKey: @"Switch001",
@@ -185,6 +188,7 @@
                 kFormItemEditableKey: @(YES),
                 kFormItemSelectorKey: @"testFormTBSwitchCell:model:indexPath:reserve:"
             },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
                 kFormItemTitleKey: @"InputSearch001",
@@ -203,6 +207,7 @@
                 kFormItemEditableKey: @(NO),
                 kFormItemSelectorKey: @"testFormTBInputSearchCell:model:indexPath:reserve:"
             },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBMultiSelect001TableViewCell",
                 kFormItemTitleKey: @"MultiSelect001",
@@ -241,7 +246,8 @@
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBMultSelectCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBMultSelectCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBMultSelectCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBMultiSelect001TableViewCell",
@@ -266,8 +272,10 @@
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(NO),
                 kFormItemEditableKey: @(NO),
-                kFormItemSelectorKey: @"testFormTBMultSelectCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBMultSelectCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBMultSelectCell:model:indexPath:reserve:"
             },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBUniSelect001TableViewCell",
                 kFormItemTitleKey: @"UniSelect001",
@@ -286,6 +294,7 @@
                 kFormItemEditableKey: @(NO),
                 kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:"
             },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBTextField001TableViewCell",
                 kFormItemTitleKey: @"TextField001",
@@ -296,14 +305,34 @@
                 kFormItemSelectorKey: @"testFormTBTextFieldCell:model:indexPath:reserve:"
             },
             @{
+                kFormItemClassKey: @"CJFFormTBTextField001TableViewCell",
+                kFormItemTitleKey: @"TextField001",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBTextFieldCell:model:indexPath:reserve:"
+            },
+            
+            @{
                 kFormItemClassKey: @"CJFFormTBDate001TableViewCell",
                 kFormItemTitleKey: @"Date001",
                 kFormItemValueKey: @"default text",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBDateCell:model:indexPath:reserve:"
+                kFormItemCustomSelectorKey: @"customFormTBDateCell:model:indexPath:reserve:"
             },
+            @{
+                kFormItemClassKey: @"CJFFormTBDate001TableViewCell",
+                kFormItemTitleKey: @"Date001",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemCustomSelectorKey: @"customFormTBDateCell:model:indexPath:reserve:"
+            },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBPhone001TableViewCell",
                 kFormItemTitleKey: @"Phone001",
@@ -313,8 +342,22 @@
                 @"countryArea": @"China",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBPhoneCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBPhoneCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBPhoneCell:model:indexPath:reserve:"
             },
+            @{
+                kFormItemClassKey: @"CJFFormTBPhone001TableViewCell",
+                kFormItemTitleKey: @"Phone001",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                @"countryCode": @"+86",
+                @"countryArea": @"China",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBPhoneCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBPhoneCell:model:indexPath:reserve:"
+            },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBTextView001TableViewCell",
                 kFormItemTitleKey: @"TextView001",
@@ -324,6 +367,16 @@
                 kFormItemEditableKey: @(YES),
                 kFormItemSelectorKey: @"testFormTBTextViewCell:model:indexPath:reserve:"
             },
+            @{
+                kFormItemClassKey: @"CJFFormTBTextView001TableViewCell",
+                kFormItemTitleKey: @"TextView001",
+                kFormItemValueKey: @"default text",
+                kFormItemPlaceholderKey: @"placeholder",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBTextViewCell:model:indexPath:reserve:"
+            },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBSlider001TableViewCell",
                 kFormItemTitleKey: @"Slider001",
@@ -335,6 +388,17 @@
                 kFormItemSelectorKey: @"testFormTBSliderCell:model:indexPath:reserve:"
             },
             @{
+                kFormItemClassKey: @"CJFFormTBSlider001TableViewCell",
+                kFormItemTitleKey: @"Slider001",
+                kFormItemValueKey: @"5",
+                @"minValue": @(0),
+                @"maxValue": @(10),
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBSliderCell:model:indexPath:reserve:"
+            },
+            
+            @{
                 kFormItemClassKey: @"CJFFormTBRange001TableViewCell",
                 kFormItemTitleKey: @"Range001",
                 kFormItemValueKey: @"",
@@ -345,6 +409,17 @@
                 kFormItemSelectorKey: @"testFormTBRangeCell:model:indexPath:reserve:"
             },
             @{
+                kFormItemClassKey: @"CJFFormTBRange001TableViewCell",
+                kFormItemTitleKey: @"Range001",
+                kFormItemValueKey: @"",
+                @"minValue": @(0),
+                @"maxValue": @(10),
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBRangeCell:model:indexPath:reserve:"
+            },
+            
+            @{
                 kFormItemClassKey: @"CJFFormTBNumber001TableViewCell",
                 kFormItemTitleKey: @"Number001",
                 kFormItemValueKey: @"0",
@@ -352,6 +427,15 @@
                 kFormItemEditableKey: @(YES),
                 kFormItemSelectorKey: @"testFormTBNumberCell:model:indexPath:reserve:"
             },
+            @{
+                kFormItemClassKey: @"CJFFormTBNumber001TableViewCell",
+                kFormItemTitleKey: @"Number001",
+                kFormItemValueKey: @"22",
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"testFormTBNumberCell:model:indexPath:reserve:"
+            },
+            
             @{
                 kFormItemClassKey: @"CJFFormTBImageUpload001TableViewCell",
                 kFormItemTitleKey: @"ImageUpload001",
@@ -384,7 +468,7 @@
 
 #pragma mark - Custom Cell's Event
 
-- (void)customFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)testFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
     
@@ -406,7 +490,7 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone]; 
 }
 
-- (void)testFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)customFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
     
@@ -449,6 +533,11 @@
 }
 
 - (void)testFormTBFileUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)customFormTBFileUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
     
@@ -524,6 +613,11 @@
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
 
+- (void)customFormTBMultSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
 - (void)testFormTBUniSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
@@ -534,7 +628,7 @@
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
 
-- (void)testFormTBDateCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)customFormTBDateCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
@@ -544,7 +638,12 @@
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
 
-- (void)textFormTBTextViewCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)customFormTBPhoneCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+}
+
+- (void)testFormTBTextViewCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
@@ -561,7 +660,7 @@
 
 - (void)testFormTBNumberCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
-    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, model.value, indexPath, reserveObj);
 }
 
 - (void)testFormTBImageUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj

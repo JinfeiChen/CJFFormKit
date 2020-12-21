@@ -233,7 +233,7 @@
         _textField.textColor = HEXCOLOR(0x565465);
         _textField.layer.masksToBounds = YES;
         _textField.layer.cornerRadius = 8;
-        _textField.backgroundColor = [UIColor whiteColor];
+        _textField.backgroundColor = [UIColor clearColor];
         _textField.delegate = self;
         _textField.keyboardType = UIKeyboardTypePhonePad;
         _textField.returnKeyType = UIReturnKeyDone;

@@ -47,4 +47,5 @@ Pod::Spec.new do |s|
   s.dependency 'YYModel'
   s.dependency 'YYText'
   s.dependency 'YYWebImage'
+  s.dependency 'TZImagePickerController'
 end
