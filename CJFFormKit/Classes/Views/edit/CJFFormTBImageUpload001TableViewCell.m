@@ -6,18 +6,18 @@
 //
 
 #import "CJFFormTBImageUpload001TableViewCell.h"
+
+#import <TZImagePickerController/TZImagePickerController.h>
+#import <TZImagePickerController/UIView+TZLayout.h>
+#import <TZImagePickerController/TZImageManager.h>
+#import <TZImagePickerController/TZVideoPlayerController.h>
+#import <TZImagePickerController/TZPhotoPreviewController.h>
+#import <TZImagePickerController/TZGifPhotoPreviewController.h>
+#import <TZImagePickerController/TZLocationManager.h>
+#import <TZImagePickerController/TZAssetCell.h>
+
 #import <CJFFormKit/UIView+ext.h>
-
-#import <CJFFormKit/TZImagePickerController.h>
-#import <CJFFormKit/UIView+TZLayout.h>
-#import <CJFFormKit/TZImageManager.h>
-#import <CJFFormKit/TZVideoPlayerController.h>
-#import <CJFFormKit/TZPhotoPreviewController.h>
-#import <CJFFormKit/TZGifPhotoPreviewController.h>
-#import <CJFFormKit/TZLocationManager.h>
-#import <CJFFormKit/TZAssetCell.h>
 #import <CJFFormKit/FLAnimatedImage.h>
-
 #import <Photos/Photos.h>
 //#import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreServices/CoreServices.h>
