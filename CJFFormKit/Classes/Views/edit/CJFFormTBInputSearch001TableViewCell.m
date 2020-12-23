@@ -82,6 +82,21 @@
     [self.textField resignFirstResponder];
 }
 
+- (void)searchButtonAction:(UIButton *)sender
+{
+    if (self.textField.text.length <= 0) {
+        NSLog(@"please input some text first");
+        return;
+    }
+    
+    self.model.value = self.textField.text;
+    
+    // call back
+    if (self.didUpdateFormModelBlock) {
+        self.didUpdateFormModelBlock(self, self.model, nil);
+    }
+}
+
 #pragma mark - Setters
 
 - (void)setModelWithDict:(NSDictionary *)dict format:(NSDictionary *)format
@@ -110,7 +125,7 @@
     self.TTitleLabel.attributedText = mAttr;
     
     self.textField.placeholder = [NSString stringWithFormat:@"%@", self.model.placeholder ? : @"Please Input"];
-    self.textField.text = [NSString stringWithFormat:@"%@", self.model.value];
+    self.textField.text = [NSString stringWithFormat:@"%@", self.model.value ? : @"-"];
     
     self.textField.enabled = self.model.isEditable;
     self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
@@ -146,7 +161,7 @@
         _searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
         _searchView.backgroundColor = kCJFFormMainColor;
         UIButton *rightButton = [[UIButton alloc]initWithFrame:_searchView.bounds];
-        [rightButton addTarget:self action:@selector(inputSearchAction) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton addTarget:self action:@selector(searchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"search" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [_searchView addSubview:rightButton];
     }

@@ -114,8 +114,11 @@
     } range:self.model.required?NSMakeRange(0, 1):NSMakeRange(0, 0)];
     self.TTitleLabel.attributedText = mAttr;
     
+    CGFloat value = [self.model.value floatValue];
+    value = value > self.model.minValue ? value : self.model.minValue;
+    value = value < self.model.maxValue ? value : self.model.maxValue;
     self.textField.placeholder = self.model.placeholder ? : @"Please Input";
-    self.textField.text = [self getRoundFloat:[self.model.value floatValue] withPrecisionNum:self.model.digits];
+    self.textField.text = [self getRoundFloat:value withPrecisionNum:self.model.digits];
     
     self.textField.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];
     self.decreaseButton.backgroundColor = self.model.isEditable ? [UIColor whiteColor] : [UIColor colorWithWhite:0.95 alpha:1.0];

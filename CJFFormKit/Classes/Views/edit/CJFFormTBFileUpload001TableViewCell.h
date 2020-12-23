@@ -10,9 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface CJFFormTBFileUpload001SubModel : CJFFormModel
+
+@property (copy, nonatomic) NSString *idField; /**< <#property#> */
+@property (copy, nonatomic) NSString *name; /**< <#property#> */
+@property (copy, nonatomic) NSString *url; /**< <#property#> */
+@property (copy, nonatomic) NSString *ext; /**< reserved */
+
+@end
+
 @interface CJFFormTBFileUpload001Model : CJFFormModel
 
-@property (strong, nonatomic) NSArray<NSString *> *value; /**< <#property#> */
+@property (strong, nonatomic) NSArray<CJFFormTBFileUpload001SubModel *> *value; /**< <#property#> */
 
 @property (assign, nonatomic) NSInteger maxCount; /**< <#property#> */
 

@@ -25,6 +25,7 @@
 
 @property (copy, nonatomic) void (^ didClickAtArrowButtonBlock)(UIButton *button); /**< <#property#> */
 @property (copy, nonatomic) void (^ didClickAtDeleteButtonBlock)(UIButton *button); /**< <#property#> */
+@property (copy, nonatomic) void (^ didTextFieldChangeBlock)(CJFFormTBNested001SubModel *model); /**< <#property#> */
 
 @property (strong, nonatomic) CJFFormTBNested001SubModel *model; /**< <#property#> */
 
@@ -99,20 +100,54 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
-    self.textField.text = str;
-    return YES;
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//    str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    self.textField.text = str;
+//    self.model.text = str;
+    
+    // call back
+//    if (self.didTextFieldChangeBlock) {
+//        self.didTextFieldChangeBlock(textField);
+//    }
+//    return YES;
+//}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"%s, %@", __FUNCTION__, textField.text);
+    self.model.text = textField.text;
+    
+    // call back
+    if (self.didTextFieldChangeBlock) {
+        self.didTextFieldChangeBlock(self.model);
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+    NSLog(@"%s, %ld, %@", __FUNCTION__, (long)reason, textField.text);
 //    UITableView *tableView = (UITableView *)self.superview;
 //    [tableView reloadData];
+    self.model.text = textField.text;
+    
+    // call back
+    if (self.didTextFieldChangeBlock) {
+        self.didTextFieldChangeBlock(self.model);
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    self.textField.text = @"";
+    self.model.text = @"";
+    
+    // call back
+    if (self.didTextFieldChangeBlock) {
+        self.didTextFieldChangeBlock(self.model);
+    }
     return YES;
 }
 
@@ -226,7 +261,7 @@
         _textField.layer.cornerRadius = 8;
         _textField.backgroundColor = [UIColor whiteColor];
         _textField.delegate = self;
-        _textField.keyboardType = UIKeyboardTypePhonePad;
+        _textField.keyboardType = UIKeyboardTypeDefault;
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.placeholder = @"Please input";
 
@@ -403,6 +438,20 @@
     cell.didClickAtDeleteButtonBlock = ^(UIButton *button) {
         [self.listArray removeObjectAtIndex:indexPath.row];
         self.model.value = self.listArray;
+        [self updateMyConstraints];
+        [self.listTableView reloadData];
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        
+        if (self.didUpdateFormModelBlock) {
+            self.didUpdateFormModelBlock(self, self.model, nil);
+        }
+    };
+    cell.didTextFieldChangeBlock = ^(CJFFormTBNested001SubModel *model) {
+        NSLog(@"update: %@, row: %ld", [model yy_modelToJSONObject], indexPath.row);
+        NSMutableArray *mArr = [NSMutableArray arrayWithArray:self.listArray];
+        [mArr replaceObjectAtIndex:indexPath.row withObject:[model yy_modelToJSONObject]];
+        self.model.value = mArr;
         [self updateMyConstraints];
         [self.listTableView reloadData];
         [self.tableView beginUpdates];

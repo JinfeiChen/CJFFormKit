@@ -115,22 +115,22 @@
                 kFormItemValueKey: @[
                         @{
                             @"prefixText": @"N/Aaaaaaaa",
-                            @"text": @"",
+                            @"text": @"text 01",
                             @"placeholder": @"Please input"
                         },
                         @{
                             @"prefixText": @"N/Abbbbb",
-                            @"text": @"",
+                            @"text": @"text 02",
                             @"placeholder": @"Please input"
                         },
                         @{
                             @"prefixText": @"N/Acccc",
-                            @"text": @"",
+                            @"text": @"text 03",
                             @"placeholder": @"Please input"
                         },
                         @{
                             @"prefixText": @"N/Addd",
-                            @"text": @"",
+                            @"text": @"text 04",
                             @"placeholder": @"Please input"
                         },
                         @{
@@ -154,13 +154,16 @@
                 kFormItemClassKey: @"CJFFormTBFileUpload001TableViewCell",
                 kFormItemTitleKey: @"FileUpload001",
                 kFormItemValueKey: @[
-                    @"file name 01",
-                    @"file name 02",
-                    @"file name 03"
+                        @{
+                            @"idField": @"123456",
+                            @"name": @"file name 01",
+                            @"url": @"http://www.baidu.com/xxx/xxx.pdf",
+                            @"ext": @"reserved text"
+                        }
                 ],
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBFileUploadCell:model:indexPath:reserve:",
+                kFormItemSelectorKey: @"didUpdateFormModelOfTBFileUploadCell:model:indexPath:reserve:",
                 kFormItemCustomSelectorKey: @"customFormTBFileUploadCell:model:indexPath:reserve:"
             },
             
@@ -192,7 +195,7 @@
             @{
                 kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
                 kFormItemTitleKey: @"InputSearch001",
-                kFormItemValueKey: @"default text",
+                kFormItemValueKey: @"",
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
@@ -283,7 +286,8 @@
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBUniSelectCell:model:indexPath:reserve:"
             },
             @{
                 kFormItemClassKey: @"CJFFormTBUniSelect001TableViewCell",
@@ -292,7 +296,8 @@
                 kFormItemPlaceholderKey: @"placeholder",
                 kFormItemRequiredKey: @(NO),
                 kFormItemEditableKey: @(NO),
-                kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"testFormTBUniSelectCell:model:indexPath:reserve:",
+                kFormItemCustomSelectorKey: @"customFormTBUniSelectCell:model:indexPath:reserve:"
             },
             
             @{
@@ -532,9 +537,26 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void)testFormTBFileUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)didUpdateFormModelOfTBFileUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    // update
+    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
+    
+    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+    self.dataSource = mDataSource;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)customFormTBFileUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
@@ -549,7 +571,12 @@
     [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
     // add
     NSMutableArray *mArr = [NSMutableArray arrayWithArray:[model.value yy_modelToJSONObject]];
-    [mArr addObject:@"Example file name"];
+    [mArr addObject:@{
+        @"idField": @"123456",
+        @"name": @"Example file name",
+        @"url": @"",
+        @"ext": @""
+    }];
     [mCellDict setValue:mArr forKey:kFormItemValueKey];
     
     NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
@@ -618,7 +645,7 @@
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
 
-- (void)testFormTBUniSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)customFormTBUniSelectCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }

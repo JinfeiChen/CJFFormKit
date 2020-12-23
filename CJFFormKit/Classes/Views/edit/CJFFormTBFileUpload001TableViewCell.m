@@ -9,6 +9,10 @@
 
 #define kFormTBFileRowHeight 35.0
 
+@implementation CJFFormTBFileUpload001SubModel
+
+@end
+
 @interface CJFFormTBFileTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) UIButton *deleteBtn; /**< <#property#> */
@@ -115,6 +119,14 @@
         _maxCount = 20;
     }
     return self;
+}
+
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{
+        @"value" : [CJFFormTBFileUpload001SubModel class]
+    };
 }
 
 @end
@@ -229,8 +241,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CJFFormTBFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CJFFormTBFileTableViewCell class])];
+    CJFFormTBFileUpload001SubModel *model = self.model.value[indexPath.row];
     cell.iconImgView.image = [UIImage imageNamed:@"file" inBundle:kCJFFormResourceBundle compatibleWithTraitCollection:nil];
-    cell.myTitleLabel.text = [NSString stringWithFormat:@"%@", self.model.value[indexPath.row]];
+    cell.myTitleLabel.text = [NSString stringWithFormat:@"%@", model.name];
     cell.deleteBlock = ^(UIButton *button) {
         // delete
         NSMutableArray *mArr = [NSMutableArray arrayWithArray:self.model.value];
@@ -241,6 +254,7 @@
         [self.listTableView reloadData];
         [self.tableView beginUpdates];
         [self.tableView endUpdates];
+        
         // call back
         if (self.didUpdateFormModelBlock) {
             self.didUpdateFormModelBlock(self, self.model, nil);
