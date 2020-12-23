@@ -29,8 +29,7 @@
 #import <CJFFormKit/CJFFormTBNumber001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBImageUpload001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBNested001TableViewCell.h>
-
-#import "CJFFilePicker.h"
+#import <CJFFormKit/CJFFormTBFileUpload001TableViewCell.h>
 
 @interface CJFViewController () <UITableViewDelegate, UITableViewDataSource, UIDocumentPickerDelegate>
 

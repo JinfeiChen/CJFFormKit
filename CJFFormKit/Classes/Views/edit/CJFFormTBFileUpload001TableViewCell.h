@@ -8,6 +8,8 @@
 
 #import <CJFFormKit/CJFFormTBTableViewCell.h>
 
+#import <CJFFormKit/CJFFilePicker.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBFileUpload001SubModel : CJFFormModel
