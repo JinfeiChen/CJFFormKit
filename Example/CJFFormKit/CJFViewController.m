@@ -30,9 +30,15 @@
 #import <CJFFormKit/CJFFormTBImageUpload001TableViewCell.h>
 #import <CJFFormKit/CJFFormTBNested001TableViewCell.h>
 
-@interface CJFViewController () <UITableViewDelegate, UITableViewDataSource>
+#import "CJFFilePicker.h"
+
+@interface CJFViewController () <UITableViewDelegate, UITableViewDataSource, UIDocumentPickerDelegate>
+
 @property (strong, nonatomic) NSArray *dataSource; /**< <#property#> */
 @property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度所用字典
+
+@property (strong, nonatomic) CJFFilePicker *filePicker; /**< <#property#> */
+
 @end
 
 @implementation CJFViewController
@@ -140,7 +146,7 @@
                         }
                 ],
                 kFormItemRequiredKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBNestedCell:model:indexPath:reserve:",
+                kFormItemSelectorKey: @"didUpdateFormModelOfTBNestedCell:model:indexPath:reserve:",
                 kFormItemCustomSelectorKey: @"customFormTBNestedCell:model:indexPath:reserve:",
                 @"addButtonTitle": @"Add New SubCell",
                 @"prefixArray": @[
@@ -159,10 +165,17 @@
                             @"name": @"file name 01",
                             @"url": @"http://www.baidu.com/xxx/xxx.pdf",
                             @"ext": @"reserved text"
+                        },
+                        @{
+                            @"idField": @"123456",
+                            @"name": @"file name 02",
+                            @"url": @"http://www.baidu.com/xxx/xxx.pdf",
+                            @"ext": @"reserved text"
                         }
                 ],
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
+                @"maxCount": @(1),
                 kFormItemSelectorKey: @"didUpdateFormModelOfTBFileUploadCell:model:indexPath:reserve:",
                 kFormItemCustomSelectorKey: @"customFormTBFileUploadCell:model:indexPath:reserve:"
             },
@@ -473,15 +486,16 @@
 
 #pragma mark - Custom Cell's Event
 
-- (void)testFormTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)didUpdateFormModelOfTBNestedCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
     
     NSDictionary *bodyDict = self.dataSource[indexPath.section];
     NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
     NSDictionary *cellDict = bodyArray[indexPath.row];
-    
     NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    
+    // update
     [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
     
     NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
@@ -563,31 +577,39 @@
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
     
-    NSDictionary *bodyDict = self.dataSource[indexPath.section];
-    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
-    NSDictionary *cellDict = bodyArray[indexPath.row];
-    // update
-    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
-    [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
-    // add
-    NSMutableArray *mArr = [NSMutableArray arrayWithArray:[model.value yy_modelToJSONObject]];
-    [mArr addObject:@{
-        @"idField": @"123456",
-        @"name": @"Example file name",
-        @"url": @"",
-        @"ext": @""
-    }];
-    [mCellDict setValue:mArr forKey:kFormItemValueKey];
+    [self.filePicker presentDocumentPicker];
+    __weak typeof(self) weakSelf = self;
+    self.filePicker.documentPickerFinishedBlock = ^(NSData * _Nonnull fileData, NSURL * _Nonnull fileURL, NSString * _Nonnull fileName, NSError * _Nullable error) {
+        NSLog(@"fileData: %@, fileName: %@, fileURL: %@, error: %@", fileData, fileName, fileURL, error);
+        
+        NSDictionary *bodyDict = weakSelf.dataSource[indexPath.section];
+        NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+        NSDictionary *cellDict = bodyArray[indexPath.row];
+        // update
+        NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+        [mCellDict setValue:[model.value yy_modelToJSONObject] forKey:kFormItemValueKey];
+        // add
+        NSMutableArray *mArr = [NSMutableArray arrayWithArray:[model.value yy_modelToJSONObject]];
+        [mArr addObject:@{
+            @"idField": @"***",
+            @"name": fileName ? : @"N/A",
+            @"url": [fileURL absoluteString] ? : @"N/A",
+            @"ext": @""
+        }];
+        [mCellDict setValue:mArr forKey:kFormItemValueKey];
     
-    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
-    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
-    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
-    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
-    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
-    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
-    self.dataSource = mDataSource;
+        NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+        [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+        NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+        [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+        NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:weakSelf.dataSource];
+        [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+        weakSelf.dataSource = mDataSource;
     
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    };
+    
+
 }
 
 - (void)testFormTBSwitchCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
@@ -766,6 +788,14 @@
 }
 
 #pragma mark - Getters
+
+- (CJFFilePicker *)filePicker
+{
+    if (!_filePicker) {
+        _filePicker = [[CJFFilePicker alloc] init];
+    }
+    return _filePicker;
+}
 
 - (NSMutableDictionary *)heightAtIndexPath {
     if (!_heightAtIndexPath) {
