@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CJFFormKit'
-  s.version          = '1.0.11'
+  s.version          = '1.0.12'
   s.summary          = '常用的各种Form表单控件.'
 
 # This description is used to generate tags and improve search results.
@@ -48,4 +48,5 @@ Pod::Spec.new do |s|
   s.dependency 'YYText'
   s.dependency 'YYWebImage'
   s.dependency 'TZImagePickerController'
+  s.dependency 'TZImagePreviewController'
 end

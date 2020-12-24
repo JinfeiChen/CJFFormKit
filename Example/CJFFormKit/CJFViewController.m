@@ -457,12 +457,23 @@
                 kFormItemClassKey: @"CJFFormTBImageUpload001TableViewCell",
                 kFormItemTitleKey: @"ImageUpload001",
                 kFormItemValueKey: @[
-                        @"https://cdn.pixabay.com/photo/2020/11/12/15/45/dog-5735837__480.jpg",
-                        @"https://cdn.pixabay.com/photo/2020/11/26/11/48/cat-5778777__480.jpg"
+                        @"/ims/hornet/prp/img/346c9dd387f047fd99446100a95e94d2-wtm.jpg",
+                        @"https://img-blog.csdnimg.cn/20201222160340884.jpg"
                 ],
                 kFormItemRequiredKey: @(YES),
                 kFormItemEditableKey: @(YES),
-                kFormItemSelectorKey: @"testFormTBImageUploadCell:model:indexPath:reserve:"
+                kFormItemSelectorKey: @"didUpdatedFormModelOfTBImageUploadCell:model:indexPath:reserve:"
+            },
+            @{
+                kFormItemClassKey: @"CJFFormTBImageUpload001TableViewCell",
+                kFormItemTitleKey: @"ImageUpload001",
+                kFormItemValueKey: @[
+                        @"/ims/hornet/prp/img/346c9dd387f047fd99446100a95e94d2-wtm.jpg",
+                        @"https://img-blog.csdnimg.cn/20201222160340884.jpg"
+                ],
+                kFormItemRequiredKey: @(NO),
+                kFormItemEditableKey: @(NO),
+                kFormItemSelectorKey: @"didUpdatedFormModelOfTBImageUploadCell:model:indexPath:reserve:"
             }
         ],
         kFormSectionFooter: @{}
@@ -711,7 +722,7 @@
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, model.value, indexPath, reserveObj);
 }
 
-- (void)testFormTBImageUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+- (void)didUpdatedFormModelOfTBImageUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
 }
