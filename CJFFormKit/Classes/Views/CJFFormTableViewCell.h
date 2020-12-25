@@ -43,6 +43,9 @@ typedef NS_ENUM(NSUInteger, CJFFormTableViewCellType) {
 #define kFormItemRequiredKey @"required"
 #define kFormItemEditableKey @"editable"
 
+#define kFormItemRequestKey @"IMSKey"
+#define kFormItemRequestValue @"IMSValue"
+
 /**
  * Example:
  * NSDictionary *exampleDict = @{

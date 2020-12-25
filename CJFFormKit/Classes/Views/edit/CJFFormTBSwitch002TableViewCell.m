@@ -68,33 +68,30 @@
 
 - (void)updateMySeleteStatus
 {
-    [UIView animateWithDuration:0.25 animations:^{
-        
-        CGFloat padding = 4.0;
-        if (self.isMySelected) {
-            [self.indicatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(self.bgView.mas_width).offset(-2 * padding).multipliedBy(0.5);
-                make.height.mas_equalTo(self.bgView.mas_height).offset(-2 * padding).multipliedBy(1);
-                make.centerX.mas_equalTo(self.bgView).multipliedBy(1.5);
-                make.centerY.mas_equalTo(self.bgView);
-            }];
-            self.bgView.layer.borderColor = [UIColor colorWithRed:255 / 255.0 green:194 / 255.0 blue:76 / 255.0 alpha:1.0].CGColor;
-            self.bgView.layer.borderWidth = 1.0;
-            self.bgView.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:194 / 255.0 blue:76 / 255.0 alpha:1.0];
-        } else {
-            [self.indicatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(self.bgView.mas_width).offset(-2 * padding).multipliedBy(0.5);
-                make.height.mas_equalTo(self.bgView.mas_height).offset(-2 * padding).multipliedBy(1);
-                make.centerX.mas_equalTo(self.bgView).multipliedBy(0.5);
-                make.centerY.mas_equalTo(self.bgView);
-            }];
-            self.bgView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
-            self.bgView.layer.borderWidth = 1.0;
-            self.bgView.backgroundColor = [UIColor colorWithWhite:0.98 alpha:1.0];
-        }
-        
-        [self layoutIfNeeded];
-    }];
+    CGFloat padding = 4.0;
+    if (self.isMySelected) {
+        [self.indicatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(self.bgView.mas_width).offset(-2 * padding).multipliedBy(0.5);
+            make.height.mas_equalTo(self.bgView.mas_height).offset(-2 * padding).multipliedBy(1);
+            make.centerX.mas_equalTo(self.bgView).multipliedBy(1.5);
+            make.centerY.mas_equalTo(self.bgView);
+        }];
+        self.bgView.layer.borderColor = [UIColor colorWithRed:255 / 255.0 green:194 / 255.0 blue:76 / 255.0 alpha:1.0].CGColor;
+        self.bgView.layer.borderWidth = 1.0;
+        self.bgView.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:194 / 255.0 blue:76 / 255.0 alpha:1.0];
+    } else {
+        [self.indicatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(self.bgView.mas_width).offset(-2 * padding).multipliedBy(0.5);
+            make.height.mas_equalTo(self.bgView.mas_height).offset(-2 * padding).multipliedBy(1);
+            make.centerX.mas_equalTo(self.bgView).multipliedBy(0.5);
+            make.centerY.mas_equalTo(self.bgView);
+        }];
+        self.bgView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
+        self.bgView.layer.borderWidth = 1.0;
+        self.bgView.backgroundColor = [UIColor colorWithWhite:0.98 alpha:1.0];
+    }
+    
+    [self layoutIfNeeded];
 }
 
 #pragma mark - Public Methods
@@ -142,12 +139,18 @@
     }
     self.mySelected = [self.model.value boolValue];
     
-    [self updateMySeleteStatus];
-    
-    // call back
-    if (self.didUpdateFormModelBlock) {
-        self.didUpdateFormModelBlock(self, self.model, nil);
-    }
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        [self updateMySeleteStatus];
+
+    } completion:^(BOOL finished) {
+        
+        // call back
+        if (self.didUpdateFormModelBlock) {
+            self.didUpdateFormModelBlock(self, self.model, nil);
+        }
+        
+    }];
 }
 
 #pragma mark - Getters

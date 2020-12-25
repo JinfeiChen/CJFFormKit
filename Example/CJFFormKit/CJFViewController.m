@@ -654,6 +654,29 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+- (void)testFormTBSwitch002Cell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
+{
+    NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    
+    NSDictionary *bodyDict = self.dataSource[indexPath.section];
+    NSArray *bodyArray = [bodyDict objectForKey:kFormSectionBody];
+    NSDictionary *cellDict = bodyArray[indexPath.row];
+    
+    // update
+    NSMutableDictionary *mCellDict = [NSMutableDictionary dictionaryWithDictionary:cellDict];
+    [mCellDict setValue:model.value forKey:kFormItemValueKey];
+    
+    NSMutableArray *mBodyArray = [NSMutableArray arrayWithArray:bodyArray];
+    [mBodyArray replaceObjectAtIndex:indexPath.row withObject:mCellDict];
+    NSMutableDictionary *mBodyDict = [NSMutableDictionary dictionaryWithDictionary:bodyDict];
+    [mBodyDict setObject:mBodyArray forKey:kFormSectionBody];
+    NSMutableArray *mDataSource = [NSMutableArray arrayWithArray:self.dataSource];
+    [mDataSource replaceObjectAtIndex:indexPath.section withObject:mBodyDict];
+    self.dataSource = mDataSource;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 - (void)testFormTBInputSearchCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, model.value, indexPath, reserveObj);
