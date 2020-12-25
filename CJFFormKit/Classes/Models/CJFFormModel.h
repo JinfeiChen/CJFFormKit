@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, CJFFormPrivilege) {
 @property (copy, nonatomic) NSString *placeholder; /**< 占位文字 */
 
 @property (assign, nonatomic, getter=isRequired) BOOL required; /**< 是否为必填项, default NO */
-@property (assign, nonatomic, getter=isEditable) BOOL editable; /**< 是否可编辑, default YES */
+@property (assign, nonatomic, getter=isEditable) BOOL editable; /**< 是否可编辑, default NO */
 @property (assign, nonatomic, getter=isSelected) BOOL selected; /**< 是否已选中, default NO */
 
 // Reserved Parameters

@@ -165,15 +165,15 @@
 
 #pragma mark - Getters
 
-- (UILabel *)TTitleLabel
-{
-    if (!_TTitleLabel) {
-        _TTitleLabel = [[UILabel alloc] init];
-        _TTitleLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
-        _TTitleLabel.textColor = [UIColor colorWithRed:159 / 255.0 green:162 / 255.0 blue:168 / 255.0 alpha:1.0];
-    }
-    return _TTitleLabel;
-}
+//- (UILabel *)TTitleLabel
+//{
+//    if (!_TTitleLabel) {
+//        _TTitleLabel = [[UILabel alloc] init];
+//        _TTitleLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular];
+//        _TTitleLabel.textColor = [UIColor colorWithRed:159 / 255.0 green:162 / 255.0 blue:168 / 255.0 alpha:1.0];
+//    }
+//    return _TTitleLabel;
+//}
 
 - (NSMutableArray *)buttonArrayM
 {

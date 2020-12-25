@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CJFFormTBTableViewCell : CJFFormTableViewCell
 
-@property (strong, nonatomic) UILabel *requiredLabel; /**< <#property#> */
+//@property (strong, nonatomic) UILabel *requiredLabel; /**< <#property#> */
 @property (strong, nonatomic) UILabel *TTitleLabel; /**< <#property#> */
 
 @end

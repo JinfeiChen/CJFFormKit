@@ -6,7 +6,7 @@
 //  Created by cjf on 8/12/2020.
 //
 
-#import <CJFFormKit/CJFFormTableViewCell.h>
+#import <CJFFormKit/CJFFormTBTableViewCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,9 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CJFFormTBSwitch001TableViewCell : CJFFormTableViewCell
+@interface CJFFormTBSwitch001TableViewCell : CJFFormTBTableViewCell
 
-@property (strong, nonatomic) UILabel *TTitleLabel; /**< <#property#> */
+//@property (strong, nonatomic) UILabel *TTitleLabel; /**< <#property#> */
 
 @property (strong, nonatomic) CJFFormTBSwitch001Model *model; /**< <#property#> */
 

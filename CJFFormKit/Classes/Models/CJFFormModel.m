@@ -13,7 +13,7 @@
 {
     if (self = [super init]) {
         _required = NO;
-        _editable = YES;
+        _editable = NO;
         _selected = NO;
         
         _validateBlock = ^BOOL(CJFFormModel * _Nonnull model) {

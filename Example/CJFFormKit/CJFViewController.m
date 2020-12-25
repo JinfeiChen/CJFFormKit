@@ -725,6 +725,7 @@
 - (void)didUpdatedFormModelOfTBImageUploadCell:(CJFFormTableViewCell *)cell model:(CJFFormModel *)model indexPath:(NSIndexPath *)indexPath reserve:(id)reserveObj
 {
     NSLog(@"%s, %@, %@, %@, %@", __FUNCTION__, cell, [model.value yy_modelToJSONObject], indexPath, reserveObj);
+    // reserveObj 有值时为选择添加新图片，开发者需要自行实现图片上传和更新数据源，为空时为删除图片，开发者只需要自行实现数据源的更新即可。
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

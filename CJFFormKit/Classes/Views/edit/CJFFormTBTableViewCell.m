@@ -26,16 +26,16 @@
 
 #pragma mark - Getters
 
-- (UILabel *)requiredLabel
-{
-    if (!_requiredLabel) {
-        _requiredLabel = [[UILabel alloc] init];
-        _requiredLabel.font = [UIFont systemFontOfSize:16];
-        _requiredLabel.textColor = [UIColor redColor];
-        _requiredLabel.text = @"*";
-    }
-    return _requiredLabel;
-}
+//- (UILabel *)requiredLabel
+//{
+//    if (!_requiredLabel) {
+//        _requiredLabel = [[UILabel alloc] init];
+//        _requiredLabel.font = [UIFont systemFontOfSize:16];
+//        _requiredLabel.textColor = [UIColor redColor];
+//        _requiredLabel.text = @"*";
+//    }
+//    return _requiredLabel;
+//}
 
 - (UILabel *)TTitleLabel
 {
