@@ -205,6 +205,15 @@
             },
             
             @{
+                kFormItemClassKey: @"CJFFormTBSwitch002TableViewCell",
+                kFormItemTitleKey: @"Switch002",
+                kFormItemValueKey: @(NO),
+                kFormItemRequiredKey: @(YES),
+                kFormItemEditableKey: @(YES),
+                kFormItemSelectorKey: @"testFormTBSwitch002Cell:model:indexPath:reserve:"
+            },
+            
+            @{
                 kFormItemClassKey: @"CJFFormTBInputSearch001TableViewCell",
                 kFormItemTitleKey: @"InputSearch001",
                 kFormItemValueKey: @"",

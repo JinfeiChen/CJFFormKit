@@ -131,10 +131,8 @@
         } else {
             button.backgroundColor = [UIColor whiteColor];
         }
-        // cell为不可用状态时，清除所有按钮事件
-        if (!self.model.isEditable) {
-            [button removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-        }
+        // cell为不可用状态时，禁止button响应任何事件
+        button.userInteractionEnabled = self.model.isEditable;
     }
 }
 
